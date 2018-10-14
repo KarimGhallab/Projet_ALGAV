@@ -23,6 +23,11 @@ public class AVL implements IAVL {
 		return getHauteur(getRacine());
 	} 
 	
+	/**
+	 * Retourne la hauteur d'un noeud.
+	 * @param n Le noeud
+	 * @return La hauteur du noeud, 0 si le noeud n'existe pas.
+	 */
 	private int getHauteur(Noeud n) {
 		if (n != null)
 			return n.getHauteur();
@@ -97,61 +102,24 @@ public class AVL implements IAVL {
 	 * @param cle La clé à insérer.
 	 * @return La racine avec la clé insérée.
 	 */
-	private Noeud inserer(Noeud racine, int cle) { 		// Voir Cours 2 slide 15-16
-		/*// On effectue l'insertion
-		if (racine == null) 
-			return (new Noeud(cle)); 
-		
-		int racineCle = racine.getCle();
-		if (cle < racineCle)		// Il faut insérer à gauche
-			racine.setFilsGauche(inserer(racine.getFilsGauche(), cle));
-		else if (cle > racineCle) 		// Il faut insérer à droite
-			racine.setFilsDroit(inserer(racine.getFilsDroit(), cle)); 
-		else 							// La racine est déjà présente dans l'arbre 
-			return racine; 
-
-		// On met à jour la hauteur de la racine
-		racine.setHauteur(max(getHauteur(racine.getFilsGauche()), getHauteur(racine.getFilsDroit())) + 1); 
-		
-		int equilibrage = getEquilibrage(racine); 
-
-		// Si notre racine est déséquilibrée, il faut procéder à une rotation pour l'equilibrer
-		if (equilibrage > 1) {
-			// L'arbre contient plus de noeud à gauche
-			if (cle < racine.getFilsGauche().getCle())
-				return rotationDroite(racine); 										// Rotation Droite
-			else if (cle > racine.getFilsGauche().getCle()) {
-				racine.setFilsGauche(rotationGauche(racine.getFilsGauche()));		// Rotation gauche droite 
-				return rotationDroite(racine);
-			}
-		}
-		else if (equilibrage < -1)
-		{
-			// L'arbre contient plus de noeud à droite
-			if (cle > racine.getFilsDroit().getCle())
-				return rotationGauche(racine); 										// Rotation Gauche
-			else if (cle < racine.getFilsDroit().getCle()) {
-				racine.setFilsDroit(rotationDroite(racine.getFilsDroit()));			// Rotation droite gauche 
-				return rotationGauche(racine);
-			}
-		}
-		return racine;*/
-		
+	private Noeud inserer(Noeud racine, int cle) { 		// Voir Cours 2 slide 15-16 et 18
 		if (racine == null)
 			return new Noeud(cle);
-        if (cle < racine.getCle())
+		else if (cle == racine.getCle())				// La clé existe déjà, aucune insertion
+			return racine;
+		else if (cle < racine.getCle())					// Insertion à gauche
         	racine.setFilsGauche(inserer(racine.getFilsGauche(), cle));
-        else if (cle > racine.getCle())
+        else											// Insertion à droite
         	racine.setFilsDroit(inserer(racine.getFilsDroit(), cle));
-        else 
-            return racine;
+        
         racine.setHauteur( 1 + max(getHauteur(racine.getFilsGauche()), getHauteur(racine.getFilsDroit())));
         return equilibrage(racine);
 	}
 		
 	/**
-	 * Effectue un réequilibrage depuis un noeud racine
-	 * @param racine Le noeud depuis lequelle on souhaire rééquilibrer.
+	 * Effectue un réequilibrage depuis un noeud racine.
+	 * @param racine Le noeud depuis lequelon souhaite rééquilibrer.
+	 * @return La nouvelle racine après rééquilibrage.
 	 */
 	private Noeud equilibrage(Noeud racine) {
 		if (getEquilibrage(racine) < -1) {

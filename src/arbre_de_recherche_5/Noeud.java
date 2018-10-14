@@ -123,10 +123,10 @@ public class Noeud {
 		tmp += "\t Clé : " + getCle() + " - Hauteur : " + getHauteur() + ",\n";
 		
 		if (getFilsGauche() != null)
-			tmp += getFilsGauche().prefixeToString(niveauTabulation + "\t");
+			tmp += "FG -> " + getFilsGauche().prefixeToString(niveauTabulation + "\t");
 		
 		if (getFilsDroit() != null)
-			tmp += getFilsDroit().prefixeToString(niveauTabulation + "\t");
+			tmp += "FD -> " + getFilsDroit().prefixeToString(niveauTabulation + "\t");
 		
 		return tmp;
 	}

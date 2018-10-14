@@ -3,7 +3,7 @@ package arbre_de_recherche_5;
 public class Main {
 
 	public static void main(String[] args) { 
-		AVL arbre = new AVL(); 
+		IAVL arbre = new AVL(); 
 
 		// On construit un arbre
 		arbre.inserer(0);
