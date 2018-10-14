@@ -1,7 +1,6 @@
 package arbre_de_recherche_5;
 
 public class AVL { 
-
 		Noeud racine; 
 
 		public Noeud getRacine() {
@@ -149,6 +148,13 @@ public class AVL {
 		return racine; 
 	}
 		
+	/**
+	 * Recherche une clé dans la racine passée en argument.
+	 * @param racine Le noeud racine dans lequel on souhaite effectuer la recherche.
+	 * @param cle La clé à recherchée.
+	 * @return Le noeud contenant la clé.
+	 * @throws Exception La clé n'est pas présente ni dans la racine, ni dans ses fils.
+	 */
 	Noeud rechercher(Noeud racine, int cle) throws Exception {
 		if (racine != null) {
 			if (cle == racine.getCle())
