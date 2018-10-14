@@ -6,21 +6,25 @@ public class Main {
 		AVL arbre = new AVL(); 
 
 		// On construit un arbre
-		arbre.setRacine(arbre.inserer(arbre.getRacine(), 10));
-		arbre.setRacine(arbre.inserer(arbre.getRacine(), 4));
-		arbre.setRacine(arbre.inserer(arbre.getRacine(), 17));
-		arbre.setRacine(arbre.inserer(arbre.getRacine(), 80));
-		arbre.setRacine(arbre.inserer(arbre.getRacine(), 90));
-		arbre.setRacine(arbre.inserer(arbre.getRacine(), 2));
-		arbre.setRacine(arbre.inserer(arbre.getRacine(), 0));
-		arbre.setRacine(arbre.inserer(arbre.getRacine(), 11));
-		arbre.setRacine(arbre.inserer(arbre.getRacine(), 12));
-		arbre.setRacine(arbre.inserer(arbre.getRacine(), 10));
-
-		System.out.println("[AVL] Parcours infixe : \n" + arbre.infixeToString(arbre.getRacine()));
+		arbre.inserer(0);
+		arbre.inserer(10);
+		arbre.inserer(9);
+		arbre.inserer(80);
+		arbre.inserer(7);
+		arbre.inserer(8);
+		arbre.inserer(9);
+		arbre.inserer(10);
+		arbre.inserer(11);
+		arbre.inserer(12);
+		arbre.inserer(2);
+		arbre.inserer(0);
+		arbre.inserer(17);
+		
+		System.out.println("[AVL] Parcours infixe : \n" + arbre.infixeToString());
+		System.out.println("[AVL] Parcours prefixe : \n" + arbre.prefixeToString());
 		try {
-			Noeud n = arbre.rechercher(arbre.getRacine(), 15);
-			System.out.println("[AVL] Parcours infixe : \n" + arbre.infixeToString(n));
+			Noeud n = arbre.rechercher(15);
+			System.out.println("[AVL] Parcours infixe : \n" + n.infixeToString());
 		}
 		catch (Exception e) {
 			e.printStackTrace();

@@ -56,6 +56,10 @@ public class Noeud {
 	 */
 	public void setHauteur(int hauteur) {
 		this.hauteur = hauteur;
+		/*if (getFilsGauche() != null)
+			getFilsGauche().setHauteur(hauteur + 1);
+		if (getFilsDroit() != null)
+			getFilsDroit().setHauteur(hauteur + 1);*/
 	}
 
 	/**
@@ -88,5 +92,42 @@ public class Noeud {
 	 */
 	public void setFilsDroit(Noeud filsDroit) {
 		this.filsDroit = filsDroit;
-	} 
+	}
+	
+	/**
+	 * Affichage du parcours infixe depuis un noeud.
+	 * @param racine La racine depuis laquelle il faut effectuer le parcours.
+	 * @return La chaine de caractère correpondant à la suite des clé depuis la racine
+	 * selon un parcours infixe.
+	 */
+	public String infixeToString() { 
+		String tmp = "";
+		if (getFilsGauche() != null)
+			tmp += getFilsGauche().infixeToString();
+		
+		tmp += "\t Clé : " + getCle() + " - Hauteur : " + getHauteur() + ",\n";
+		
+		if (getFilsDroit() != null)
+			tmp += getFilsDroit().infixeToString();
+		
+		return tmp;
+	}
+	
+	public String prefixeToString() {
+		return prefixeToString("");
+	}
+	
+	private String prefixeToString(String niveauTabulation) { 
+		String tmp = niveauTabulation;
+		
+		tmp += "\t Clé : " + getCle() + " - Hauteur : " + getHauteur() + ",\n";
+		
+		if (getFilsGauche() != null)
+			tmp += getFilsGauche().prefixeToString(niveauTabulation + "\t");
+		
+		if (getFilsDroit() != null)
+			tmp += getFilsDroit().prefixeToString(niveauTabulation + "\t");
+		
+		return tmp;
+	}
 }
