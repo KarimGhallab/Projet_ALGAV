@@ -1,12 +1,24 @@
 package arbre_de_recherche_5;
 
-public class AVL { 
+/**
+ * Classe AVL représentant un arbre de recherche équilibré de type AVL (Adelson–Velsky, Landis).
+ */
+public class AVL {
+		/** La racine de l'arbre. */
 		Noeud racine; 
 
+		/**
+		 * Getteur sur la racine de l'arbre.
+		 * @return La racine de l'arbre.
+		 */
 		public Noeud getRacine() {
 			return racine;
 		}
-
+		
+		/**
+		 * Setteur de la racine de l'arbre.
+		 * @param racine La nouvelle racine pour l'arbre.
+		 */
 		public void setRacine(Noeud racine) {
 			this.racine = racine;
 		}
