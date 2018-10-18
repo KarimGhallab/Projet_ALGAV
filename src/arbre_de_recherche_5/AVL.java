@@ -1,20 +1,24 @@
 package arbre_de_recherche_5;
 
+import interfaces.IAVL;
+import interfaces.ICle;
+
 /**
  * Classe AVL représentant un arbre de recherche équilibré de type AVL (Adelson–Velsky, Landis).
+ * @param <C> @param <C> Le type des clés contenues dans l'arbre
  */
-public class AVL implements IAVL {
+public class AVL<C extends ICle> implements IAVL<C> {
 	
 	/** La racine de l'arbre. */
-	private Noeud racine; 
+	private Noeud<C> racine; 
 
 	@Override
-	public Noeud getRacine() {
+	public Noeud<C> getRacine() {
 		return racine;
 	}
 		
 	@Override
-	public void setRacine(Noeud racine) {
+	public void setRacine(Noeud<C> racine) {
 		this.racine = racine;
 	}
 
@@ -28,7 +32,7 @@ public class AVL implements IAVL {
 	 * @param n Le noeud
 	 * @return La hauteur du noeud, 0 si le noeud n'existe pas.
 	 */
-	private int getHauteur(Noeud n) {
+	private int getHauteur(Noeud<C> n) {
 		if (n != null)
 			return n.getHauteur();
 		else
@@ -46,7 +50,7 @@ public class AVL implements IAVL {
 	 * @return La chaine de caractère correpondant à la suite des clés depuis la racine
 	 * selon un parcours infixe.
 	 */
-	private String infixeToString(Noeud racine) { 
+	private String infixeToString(Noeud<C> racine) { 
 		if (racine != null)
 			return racine.infixeToString();
 		return "";
@@ -63,7 +67,7 @@ public class AVL implements IAVL {
 	 * @return La chaine de caractère correpondant à la suite des clés depuis la racine
 	 * selon un parcours prefixe.
 	 */
-	private String prefixeToString(Noeud racine) { 
+	private String prefixeToString(Noeud<C> racine) { 
 		if (racine != null)
 			return racine.prefixeToString();
 		return "";
@@ -84,7 +88,7 @@ public class AVL implements IAVL {
 	 * @param racine La racine pour laquelle on souhaite calculer son niveau d'equilibrage
 	 * @return Le niveau d'equilibrage d'un noeud
 	 */
-	private int getEquilibrage(Noeud racine) { 
+	private int getEquilibrage(Noeud<C> racine) { 
 		if (racine == null) 
 			return 0; 
 
@@ -92,7 +96,7 @@ public class AVL implements IAVL {
 	} 
 	
 	@Override
-	public void inserer(int cle) {
+	public void inserer(C cle) {
 		setRacine(inserer(getRacine(), cle));	
 	}
 		
@@ -102,12 +106,12 @@ public class AVL implements IAVL {
 	 * @param cle La clé à insérer.
 	 * @return La racine avec la clé insérée.
 	 */
-	private Noeud inserer(Noeud racine, int cle) { 		// Voir Cours 2 slide 15-16 et 18
+	private Noeud<C> inserer(Noeud<C> racine, C cle) { 		// Voir Cours 2 slide 15-16 et 18
 		if (racine == null)
-			return new Noeud(cle);
-		else if (cle == racine.getCle())				// La clé existe déjà, aucune insertion
+			return new Noeud<C>(cle);
+		else if (cle.eg(racine.getCle()))				// La clé existe déjà, aucune insertion
 			return racine;
-		else if (cle < racine.getCle())					// Insertion à gauche
+		else if (cle.inf(racine.getCle()))					// Insertion à gauche
         	racine.setFilsGauche(inserer(racine.getFilsGauche(), cle));
         else											// Insertion à droite
         	racine.setFilsDroit(inserer(racine.getFilsDroit(), cle));
@@ -121,7 +125,7 @@ public class AVL implements IAVL {
 	 * @param racine Le noeud depuis lequelon souhaite rééquilibrer.
 	 * @return La nouvelle racine après rééquilibrage.
 	 */
-	private Noeud equilibrage(Noeud racine) {
+	private Noeud<C> equilibrage(Noeud<C> racine) {
 		if (getEquilibrage(racine) < -1) {
             if (getEquilibrage(racine.getFilsDroit()) > 0) {
                 racine.setFilsDroit(rotationDroite(racine.getFilsDroit()));
@@ -142,8 +146,8 @@ public class AVL implements IAVL {
 	 * @param q La racine à partir de laquelle il faut effectuer la rotation.
 	 * @return La nouvelle racine après la rotation.
 	 */
-	private Noeud rotationDroite(Noeud q) { 
-		Noeud p = q.getFilsGauche();
+	private Noeud<C> rotationDroite(Noeud<C> q) { 
+		Noeud<C> p = q.getFilsGauche();
 		
 		// La rotation !
 		q.setFilsGauche(p.getFilsDroit());		// V
@@ -161,8 +165,8 @@ public class AVL implements IAVL {
 	 * @param p La racine à partir de laquelle il faut effectuer la rotation.
 	 * @return La nouvelle racine après la rotation.
 	 */ 
-	private Noeud rotationGauche(Noeud p) { 
-		Noeud q = p.getFilsDroit();
+	private Noeud<C> rotationGauche(Noeud<C> p) { 
+		Noeud<C> q = p.getFilsDroit();
 		
 		// La rotation
 		p.setFilsDroit(q.getFilsGauche());		// V
@@ -176,7 +180,7 @@ public class AVL implements IAVL {
 	}
 	
 	@Override
-	public Noeud rechercher(int cle) throws Exception {
+	public Noeud<C> rechercher(C cle) throws Exception {
 		return rechercher(getRacine(), cle);
 	}
 		
@@ -187,11 +191,11 @@ public class AVL implements IAVL {
 	 * @return Le noeud contenant la clé.
 	 * @throws Exception La clé n'est pas présente ni dans la racine, ni dans ses fils.
 	 */
-	private Noeud rechercher(Noeud racine, int cle) throws Exception {
+	private Noeud<C> rechercher(Noeud<C> racine, C cle) throws Exception {
 		if (racine != null) {
-			if (cle == racine.getCle())
+			if (cle.eg(racine.getCle()))
 				return racine;
-			else if (cle < racine.getCle())
+			else if (cle.inf(racine.getCle()))
 				return rechercher(racine.getFilsGauche(), cle);
 			else
 				return rechercher(racine.getFilsDroit(), cle);

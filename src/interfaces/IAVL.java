@@ -1,17 +1,25 @@
-package arbre_de_recherche_5;
+package interfaces;
 
-public interface IAVL {
+import arbre_de_recherche_5.Noeud;
+
+/**
+ * Interface d'un arbre AVL
+ * @author 3772468
+ *
+ * @param <C> @param <C> Le type des clés contenues dans l'arbre
+ */
+public interface IAVL<C extends ICle> {
 	/**
 	 * Getteur sur la racine de l'arbre.
 	 * @return La racine de l'arbre.
 	 */
-	public Noeud getRacine();
+	public Noeud<C> getRacine();
 	
 	/**
 	 * Setteur de la racine de l'arbre.
 	 * @param racine La nouvelle racine pour l'arbre.
 	 */
-	public void setRacine(Noeud racine);
+	public void setRacine(Noeud<C> racine);
 	
 	/**
 	 * Récupère la hauteur de la racine de l'arbre.
@@ -37,7 +45,7 @@ public interface IAVL {
 	 * Insère une clé dans l'arbre.
 	 * @param cle La clé à insérer.
 	 */
-	public void inserer(int cle);
+	public void inserer(C cle);
 	
 	/**
 	 * Recherche une clé dans l'arbre.
@@ -45,5 +53,5 @@ public interface IAVL {
 	 * @return Le noeud contenant la clé.
 	 * @throws Exception La clé n'est pas présente dans l'arbre.
 	 */
-	public Noeud rechercher(int cle) throws Exception;
+	public Noeud<C> rechercher(C cle) throws Exception;
 }

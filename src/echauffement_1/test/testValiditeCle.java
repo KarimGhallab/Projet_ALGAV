@@ -1,4 +1,4 @@
-package echauffement_1.test_junit;
+package echauffement_1.test;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

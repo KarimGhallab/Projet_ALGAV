@@ -1,25 +1,27 @@
 package arbre_de_recherche_5;
 
+import interfaces.ICle;
+
 /**
  * Classe représentant un noeud pour nos arbres.
- *
+ * @param <C> Le type de la clé contenue dans le noeud
  */
-public class Noeud {
+public class Noeud<C extends ICle> {
 	/** La clé présente dans le noeud */
-    private int cle;
+    private ICle cle;
     /** La hauteur du noeud */
     private int hauteur;
     
     /** Le fils gauche du noeud */
-    private Noeud filsGauche;
+    private Noeud<C> filsGauche;
     /** Le fils droit du noeud */
-    private Noeud filsDroit; 
+    private Noeud<C> filsDroit; 
   
     /**
      * Constructeur d'un noeud à partir d'une clé
      * @param cle La clé du noeud.
      */
-    Noeud(int cle) { 
+    Noeud(ICle cle) { 
         this.cle = cle; 
         hauteur = 1;
         filsGauche = null;
@@ -30,7 +32,7 @@ public class Noeud {
      * Getteur sur la clé du noeud.
      * @return La clé du noeud.
      */
-	public int getCle() {
+	public ICle getCle() {
 		return cle;
 	}
 
@@ -38,7 +40,7 @@ public class Noeud {
 	 * Setteur sur la clé du noeud.
 	 * @param cle La nouvelle clé du noeud.
 	 */
-	public void setCle(int cle) {
+	public void setCle(ICle cle) {
 		this.cle = cle;
 	}
 
@@ -56,17 +58,13 @@ public class Noeud {
 	 */
 	public void setHauteur(int hauteur) {
 		this.hauteur = hauteur;
-		/*if (getFilsGauche() != null)
-			getFilsGauche().setHauteur(hauteur + 1);
-		if (getFilsDroit() != null)
-			getFilsDroit().setHauteur(hauteur + 1);*/
 	}
 
 	/**
 	 * Getteur sur le fils gauche du noeud.
 	 * @return Le fils gauche du noeud
 	 */
-	public Noeud getFilsGauche() {
+	public Noeud<C> getFilsGauche() {
 		return filsGauche;
 	}
 
@@ -74,7 +72,7 @@ public class Noeud {
 	 * Setteur sur le fils gauche du noeud.
 	 * @param filsGauche Le nouveau fils gauche du noeud.
 	 */
-	public void setFilsGauche(Noeud filsGauche) {
+	public void setFilsGauche(Noeud<C> filsGauche) {
 		this.filsGauche = filsGauche;
 	}
 
@@ -82,7 +80,7 @@ public class Noeud {
 	 * Getteur sur le fils droit du noeud.
 	 * @return Le fils droit du noeud
 	 */
-	public Noeud getFilsDroit() {
+	public Noeud<C> getFilsDroit() {
 		return filsDroit;
 	}
 
@@ -90,7 +88,7 @@ public class Noeud {
 	 * Setteur sur le fils droit  du noeud.
 	 * @param filsDroit Le nouveau fils droit du noeud.
 	 */
-	public void setFilsDroit(Noeud filsDroit) {
+	public void setFilsDroit(Noeud<C> filsDroit) {
 		this.filsDroit = filsDroit;
 	}
 	
@@ -105,7 +103,7 @@ public class Noeud {
 		if (getFilsGauche() != null)
 			tmp += getFilsGauche().infixeToString();
 		
-		tmp += "\t Clé : " + getCle() + " - Hauteur : " + getHauteur() + ",\n";
+		tmp += "\t Clé : " + getCle().toString() + " - Hauteur : " + getHauteur() + ",\n";
 		
 		if (getFilsDroit() != null)
 			tmp += getFilsDroit().infixeToString();
@@ -120,7 +118,7 @@ public class Noeud {
 	private String prefixeToString(String niveauTabulation) { 
 		String tmp = niveauTabulation;
 		
-		tmp += "\t Clé : " + getCle() + " - Hauteur : " + getHauteur() + ",\n";
+		tmp += "\t Clé : " + getCle().toString() + " - Hauteur : " + getHauteur() + ",\n";
 		
 		if (getFilsGauche() != null)
 			tmp += "FG -> " + getFilsGauche().prefixeToString(niveauTabulation + "\t");
