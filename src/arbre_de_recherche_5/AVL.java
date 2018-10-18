@@ -1,5 +1,10 @@
 package arbre_de_recherche_5;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
 import interfaces.IAVL;
 import interfaces.ICle;
 
@@ -202,5 +207,24 @@ public class AVL<C extends ICle> implements IAVL<C> {
 		}
 		else
 			throw new Exception("La clé " + cle + " n'est pas présente dans l'arbre");
+	}
+
+	@Override
+	public List<C> getCleTriee() {
+		List<C> l = new ArrayList<C>();
+		l = getCleTriee(racine, l);
+		return l;
+	}
+	
+	private List<C> getCleTriee(Noeud<C> racine, List<C> l) {
+		if (racine != null) {
+			System.out.println("V :" + racine.getCle());
+			l.addAll(getCleTriee(racine.getFilsGauche(), l));
+			l.add(racine.getCle());
+			l.addAll(getCleTriee(racine.getFilsDroit(), l));
+			return l;
+		}
+		else
+			return Collections.emptyList();
 	}
 }

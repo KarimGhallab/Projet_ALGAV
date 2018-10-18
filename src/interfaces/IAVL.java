@@ -1,5 +1,7 @@
 package interfaces;
 
+import java.util.List;
+
 import arbre_de_recherche_5.Noeud;
 
 /**
@@ -54,4 +56,10 @@ public interface IAVL<C extends ICle> {
 	 * @throws Exception La clé n'est pas présente dans l'arbre.
 	 */
 	public Noeud<C> rechercher(C cle) throws Exception;
+	
+	/**
+	 * Récupère la liste triée des clés.
+	 * @return La liste triée des clés.
+	 */
+	public List<C> getCleTriee();
 }

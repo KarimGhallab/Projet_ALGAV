@@ -8,7 +8,7 @@ import interfaces.ICle;
  */
 public class Noeud<C extends ICle> {
 	/** La clé présente dans le noeud */
-    private ICle cle;
+    private C cle;
     /** La hauteur du noeud */
     private int hauteur;
     
@@ -21,7 +21,7 @@ public class Noeud<C extends ICle> {
      * Constructeur d'un noeud à partir d'une clé
      * @param cle La clé du noeud.
      */
-    Noeud(ICle cle) { 
+    Noeud(C cle) { 
         this.cle = cle; 
         hauteur = 1;
         filsGauche = null;
@@ -32,7 +32,7 @@ public class Noeud<C extends ICle> {
      * Getteur sur la clé du noeud.
      * @return La clé du noeud.
      */
-	public ICle getCle() {
+	public C getCle() {
 		return cle;
 	}
 
@@ -40,7 +40,7 @@ public class Noeud<C extends ICle> {
 	 * Setteur sur la clé du noeud.
 	 * @param cle La nouvelle clé du noeud.
 	 */
-	public void setCle(ICle cle) {
+	public void setCle(C cle) {
 		this.cle = cle;
 	}
 
