@@ -3,5 +3,5 @@ Projet de programmation de l'UE Algorithmique Avancée de la première année de
 
 ## Auteurs
 
-* **Ale Pidery**
+* **Ale Pidery** (https://github.com/apidery)
 * **Karim Ghallab** (https://github.com/KarimGhallab)
