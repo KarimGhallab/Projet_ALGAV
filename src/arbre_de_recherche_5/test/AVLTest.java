@@ -12,7 +12,6 @@ import org.junit.Test;
 import arbre_de_recherche_5.AVL;
 import arbre_de_recherche_5.Noeud;
 import autres.CleInteger;
-import interfaces.IAVL;
 
 public class AVLTest {
 
