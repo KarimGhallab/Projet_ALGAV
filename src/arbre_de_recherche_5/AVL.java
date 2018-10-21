@@ -15,7 +15,10 @@ import interfaces.ICle;
 public class AVL<C extends ICle> implements IAVL<C> {
 	
 	/** La racine de l'arbre. */
-	private Noeud<C> racine; 
+	private Noeud<C> racine;
+	
+	/** La taille de l'arbre */
+	private int taille;
 
 	@Override
 	public Noeud<C> getRacine() {
@@ -42,6 +45,10 @@ public class AVL<C extends ICle> implements IAVL<C> {
 			return n.getHauteur();
 		else
 			return 0;
+	}
+	
+	public int size() {
+		return taille;
 	}
 		
 	@Override
@@ -112,8 +119,10 @@ public class AVL<C extends ICle> implements IAVL<C> {
 	 * @return La racine avec la clé insérée.
 	 */
 	private Noeud<C> inserer(Noeud<C> racine, C cle) { 		// Voir Cours 2 slide 15-16 et 18
-		if (racine == null)
+		if (racine == null) {
+			taille++;
 			return new Noeud<C>(cle);
+		}
 		else if (cle.eg(racine.getCle()))				// La clé existe déjà, aucune insertion
 			return racine;
 		else if (cle.inf(racine.getCle()))					// Insertion à gauche
@@ -218,10 +227,9 @@ public class AVL<C extends ICle> implements IAVL<C> {
 	
 	private List<C> getCleTriee(Noeud<C> racine, List<C> l) {
 		if (racine != null) {
-			System.out.println("V :" + racine.getCle());
-			l.addAll(getCleTriee(racine.getFilsGauche(), l));
+			getCleTriee(racine.getFilsGauche(), l);
 			l.add(racine.getCle());
-			l.addAll(getCleTriee(racine.getFilsDroit(), l));
+			getCleTriee(racine.getFilsDroit(), l);
 			return l;
 		}
 		else

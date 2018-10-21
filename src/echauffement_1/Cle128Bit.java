@@ -4,17 +4,23 @@ import java.math.BigInteger;
 import java.util.BitSet;
 
 import interfaces.ICle;
+/**
+ * Clé codé sur 128 bits.
+ *
+ */
+public class Cle128Bit implements ICle{
 
-public class Cle implements ICle{
-
-	private String cleString; // Representation hexadécimal
-	private BitSet cle; // Representation binaire sur 128 bits
+	/** Representation hexadécimal de la clé. */
+	private String cleString;
+	
+	/** Representation binaire sur 128 bits. */
+	private BitSet cle;
 	
 	/**
 	 * Constructeur
-	 * @param cleS : hexadecimal à transformer en cle
+	 * @param cleS : hexadecimal à transformer en cle de 128 bits
 	 */
-	public Cle(String cleS) {
+	public Cle128Bit(String cleS) {
 		cleString = cleS;
 		cle = new BitSet(128);
 		String cleBinaire = new BigInteger(cleString, 16).toString(2);
@@ -46,8 +52,8 @@ public class Cle implements ICle{
 	
 	@Override
 	public boolean inf(ICle cle1) {
-		if (cle1 instanceof Cle) {
-			Cle c = (Cle) cle1;
+		if (cle1 instanceof Cle128Bit) {
+			Cle128Bit c = (Cle128Bit) cle1;
 			boolean result = false;
 			
 			if(cle.length() < c.cle.length())
@@ -75,8 +81,8 @@ public class Cle implements ICle{
 	@Override
 	public boolean eg(ICle cle1) {
 		
-		if (cle1 instanceof Cle) {
-			Cle c = (Cle) cle1;
+		if (cle1 instanceof Cle128Bit) {
+			Cle128Bit c = (Cle128Bit) cle1;
 			
 			boolean result = true;
 			
@@ -94,5 +100,4 @@ public class Cle implements ICle{
 		else
 			throw new RuntimeException("Impossible de comparer une \"Cle\" avec une autre classe");
 	}
-	
 }

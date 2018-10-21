@@ -24,10 +24,16 @@ public interface IAVL<C extends ICle> {
 	public void setRacine(Noeud<C> racine);
 	
 	/**
-	 * Récupère la hauteur de la racine de l'arbre.
-	 * @return La hauteur de la racine de l'arbre.
+	 * Récupère la hauteur depuis la racine de l'arbre.
+	 * @return La hauteur depuis la racine de l'arbre.
 	 */
 	public int getHauteur();
+	
+	/**
+	 * Récupère la taille de notre arbre
+	 * @return La taille de l'arbre.
+	 */
+	public int size();
 	
 	/**
 	 * Affichage du parcours infixe de l'arbre.

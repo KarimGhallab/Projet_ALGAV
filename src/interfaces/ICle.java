@@ -1,5 +1,9 @@
 package interfaces;
 
+/**
+ * Interface d'une clé pour nos structures.
+ *
+ */
 public interface ICle {
 	
 	/**

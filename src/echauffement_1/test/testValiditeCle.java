@@ -8,24 +8,25 @@ import java.util.Vector;
 import org.junit.Before;
 import org.junit.Test;
 
-import echauffement_1.Cle;
+import echauffement_1.Cle128Bit;
 import echauffement_1.FileConverter;
 
 public class testValiditeCle{
 
+	
 	FileConverter fc;
-	Cle cle32;
-	Cle cle64;
-	Cle cle96;
-	Vector <Cle> cles;
+	Cle128Bit cle32;
+	Cle128Bit cle64;
+	Cle128Bit cle96;
+	Vector <Cle128Bit> cles;
 	
 	@Before
 	public void initialize() {
 		fc = new FileConverter("donnees/cles_alea/jeu_1_nb_cles_100.txt");
 		cles = fc.getCle();
-		cle32 = new Cle("9CF48CF5");
-		cle64 = new Cle("9CF48CF5E89AF1A2");
-		cle96 = new Cle("9CF48CF5E89AF1A2EFC892A8");
+		cle32 = new Cle128Bit("9CF48CF5");
+		cle64 = new Cle128Bit("9CF48CF5E89AF1A2");
+		cle96 = new Cle128Bit("9CF48CF5E89AF1A2EFC892A8");
 	}
 	
 	@Test

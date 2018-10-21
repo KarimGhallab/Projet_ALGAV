@@ -6,8 +6,13 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Vector;
 
+/**
+ * Lit un fichier contenant les valeurs des clés en héxadécimal et renvoit un vecteur contenant les traductions
+ * de ses clés en entiers de 128 bit.
+ *
+ */
 public class FileConverter {
-	
+	/** Le fichier à lire. */
 	private File file;
 	
 	/**
@@ -19,13 +24,12 @@ public class FileConverter {
 	}
 	
 	/**
-	 *Li dans le fichier pour recuperer les cles en les stocke dans un vector. 
+	 * Lit dans le fichier pour recuperer les cles en les stocke dans un vector. 
 	 * @return le vector contenant les cles.
 	 */
-	public Vector<Cle> getCle(){
-		Vector<Cle> cles = new Vector<Cle>();
+	public Vector<Cle128Bit> getCle(){
+		Vector<Cle128Bit> cles = new Vector<Cle128Bit>();
 		BufferedReader br;
-		
 		try {
 				br = new BufferedReader(new FileReader(file));
 				String ligne;
@@ -33,7 +37,7 @@ public class FileConverter {
 					
 					String cleS = ligne.substring(2);
 					
-					Cle cle = new Cle(cleS);
+					Cle128Bit cle = new Cle128Bit(cleS);
 					
 					cles.add(cle);
 				}

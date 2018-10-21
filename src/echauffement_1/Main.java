@@ -7,9 +7,9 @@ public class Main {
 	public static void main(String[] args) {
 		
 		FileConverter cv = new FileConverter("donnees/cles_alea/jeu_5_nb_cles_50000.txt");
-		Vector <Cle> cles = cv.getCle();
+		Vector <Cle128Bit> cles = cv.getCle();
 		
-		for(Cle c : cles)
+		for(Cle128Bit c : cles)
 			System.out.println(c);
 	}
 
