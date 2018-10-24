@@ -13,7 +13,6 @@ import echauffement_1.FileConverter;
 
 public class testValiditeCle{
 
-	
 	FileConverter fc;
 	Cle128Bit cle32;
 	Cle128Bit cle64;

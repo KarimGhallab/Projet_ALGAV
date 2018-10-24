@@ -175,8 +175,28 @@ public class TasMinTab implements ITasMin {
 
 	@Override
 	public boolean union(ITasMin t2) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		if(t2 instanceof TasMinTab) {
+			TasMinTab tas2 = (TasMinTab) t2;
+			ICle [] tabTas2 = tas2.getTas();
+			for(int i =0; i < tabTas2.length; i++)
+				ajout(tabTas2[i]);
+			
+			return true;
+		}
+		else {
+			System.out.println("Union impossible.");
+			return false;
+		}	
+		
+	}
+	
+	/**
+	 * Renvoie le tableau.
+	 * @return tas
+	 */
+	public ICle[] getTas(){
+		return tas;
 	}
 	
 	@Override
@@ -185,7 +205,9 @@ public class TasMinTab implements ITasMin {
 		
 		for(int i = 0; i<tas.length; i++) {
 			str.append(tas[i]);
-			str.append(" ");
+			
+			if(i!=tas.length-1)
+				str.append(" ");
 		}
 		
 		return str.toString();

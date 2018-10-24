@@ -18,13 +18,12 @@ public class Main {
 		t.ajout(new CleInteger(10));
 		t.ajout(new CleInteger(11));
 		t.ajout(new CleInteger(3));
-		t.ajout(new CleInteger(2));
-		t.ajout(new CleInteger(15));
-		t.ajout(new CleInteger(6));
+		
 		//t.supprMin();
 		
 		System.out.println(t.toString());
 		
+		//Test consIter
 		TasMinTab tLoop = new TasMinTab();
 		
 		List<ICle> l = new ArrayList<>();
@@ -41,6 +40,22 @@ public class Main {
 		tLoop.consIter(l);
 		
 		System.out.println(tLoop.toString());
+		
+		// Test union
+		TasMinTab t2 = new TasMinTab();
+		t2.ajout(new CleInteger(1));
+		t2.ajout(new CleInteger(99));
+		t2.ajout(new CleInteger(65));
+		t2.ajout(new CleInteger(13));
+		t2.ajout(new CleInteger(11));
+		t2.ajout(new CleInteger(14));
+		t2.ajout(new CleInteger(22));
+		t2.ajout(new CleInteger(5));
+		t2.ajout(new CleInteger(9));
+		
+		t.union(t2);
+		
+		System.out.println(t.toString());
 		
 	}
 
