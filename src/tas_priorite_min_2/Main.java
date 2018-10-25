@@ -10,7 +10,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		TasMinTab t = new TasMinTab();
+		TasMinTab t = new TasMinTab(5);
 		
 		t.ajout(new CleInteger(1));
 		t.ajout(new CleInteger(9));
@@ -19,12 +19,12 @@ public class Main {
 		t.ajout(new CleInteger(11));
 		t.ajout(new CleInteger(3));
 		
-		//t.supprMin();
+		t.supprMin();
 		
 		System.out.println(t.toString());
 		
 		//Test consIter
-		TasMinTab tLoop = new TasMinTab();
+		TasMinTab tLoop = new TasMinTab(5);
 		
 		List<ICle> l = new ArrayList<>();
 		l.add(new CleInteger(1));
@@ -42,7 +42,7 @@ public class Main {
 		System.out.println(tLoop.toString());
 		
 		// Test union
-		TasMinTab t2 = new TasMinTab();
+		TasMinTab t2 = new TasMinTab(9);
 		t2.ajout(new CleInteger(1));
 		t2.ajout(new CleInteger(99));
 		t2.ajout(new CleInteger(65));

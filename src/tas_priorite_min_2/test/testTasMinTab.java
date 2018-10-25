@@ -1,13 +1,10 @@
 package tas_priorite_min_2.test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,9 +21,9 @@ public class testTasMinTab {
 	
 	@Before
 	public void initialize() {
-		tas1 = new TasMinTab();
-		tas2 = new TasMinTab();
-		tasConstLoop = new TasMinTab();
+		tas1 = new TasMinTab(5);
+		tas2 = new TasMinTab(5);
+		tasConstLoop = new TasMinTab(5);
 		
 		list = new ArrayList<>();
 		list.add(new CleInteger(1));
@@ -47,7 +44,7 @@ public class testTasMinTab {
 		assertEquals(tas1.size(), 3);
 		
 		//Pour des contrainte d'affichage, on utilise ICleInteger
-		tas1 = new TasMinTab();
+		tas1 = new TasMinTab(5);
 		
 		tas1.ajout(new CleInteger(1));
 		tas1.ajout(new CleInteger(9));
@@ -76,7 +73,7 @@ public class testTasMinTab {
 		assertEquals(tas1.size(), 1);
 		
 		//Pour des contrainte d'affichage, on utilise ICleInteger
-		tas1 = new TasMinTab();
+		tas1 = new TasMinTab(5);
 		
 		tas1.ajout(new CleInteger(10));
 		tas1.ajout(new CleInteger(9));
@@ -86,7 +83,7 @@ public class testTasMinTab {
 		tas1.ajout(new CleInteger(30));
 		
 		assertEquals(tas1.size(), 6);
-		assertEquals(tas1.toString(), "9 10 15 10 11 30");
+		assertEquals("9 10 15 10 11 30", tas1.toString());
 		
 		assertTrue(tas1.supprMin());
 		
@@ -123,8 +120,8 @@ public class testTasMinTab {
 		assertEquals(tas1.size(), 7);
 		
 		//Pour des contrainte d'affichage, on utilise ICleInteger
-		tas1 = new TasMinTab();
-		tas2 = new TasMinTab();
+		tas1 = new TasMinTab(5);
+		tas2 = new TasMinTab(5);
 		
 		tas1.ajout(new CleInteger(10));
 		tas1.ajout(new CleInteger(9));

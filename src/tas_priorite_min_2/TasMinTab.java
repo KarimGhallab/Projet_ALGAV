@@ -3,13 +3,16 @@ package tas_priorite_min_2;
 import java.util.List;
 
 import interfaces.ICle;
+import interfaces.ITasMin;
 
 public class TasMinTab implements ITasMin {
 
 	private ICle [] tas;
+	private int nbElements;
 	
-	public TasMinTab() {
-		tas = new ICle[0];
+	public TasMinTab(int capacite) {
+		tas = new ICle[capacite];
+		nbElements=0;	
 	}
 	
 	/**
@@ -26,29 +29,26 @@ public class TasMinTab implements ITasMin {
 	@Override
 	public boolean supprMin() {
 		
-		if(tas.length == 0) { // Cas ou le tas est vide.
+		if(nbElements == 0) { // Cas ou le tas est vide.
 			System.out.println("Tas vide, suppression impossible.");
 			return false;
 
-		}else if(tas.length == 1) { // Cas ou le tas possede 1 element à supprimer.			
-			tas = new ICle[0];
+		}else if(nbElements == 1) { // Cas ou le tas possede 1 element à supprimer.			
+			tas[0] = null;
+			nbElements--;
+			
 			return true;
 			
 		}
 		// Cas ou le tas possede plus de 1 element.
-		
-		int s = size()-1;
-    	ICle c = tas[s];
+    	ICle c = tas[nbElements - 1];
     	
     	tas[0] = c;
     	
-    	ICle [] tasTmp = new ICle[tas.length - 1]; 
-		
-		for(int i=0; i < tasTmp.length; i++)
-			tasTmp[i] = tas[i];
-			
-		tas = tasTmp;		
-		
+    	tas[nbElements-1] = null;
+    	
+		nbElements--; // nombre d'element diminue de 1
+
 		// on verifie que le tas est toujour minimal
 		verifMin(0);
 		
@@ -66,7 +66,7 @@ public class TasMinTab implements ITasMin {
         int fDroit = idFilsDroit(noeud);
         
         int idMin = -1;
-        int nbElems = tas.length-1;
+        int nbElems = nbElements-1;
         
         if (fDroit <= nbElems && fDroit > 0 && tas[fDroit].inf(tas[noeud])) { // Verifie si le fils droit n'est pas plus grand que le pere.
             idMin = fDroit;
@@ -90,7 +90,7 @@ public class TasMinTab implements ITasMin {
 	 */
 	public int idFilsGauche(int noeud) {
 		
-		if((2*noeud + 1) > tas.length)
+		if((2*noeud + 1) > nbElements)
 			return -1;
 		else {
 			return (2*noeud + 1);
@@ -105,7 +105,7 @@ public class TasMinTab implements ITasMin {
 	 */
 	public int idFilsDroit(int noeud) {
 		
-		if((2*noeud + 2) > tas.length)
+		if((2*noeud + 2) > nbElements)
 			return -1;
 		else {
 			return (2*noeud + 2);
@@ -114,28 +114,47 @@ public class TasMinTab implements ITasMin {
 	}
 
 	/**
+	 * Renvoie la capacite du tas.
+	 * @return 
+	 */
+	public int capacite() {
+		return tas.length;
+	}
+	
+
+	/**
 	 * Renvoie la taille du tas.
-	 * @return
+	 * @return 
 	 */
 	public int size() {
-		return tas.length;
+		return nbElements;
 	}
 	
 	@Override
 	public boolean ajout(ICle c) {
 		
-		ICle [] tasTmp = new ICle[tas.length + 1]; 
-		
-		for(int i=0; i < tas.length; i++)
-			tasTmp[i] = tas[i];
-		
-		tasTmp[tas.length] = c; // Cle ajoute en fin de tableau (en feuille)
+		if(nbElements == 0) {
+			tas[0] = c;
+			nbElements++;
 			
-		tas = tasTmp;
+			return true;
+			
+		}else if (capacite() == nbElements) { // Si la capacite est atteinte, on agrandi le tableau du double de sa capacite actuelle.
+			ICle [] tasTmp = new ICle[capacite() * 2]; 
+			
+			for(int i=0; i < nbElements; i++)
+				tasTmp[i] = tas[i];
+				
+			tas = tasTmp;	
+		}
+		
+		tas[nbElements] = c; // Cle ajoute en fin de tas (en feuille)
+		
+		nbElements++; // Augement le nombre d'element du tas
 		
 		// Reagencement des cles par rapport a la nouvelle cle inseree.
 		
-		int lastId = tas.length - 1;
+		int lastId = nbElements - 1;
 		int pere = idPere(lastId); // indice du pere de la derniere cle ajoutee
 		
 		while(pere != lastId && tas[lastId].inf(tas[pere])) {
@@ -143,7 +162,7 @@ public class TasMinTab implements ITasMin {
 			lastId = pere;
 			pere = idPere(lastId);
 		}
-				
+		
 		return true;
 	}
 
@@ -179,7 +198,7 @@ public class TasMinTab implements ITasMin {
 		if(t2 instanceof TasMinTab) {
 			TasMinTab tas2 = (TasMinTab) t2;
 			ICle [] tabTas2 = tas2.getTas();
-			for(int i =0; i < tabTas2.length; i++)
+			for(int i =0; i < tas2.nbElements; i++)
 				ajout(tabTas2[i]);
 			
 			return true;
@@ -203,10 +222,10 @@ public class TasMinTab implements ITasMin {
 	public String toString() {
 		StringBuilder str = new StringBuilder();
 		
-		for(int i = 0; i<tas.length; i++) {
+		for(int i = 0; i<nbElements; i++) {
 			str.append(tas[i]);
 			
-			if(i!=tas.length-1)
+			if(i!=nbElements-1)
 				str.append(" ");
 		}
 		

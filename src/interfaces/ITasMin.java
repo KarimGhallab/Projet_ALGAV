@@ -1,8 +1,6 @@
-package tas_priorite_min_2;
+package interfaces;
 
 import java.util.List;
-
-import interfaces.ICle;
 
 public interface ITasMin {
 	/**
