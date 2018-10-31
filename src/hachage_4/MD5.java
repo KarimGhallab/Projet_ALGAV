@@ -70,7 +70,7 @@ public class MD5
 		
 		// Les opérations bit à bit étant très compliqué sur des ByteBuffers, on utilise ici la technique suivante :
 		// Le ByteBuffer que l'on alloue a toujours une taille multiple de 512 bits (soit 64 bytes).
-		// L'ajout du bit à 1 et des bits restant à zero se fait via l'ajout du byte 0x80 (1000 0000 en binaire).
+		// L'ajout du bit à 1 et des bits restant à zero se fait via l'ajout du byte 0x80 (1000 0000 Men binaire).
 		// Cela ajoute un byte dont le premier bit est un '1' est les autres sont des '0'.
 		// Les bits restants dans le ByteBuffer sont déjà tous des zéros, cela nous évite de boucler pour les ajouter.
 		byteBufferMessage.put((byte)0x80);
