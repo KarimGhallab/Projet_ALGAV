@@ -31,7 +31,6 @@ public class Cle128Bit implements ICle{
 	    	}else
 	    		cle.set(i, true);
 	    }
-
 	}
 	
 	@Override
