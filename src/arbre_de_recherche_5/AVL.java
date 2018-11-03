@@ -324,6 +324,11 @@ public class AVL<C extends ICle> implements IAVL<C> {
 		}
 	}
 	
+	/**
+	 * Calcule la moyenne des élements d'une liste.
+	 * @param liste La liste pour laquelle on souhaite la moyenne des éléments.
+	 * @return La moyenne des éléments de la liste.
+	 */
 	private static float getMoyenne(ArrayList<Integer> liste) {
 		int somme = 0;
 		for(Integer x : liste)
@@ -332,6 +337,11 @@ public class AVL<C extends ICle> implements IAVL<C> {
 		return (float) somme/liste.size();
 	}
 	
+	/**
+	 * Récupère la valeur maximale dans une liste.
+	 * @param liste La liste pour laquelle on souhaite récupèrer la valeur maximale.
+	 * @return L'élément le plus grand de la liste.
+	 */
 	private static int getMax(ArrayList<Integer> liste) {
 		int max = -1;
 		for(Integer x : liste) {
