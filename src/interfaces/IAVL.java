@@ -1,6 +1,8 @@
 package interfaces;
 
+import java.util.AbstractMap;
 import java.util.List;
+import java.util.AbstractMap.SimpleEntry;
 
 import arbre_de_recherche_5.Noeud;
 
@@ -58,10 +60,10 @@ public interface IAVL<C extends ICle> {
 	/**
 	 * Recherche une clé dans l'arbre.
 	 * @param cle La clé à rechercher.
-	 * @return Le noeud contenant la clé.
+	 * @return Une map associant au noeud que l'on a trouvé, le nombre de comparaison necessaire à cet recherche.
 	 * @throws Exception La clé n'est pas présente dans l'arbre.
 	 */
-	public Noeud<C> rechercher(C cle) throws Exception;
+	public SimpleEntry<Noeud<C>, Integer> rechercher(C cle) throws Exception;
 	
 	/**
 	 * Récupère la liste triée des clés.

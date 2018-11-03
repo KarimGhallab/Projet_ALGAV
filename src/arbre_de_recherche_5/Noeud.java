@@ -23,7 +23,7 @@ public class Noeud<C extends ICle> {
      */
     Noeud(C cle) { 
         this.cle = cle; 
-        hauteur = 1;
+        hauteur = 0;
         filsGauche = null;
         filsDroit = null;
     }

@@ -45,7 +45,7 @@ public class AVLTest {
 	 */
 	public void testRecherche() {
 		try {
-			Noeud<CleInteger> res = arbre.rechercher(new CleInteger(5));
+			Noeud<CleInteger> res = arbre.rechercher(new CleInteger(5)).getKey();
 			
 			assertTrue(res.getCle().getValeur() == 5);
 			assertTrue(res.getFilsGauche().getCle().getValeur() == 4);

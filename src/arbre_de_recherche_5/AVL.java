@@ -1,9 +1,17 @@
 package arbre_de_recherche_5;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
+
+import echauffement_1.Cle128Bit;
 import interfaces.IAVL;
 import interfaces.ICle;
 
@@ -18,6 +26,9 @@ public class AVL<C extends ICle> implements IAVL<C> {
 	
 	/** La taille de l'arbre */
 	private int taille;
+	
+	/** Le nombre de comparaison pour la derniere opération de recherche. */
+	private int nbComparaison;
 
 	@Override
 	public Noeud<C> getRacine() {
@@ -37,13 +48,13 @@ public class AVL<C extends ICle> implements IAVL<C> {
 	/**
 	 * Retourne la hauteur d'un noeud.
 	 * @param n Le noeud
-	 * @return La hauteur du noeud, 0 si le noeud n'existe pas.
+	 * @return La hauteur du noeud, -1 si le noeud n'existe pas.
 	 */
 	private int getHauteur(Noeud<C> n) {
 		if (n != null)
 			return n.getHauteur();
 		else
-			return 0;
+			return -1;
 	}
 	
 	public int size() {
@@ -193,8 +204,10 @@ public class AVL<C extends ICle> implements IAVL<C> {
 	}
 	
 	@Override
-	public Noeud<C> rechercher(C cle) throws Exception {
-		return rechercher(getRacine(), cle);
+	public SimpleEntry<Noeud<C>, Integer> rechercher(C cle) throws Exception {
+		nbComparaison = 0;
+		Noeud<C> res = rechercher(getRacine(), cle);
+		return new SimpleEntry<Noeud<C>, Integer>(res, nbComparaison);
 	}
 		
 	/**
@@ -208,10 +221,13 @@ public class AVL<C extends ICle> implements IAVL<C> {
 		if (racine != null) {
 			if (cle.eg(racine.getCle()))
 				return racine;
-			else if (cle.inf(racine.getCle()))
-				return rechercher(racine.getFilsGauche(), cle);
-			else
-				return rechercher(racine.getFilsDroit(), cle);
+			else {
+				nbComparaison++;
+				if (cle.inf(racine.getCle()))
+					return rechercher(racine.getFilsGauche(), cle);
+				else
+					return rechercher(racine.getFilsDroit(), cle);
+			}
 		}
 		else
 			throw new Exception("La clé " + cle + " n'est pas présente dans l'arbre");
@@ -233,5 +249,96 @@ public class AVL<C extends ICle> implements IAVL<C> {
 		}
 		else
 			return Collections.emptyList();
+	}
+	
+	/**
+	 * Permet de voir le temps pris pour la recherche d'un élément dans l'AVL.
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		int tailles[] = {100, 200, 500, 1000, 5000, 10000, 20000, 50000};
+		int nb = 5;
+		int cpt = 0;
+		File file;
+		String nomFichier;
+		String mot;
+		Cle128Bit cle;
+		BufferedReader bufferedReader;
+		AVL<Cle128Bit> avl;
+		HashMap<Integer, ArrayList<Integer>> nbComparaisonParTaille = new HashMap<>();
+		SimpleEntry<Noeud<Cle128Bit>, Integer> res;
+		
+		for(int i=1; i<=nb; i++) {
+			for(int j=0; j<tailles.length; j++) {
+				if (!nbComparaisonParTaille.containsKey(tailles[j]))		// Initialisation des arrayList des Hashmap
+					nbComparaisonParTaille.put(tailles[j], new ArrayList<Integer>());
+				
+				cpt++;
+				nomFichier = "jeu_"+i+"_nb_cles_"+tailles[j]+".txt";
+				System.out.println("Fichier : " + nomFichier + "Progression : " + cpt + "/" + nb*tailles.length);
+				
+				file = new File("donnees/cles_alea/"+nomFichier);
+				avl = new AVL<>();
+				try {
+					// Une première itération pour construire l'AVL avec toutes les clés
+					bufferedReader = new BufferedReader(new FileReader(file));
+					mot = bufferedReader.readLine();
+					while (mot != null) {
+						mot = mot.substring(2);
+						cle = new Cle128Bit(mot);
+						avl.inserer(cle);
+						mot = bufferedReader.readLine();
+					}
+					bufferedReader.close();
+					
+					// Une seconde itération pour effectuer une recherche sur chaque élément
+					bufferedReader = new BufferedReader(new FileReader(file));
+					mot = bufferedReader.readLine();
+					while (mot != null) {
+						mot = mot.substring(2);
+						res = avl.rechercher(new Cle128Bit(mot));
+						nbComparaisonParTaille.get(tailles[j]).add(res.getValue());
+						mot = bufferedReader.readLine();
+					}
+					bufferedReader.close();
+				} catch (Exception e) {
+					System.err.println("Erreur avec le fichier : " + file.getName());
+					e.printStackTrace();
+				}
+			}
+		}// Toutes les recherches ont été effectués
+		ArrayList<Integer> liste;
+		float moyenne;
+		int max;
+		ArrayList<Integer> listeTriee = new ArrayList<>(nbComparaisonParTaille.keySet());
+		Collections.sort(listeTriee);
+		
+		for (Integer taille : listeTriee) {
+			
+			liste = new ArrayList<>(nbComparaisonParTaille.get(taille));
+			moyenne = getMoyenne(liste);
+			max = getMax(liste);
+			System.out.println("Taille " + taille);
+			System.out.println("\tNombre de comparaison moyen " + moyenne);
+			System.out.println("\tNombre de comparaison maximum " + max);
+		}
+	}
+	
+	private static float getMoyenne(ArrayList<Integer> liste) {
+		int somme = 0;
+		for(Integer x : liste)
+			somme += x;
+			
+		return (float) somme/liste.size();
+	}
+	
+	private static int getMax(ArrayList<Integer> liste) {
+		int max = -1;
+		for(Integer x : liste) {
+			if (x > max)
+				max = x;
+		}
+		
+		return max;
 	}
 }
