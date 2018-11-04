@@ -3,7 +3,9 @@ package arbre_de_recherche_5;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -307,20 +309,36 @@ public class AVL<C extends ICle> implements IAVL<C> {
 				}
 			}
 		}// Toutes les recherches ont été effectués
+		String nomFichierCSV = "recherche_AVL.csv";
+		
+		System.out.println("Sauvegarde des resultats dans le fichier \"" + nomFichierCSV + "\"...");
 		ArrayList<Integer> liste;
 		float moyenne;
 		int max;
 		ArrayList<Integer> listeTriee = new ArrayList<>(nbComparaisonParTaille.keySet());
 		Collections.sort(listeTriee);
-		
-		for (Integer taille : listeTriee) {
-			
-			liste = new ArrayList<>(nbComparaisonParTaille.get(taille));
-			moyenne = getMoyenne(liste);
-			max = getMax(liste);
-			System.out.println("Taille " + taille);
-			System.out.println("\tNombre de comparaison moyen " + moyenne);
-			System.out.println("\tNombre de comparaison maximum " + max);
+
+		// Écriture des résultats dans un fichier CSV
+		try {
+			File fichierCSV = new File("resultats/" + nomFichierCSV);
+	        String aEcrire = "Taille moyenne maximum\n";
+	        DecimalFormat df = new DecimalFormat("#.###");
+	        for (Integer taille : listeTriee) {
+				liste = new ArrayList<>(nbComparaisonParTaille.get(taille));
+				moyenne = getMoyenne(liste);
+				max = getMax(liste);
+				System.out.println();
+				aEcrire += taille + " " + df.format(moyenne )+ " " + max + "\n";
+			}
+	        FileWriter writer = new FileWriter(fichierCSV);
+	        writer.write(aEcrire);
+	        writer.close();
+	        
+	        System.out.println("Les résultats ont été sauvegardés !");
+	        
+		} catch (IOException e) {
+			System.err.println("Erreur lors de la sauvagardes des résultats");
+			e.printStackTrace();
 		}
 	}
 	
