@@ -61,11 +61,12 @@ public class MD5
 		byte[] messageBytes = message.getBytes();
 
 		// Il faut réserver une taille multiple de 64 bytes permettant de stocker le message ainsi que son padding.
-		// Les 64 bytes résérvés ici représentent les 512 bits nécéssairent à l'algorithme du MD5. 
+		// Les 64 bytes résérvés ici représentent les 512 bits nécéssairent à l'algorithme du MD5.
+		// L'utillisation du ByteBuffer nous permet d'ajouter facilement les informations de padding du MD5.
 		int taille = (((messageBytes.length) / 64) + 1) * 64;
 		ByteBuffer byteBufferMessage = ByteBuffer.allocate(taille).order(ByteOrder.LITTLE_ENDIAN);
 		
-		// On ajoute le message
+		// On ajoute le message au buffer
 		byteBufferMessage.put(messageBytes);
 		
 		// Les opérations bit à bit étant très compliqué sur des ByteBuffers, on utilise ici la technique suivante :
