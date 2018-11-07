@@ -1,8 +1,5 @@
 package autres;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import echauffement_1.Cle128Bit;
 import interfaces.ICle;
 
 public class CleInteger implements ICle{
