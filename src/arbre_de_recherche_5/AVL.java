@@ -254,16 +254,13 @@ public class AVL<C extends ICle> implements IAVL<C> {
 	}
 	
 	/**
-	 * Permet de voir le temps pris pour la recherche d'un élément dans l'AVL.
-	 * @param args
+	 * Génére un fichier CSV avec les résulats de la méthode de recherche dans un AVL.
 	 */
-	public static void main(String[] args) {
+	public static void genererResultatRecherche() {
 		int tailles[] = {100, 200, 500, 1000, 5000, 10000, 20000, 50000};
-		int nb = 5;
-		int cpt = 0;
+		int nb = 5; int cpt = 0;
 		File file;
-		String nomFichier;
-		String mot;
+		String nomFichier, mot;
 		Cle128Bit cle;
 		BufferedReader bufferedReader;
 		AVL<Cle128Bit> avl;
@@ -312,13 +309,27 @@ public class AVL<C extends ICle> implements IAVL<C> {
 		String nomFichierCSV = "recherche_AVL.csv";
 		
 		System.out.println("Sauvegarde des resultats dans le fichier \"" + nomFichierCSV + "\"...");
+		if (sauvegarderResultat(nomFichierCSV, nbComparaisonParTaille))
+			System.out.println("Les résultats ont été sauvegardés !");
+		else
+			System.err.println("Erreur lors de la sauvagardes des résultats");
+	}
+	
+	/**
+	 * Sauvegarde le contenu de la HashMap dans un fichier.
+	 * @param nomFichier Le nom du fichier.
+	 * @param nbComparaisonParTaille La hashmap contenant les résultats à sauvegarder.
+	 * @return Un booléen indiquant si la sauvegarde s'est bien déroulée.
+	 */
+	private static boolean sauvegarderResultat(String nomFichier, HashMap<Integer, ArrayList<Integer>> nbComparaisonParTaille) {
+		String nomFichierCSV = "recherche_AVL.csv";
 		ArrayList<Integer> liste;
 		float moyenne;
 		int max;
 		ArrayList<Integer> listeTriee = new ArrayList<>(nbComparaisonParTaille.keySet());
 		Collections.sort(listeTriee);
 
-		// Écriture des résultats dans un fichier CSV
+		// Écriture des résultats
 		try {
 			File fichierCSV = new File("resultats/" + nomFichierCSV);
 	        String aEcrire = "Taille moyenne maximum\n";
@@ -327,18 +338,17 @@ public class AVL<C extends ICle> implements IAVL<C> {
 				liste = new ArrayList<>(nbComparaisonParTaille.get(taille));
 				moyenne = getMoyenne(liste);
 				max = getMax(liste);
-				System.out.println();
 				aEcrire += taille + " " + df.format(moyenne )+ " " + max + "\n";
 			}
 	        FileWriter writer = new FileWriter(fichierCSV);
 	        writer.write(aEcrire);
 	        writer.close();
 	        
-	        System.out.println("Les résultats ont été sauvegardés !");
+	        return true;
 	        
 		} catch (IOException e) {
-			System.err.println("Erreur lors de la sauvagardes des résultats");
 			e.printStackTrace();
+			return false;
 		}
 	}
 	
@@ -368,5 +378,9 @@ public class AVL<C extends ICle> implements IAVL<C> {
 		}
 		
 		return max;
+	}
+	
+	public static void main(String[] args) {
+		genererResultatRecherche();
 	}
 }
