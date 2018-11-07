@@ -4,8 +4,8 @@ set output '../graphiques/recherche_AVL.pdf'
 set style data histograms
 set boxwidth 0.8
 set title "Nombre de comparaison pour la recherche d'un élément dans un AVL"
-set ylabel "Nombre de comparaison"
-set xlabel "Taille de l'AVL" offset 0,-1
+set ylabel "Nombre de comparaison de clé"
+set xlabel "Taille de l'AVL en nombre de clé" offset 0,-1
 set style fill solid						# Les barres sont pleines
 set yrange [0 to *]							# Commence la graduation à 0
 set key spacing 1.5							# Ajuste l'espace des éléments de la légende
