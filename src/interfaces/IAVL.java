@@ -3,6 +3,7 @@ package interfaces;
 import java.util.List;
 import java.util.AbstractMap.SimpleEntry;
 
+import arbre_de_recherche_5.InsertionException;
 import arbre_de_recherche_5.Noeud;
 
 /**
@@ -53,8 +54,9 @@ public interface IAVL<C extends ICle> {
 	/**
 	 * Insère une clé dans l'arbre.
 	 * @param cle La clé à insérer.
+	 * @throws InsertionException En cas d'insèrtion d'une clé déjà présente dans l'arbre.
 	 */
-	public void inserer(C cle);
+	public void inserer(C cle) throws InsertionException;
 	
 	/**
 	 * Recherche une clé dans l'arbre.

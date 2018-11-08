@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import arbre_de_recherche_5.AVL;
+import arbre_de_recherche_5.InsertionException;
 import arbre_de_recherche_5.Noeud;
 import autres.CleInteger;
 
@@ -22,7 +23,11 @@ public class AVLTest {
 	public void initialiserAVL() {
 		arbre = new AVL<CleInteger>();
 		for (int i=0; i<taille; i++)
-			arbre.inserer(new CleInteger(i));
+			try {
+				arbre.inserer(new CleInteger(i));
+			} catch (InsertionException e) {
+				e.printStackTrace();
+			}
 	}
 	/**
 	 * Teste la structure de l'arbre (si les clés sont bien dans les emlacement

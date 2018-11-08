@@ -120,8 +120,13 @@ public class AVL<C extends ICle> implements IAVL<C> {
 	} 
 	
 	@Override
-	public void inserer(C cle) {
-		setRacine(inserer(getRacine(), cle));	
+	public void inserer(C cle) throws InsertionException{
+		try {
+			setRacine(inserer(getRacine(), cle));	
+		}
+		catch (InsertionException IE) {
+			throw IE;
+		}
 	}
 		
 	/**
@@ -130,13 +135,13 @@ public class AVL<C extends ICle> implements IAVL<C> {
 	 * @param cle La clé à insérer.
 	 * @return La racine avec la clé insérée.
 	 */
-	private Noeud<C> inserer(Noeud<C> racine, C cle) { 		// Voir Cours 2 slide 15-16 et 18
+	private Noeud<C> inserer(Noeud<C> racine, C cle) throws InsertionException { 		// Voir Cours 2 slide 15-16 et 18
 		if (racine == null) {
 			taille++;
 			return new Noeud<C>(cle);
 		}
 		else if (cle.eg(racine.getCle()))				// La clé existe déjà, aucune insertion
-			return racine;
+			throw new InsertionException();
 		else if (cle.inf(racine.getCle()))					// Insertion à gauche
         	racine.setFilsGauche(inserer(racine.getFilsGauche(), cle));
         else											// Insertion à droite
