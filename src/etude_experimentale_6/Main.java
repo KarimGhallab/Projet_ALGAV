@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -32,6 +33,7 @@ public class Main {
 		File[] listeFichiers = folder.listFiles();
 		AVL<Cle128Bit> avl = new AVL<>();
 		HashSet<String> motsAjoutes = new HashSet<>();
+		ArrayList<String> listeMot = new ArrayList<>();
 		
 		for (int i=0; i<listeFichiers.length; i++) {
 			file = listeFichiers[i];
@@ -45,6 +47,7 @@ public class Main {
 				while (mot != null) {
 					if (!motsAjoutes.contains(mot)) {
 						motsAjoutes.add(mot);
+						listeMot.add(mot);
 						md5 = MD5.genererMd5(mot);
 						// System.out.println(md5 + " <= " + mot);
 						try {
@@ -64,5 +67,9 @@ public class Main {
 			}
 		}// Fin des ajouts
 		System.out.println("Nombre de collision : " + nbCollision);
+		System.out.println("Affichage de la liste de mot : ");
+		for(int i=0; i<listeMot.size(); i++) {
+			System.out.println("\t" + listeMot.get(i));
+		}
 	}
 }
