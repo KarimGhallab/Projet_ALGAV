@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 
 import arbre_de_recherche_5.AVL;
@@ -71,5 +70,5 @@ public class Main {
 		for(int i=0; i<listeMot.size(); i++) {
 			System.out.println("\t" + listeMot.get(i));
 		}
-	}
+	}	
 }
