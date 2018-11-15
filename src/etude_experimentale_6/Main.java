@@ -44,7 +44,7 @@ public class Main {
 				mot = bufferedReader.readLine();
 				// Parcours et ajout de tous les MD5 des mots du fichier courant
 				while (mot != null) {
-					if (!motsAjoutes.contains(mot)) {
+					if (!motsAjoutes.contains(mot)) {		// On a pas encore calculé la signature de ce mot
 						motsAjoutes.add(mot);
 						listeMot.add(mot);
 						md5 = MD5.genererMd5(mot);
@@ -70,5 +70,6 @@ public class Main {
 		for(int i=0; i<listeMot.size(); i++) {
 			System.out.println("\t" + listeMot.get(i));
 		}
+		System.out.println("Nombre de mots différents dans le jeu de données : " + listeMot.size());
 	}	
 }
