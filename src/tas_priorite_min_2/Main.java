@@ -10,6 +10,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		
+		System.out.println("Tas min avec un tableau : ");
 		TasMinTab t = new TasMinTab(5);
 		
 		t.ajout(new CleInteger(1));
@@ -21,7 +22,7 @@ public class Main {
 		
 		t.supprMin();
 		
-		System.out.println(t.toString());
+		System.out.println("\t" + t.toString());
 		
 		//Test consIter
 		TasMinTab tLoop = new TasMinTab(5);
@@ -39,7 +40,7 @@ public class Main {
 		
 		tLoop.consIter(l);
 		
-		System.out.println(tLoop.toString());
+		System.out.println("\t" + tLoop.toString());
 		
 		// Test union
 		TasMinTab t2 = new TasMinTab(9);
@@ -55,7 +56,17 @@ public class Main {
 		
 		t.union(t2);
 		
-		System.out.println(t.toString());
+		System.out.println("\t" + t.toString());
+		
+		System.out.println("Tas min avec un arbre : ");
+		
+		TasMinArbre tArbre1 = new TasMinArbre();
+		
+		int N = 1023;
+		for (int i=1; i<=N; i++)
+			tArbre1.ajout(new CleInteger(i));
+		
+		System.out.println(tArbre1.infixeToString());
 		
 	}
 
