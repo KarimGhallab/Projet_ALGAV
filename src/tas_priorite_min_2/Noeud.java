@@ -80,35 +80,23 @@ public class Noeud {
 	 * @return Le noeud sur lequel se fera la prochaine insertion.
 	 */
 	public Noeud add(ICle c) {
-		// On fait l'insertion
-		if(noeud == null) {
-			noeud = c;
-			filsGauche = new Noeud(this, true, false);
-			
-			// On etait sur l'extremité de l'arbre
-			if (estExtremiteDroite) {
-				filsDroit = new Noeud(this, false, true);		// La nouvelle estremité est son fils droit
+		noeud = c;
+		filsGauche = new Noeud(this, true, false);
+		
+		// On etait sur l'extremité de l'arbre
+		if (estExtremiteDroite) {
+			filsDroit = new Noeud(this, false, estExtremiteDroite);		// La nouvelle estremité est son fils droit
 
-				Noeud res = prochaineInsertion();
-				estExtremiteDroite = false;
-				
-				return res;
-			}
-			else
-				filsDroit = new Noeud(this, false, false);
-			return prochaineInsertion();
-		}
-		else if(filsGauche.getNoeud() == null && filsDroit.getNoeud() == null) {
-			return filsGauche.add(c);
-		}
-		else if(filsGauche.getNoeud() != null && filsDroit.getNoeud() == null) {
-			return filsDroit.add(c);
-		}
-		else if(filsGauche.getNoeud() == null && filsDroit.getNoeud() != null) {
-			return filsGauche.add(c);
+			Noeud res = prochaineInsertion();
+			estExtremiteDroite = false;									// Le noeud n'est plus l'extrémité de l'arbre
+			
+			return res;
 		}
 		else
-			return filsGauche.add(c);
+			filsDroit = new Noeud(this, false, false);
+		
+		// On doit trouver et retourner le prochain noeud sur lequel on fera l'insertion
+		return prochaineInsertion();
 	}
 	
 	/**
