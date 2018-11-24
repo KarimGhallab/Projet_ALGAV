@@ -75,36 +75,56 @@ public class Noeud {
 	}
 	
 	/**
-	 * Ajoute une clé au noeud.
-	 * @param c La clé à ajouter.
-	 * @return Le noeud sur lequel se fera la prochaine insertion.
-	 */
-	public Noeud add(ICle c) {
-		noeud = c;
-		filsGauche = new Noeud(this, true, false);
-		
-		// On etait sur l'extremité de l'arbre
-		if (estExtremiteDroite) {
-			filsDroit = new Noeud(this, false, estExtremiteDroite);		// La nouvelle estremité est son fils droit
-
-			Noeud res = prochaineInsertion();
-			estExtremiteDroite = false;									// Le noeud n'est plus l'extrémité de l'arbre
-			
-			return res;
-		}
-		else
-			filsDroit = new Noeud(this, false, false);
-		
-		// On doit trouver et retourner le prochain noeud sur lequel on fera l'insertion
-		return prochaineInsertion();
-	}
-	
-	/**
 	 * getteur sur l'attribut fils gauche du noeud.
 	 * @return true si le noeud est un fils gauche, false sinon.
 	 */
 	public boolean estFilsGauche() {
 		return estFilsGauche;
+	}
+	
+	/**
+	 * getteur sur l'attribut fils droit du noeud.
+	 * @return true si le noeud est un fils droit, false sinon.
+	 */
+	public boolean estExtremiteDroite() {
+		return estExtremiteDroite;
+	}
+	
+	/**
+	 * Getteur sur le père du noeud.
+	 * @return Le père du noeud, null si le noeud courant est la racine.
+	 */
+	public Noeud getPere() {
+		return pere;
+	}
+	
+	/**
+	 * Setteur sur l'attribut indiquant si le noeud courant est l'extrémité droit de l'arbre.
+	 * @param estExtremiteDroite Un booléen indiquant si le noeud courant est l'extrémité droit de l'arbre.
+	 */
+	public void setEstExtremiteDroite(boolean estExtremiteDroite) {
+		this.estExtremiteDroite = estExtremiteDroite;
+	}
+	
+	/**
+	 * Setteur sur la clé du noeud.
+	 * @param cle La nouvelle clé du noeud.
+	 */
+	public void setNoeud(ICle cle) {
+		noeud = cle;
+	}
+	
+	/**
+	 * Ajoute une clé au noeud.
+	 * @param c La clé à ajouter.
+	 */
+	public void add(ICle c) {
+		noeud = c;
+		filsGauche = new Noeud(this, true, false);
+		
+		// Le fils droit de l'extrémité est la nouvelle extrémité
+		// Si le noeud courant n'est pas l'ectrémité, alors son fils droit ne le sera pas non plus
+		filsDroit = new Noeud(this, false, estExtremiteDroite);
 	}
 	
 	/**
@@ -130,89 +150,5 @@ public class Noeud {
 				tmp += filsDroit.infixeToString(tabLvl+"\t");
 		}
 		return tmp;
-	}
-	
-	/**
-	 * Calcule le prochain noeud sur lequel se fera la prochaine insertion.
-	 * @return Le noeud sur lequel se fera la prochaine insertion.
-	 */
-	private Noeud prochaineInsertion() {
-		if (estFilsGauche)
-			return pere.filsDroit;
-		else if (estExtremiteDroite)
-			return prochaineInsertionDepuisExtremite();
-		else
-			return prochaineInsertionDepuisFilsDroit();
-	}
-	
-	
-	/**
-	 * Calcule le prochain noeud sur lequel doit se faire la prochaine insertion en cas d'insertion dans un fils droit.
-	 * Le fils droit ne doit pas être l'extrémité de l'arbre.
-	 * 
-	 * Le noeud renvoyé sera le noeud le plus à gauche par rapport au fils droit de la racine.
-	 * @return Le noeud sur lequel se fera la prochaine insertion.
-	 */
-	private Noeud prochaineInsertionDepuisFilsDroit() {
-		// On est sur un fils gauche.
-		// La prochaine insertion se fait sur le fils droit du pêre puis tout à gauche
-		if(estFilsGauche)
-			return pere.filsDroit.trouverExtremiteGauche(); 
-
-		// On est à la racine.
-		// La prochaine insertion se fait sur le chemin le plus à gauche depuis le fils droit
-		else  if (pere == null)
-			return filsDroit.prochaineInsertionDepuisFilsDroit();
-		
-		// On est sur un fils droit.
-		// Il faut continuer à monter.
-		else
-			return pere.prochaineInsertionDepuisFilsDroit();
-	}
-	
-	/**
-	 * Calcule le prochain noeud sur lequel doit se faire la prochaine insertion en cas d'insertion à l'extémité de l'arbre.
-	 * 
-	 * Le noeud renvoyé sera le noeud le plus à gauche par rapport à la racine.
-	 * @return Le noeud sur lequel se fera la prochaine insertion.
-	 */
-	private Noeud prochaineInsertionDepuisExtremite() {
-		// On remonte d'abord jusqu'à la racine
-		Noeud racine = trouverRacine();
-		
-		// Puis on cherche l'extremité gauche de la racine
-		return racine.trouverExtremiteGauche();
-	}
-	
-	/**
-	 * Recherche la racine de l'arbre depuis le noeud courant.
-	 * @return La racine de l'arbre.
-	 */
-	private Noeud trouverRacine() {
-		if (pere == null)
-			return this;
-		Noeud courant = this;
-		while (true) {
-			if (courant.pere == null)
-				break;
-			else
-				courant = courant.pere;
-		}
-		return courant;
-	}
-	
-	/**
-	 * Recherche le noeud le plus à gauche depuis le noeud courant.
-	 * @return Le noeud le plus à gauche depuis le noeud courant.
-	 */
-	private Noeud trouverExtremiteGauche() {
-		Noeud courant = this;
-		while( true) {
-			if (courant.filsGauche == null)
-				break;
-			else
-				courant = courant.filsGauche;
-		}
-		return courant;
 	}
 }
