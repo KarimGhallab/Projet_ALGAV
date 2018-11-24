@@ -48,6 +48,7 @@ public class TasMinArbre implements ITasMin {
 			prochaineInsertion = racine.getFilsGauche();
 		}
 		else {
+			// Ajout de la clé dans le noeud déstiné à la prochaine insertion
 			prochaineInsertion.add(c);
 			
 			Noeud ancienneProchaineInsertion = prochaineInsertion;
@@ -99,7 +100,7 @@ public class TasMinArbre implements ITasMin {
 		// On est à la racine.
 		// La prochaine insertion se fait sur le chemin le plus à gauche depuis le fils droit
 		else  if (courant.getPere() == null)
-			return prochaineInsertionDepuisFilsDroit(courant.getFilsDroit());
+			return trouverExtremiteGauche(courant.getFilsDroit());
 		
 		// On est sur un fils droit.
 		// Il faut continuer à monter.
