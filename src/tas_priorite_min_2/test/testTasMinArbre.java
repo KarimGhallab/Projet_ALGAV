@@ -12,11 +12,12 @@ import tas_priorite_min_2.TasMinArbre;
 public class testTasMinArbre {
 	
 	TasMinArbre tArbre;
+	
 	@Before
 	public void initialize() {
 		tArbre = new TasMinArbre();
 		
-		int N = 1023;
+		int N = 1000000;
 		for (int i=N; i>=1; i--)
 			tArbre.ajout(new CleInteger(i));
 	}
@@ -39,20 +40,5 @@ public class testTasMinArbre {
 				testAjoutCleRec(courant.getFilsDroit());
 			}
 		}
-	}
-	
-	@Test
-	public void testDeleteCleMin() {
-		
-		
-	}
-	
-	@Test
-	public void testConstIterTasMin() {
-	}
-	
-	@Test
-	public void testUnionTas() {
-	}
-	
+	}	
 }

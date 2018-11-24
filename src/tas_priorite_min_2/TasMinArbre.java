@@ -125,7 +125,7 @@ public class TasMinArbre implements ITasMin {
 	 * @return Le noeud le plus à gauche depuis le noeud courant.
 	 */
 	private Noeud trouverExtremiteGauche(Noeud courant) {
-		while( true) {
+		while(true) {
 			if (courant.getFilsGauche() == null)
 				break;
 			else
