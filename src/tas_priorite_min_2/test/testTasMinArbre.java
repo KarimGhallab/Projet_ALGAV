@@ -109,4 +109,18 @@ public class testTasMinArbre {
 			
 		testStructureTasMin(tArbreIter.getRacine(), tArbreIter.size());
 	}
+	
+	@Test
+	public void testUnion() {
+		TasMinArbre tUnion1 = new TasMinArbre();
+		TasMinArbre tUnion2 = new TasMinArbre();
+		for (int i=100000; i>0; i--)
+			tUnion1.ajout(new CleInteger(i));
+		
+		for (int i=0; i<250000; i++)
+			tUnion2.ajout(new CleInteger(i));
+		
+		tUnion1.union(tUnion2);
+		testStructureTasMin(tUnion1.getRacine(), tUnion1.size());
+	}
 }

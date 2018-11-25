@@ -1,5 +1,7 @@
 package tas_priorite_min_2;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
@@ -330,23 +332,56 @@ public class TasMinArbre implements ITasMin {
 	
 	@Override
 	public void union(ITasMin t2) {
-		// TODO Auto-generated method stub
+		// L'objectif pour effectuer l'union ets d'utiliser la méthode constIter
+		// Pour cela il faut réaliser une liste contenant tous les élements des deux tas
+		ICle[] tabTas1 = this.getRepresentationTableau();
+		ICle[] tabTas2 = t2.getRepresentationTableau();
+		
+		List<ICle> union = new ArrayList<>(tabTas1.length + tabTas2.length);//new ICle[tabTas1.length + tabTas2.length];
+		
+		// On ajoute le premier tas à la liste
+		for(int i=0; i<tabTas1.length; i++)
+			union.add(i, tabTas1[i]);
+		
+		// On ajoute le second tas à la liste
+		for(int i=0; i<tabTas2.length; i++)
+			union.add(tabTas1.length + i, tabTas2[i]);
+		
+		// On appelle consIter pour construire le tas contenant tous les élements
+		consIter(union);
 	}
 
+	/**
+	 * Renvoie la string représentant le parcours infixe du tas
+	 * @return La string représentant le parcours infixe du tas.
+	 */
 	public String infixeToString() {
-		return racine.infixeToString("\t");
+		if (racine == null)
+			return "";
+		else
+			return racine.infixeToString("\t");
 	}
 
 	@Override
 	public ICle[] getRepresentationTableau() {
 		ICle[] tab = new ICle[size()];
-		tab[0] = new CleInteger(12);
-		System.out.println(tab[0]);
-		getRepresentationTableau(tab, 0);
+		
+		getRepresentationTableau(racine, tab, 0);
+		
 		return tab;
 	}
 	
-	private void getRepresentationTableau(ICle[] tab, int indiceCourant) {
-		tab[0] = new CleInteger(24);
+	/**
+	 * Méthode récursive pour obtenir le tas sous forme de tableau.
+	 * @param courant Le noeud courant.
+	 * @param tab Le tab à modifier.
+	 * @param indiceCourant L'indice du noeud dans le tableau.
+	 */
+	private void getRepresentationTableau(Noeud courant, ICle[] tab, int indiceCourant) {
+		tab[indiceCourant] = courant.getNoeud();
+		if (courant.getFilsGauche().getNoeud() != null)
+			getRepresentationTableau(courant.getFilsGauche(), tab, 2 * indiceCourant + 1);
+		if (courant.getFilsDroit().getNoeud() != null)
+			getRepresentationTableau(courant.getFilsDroit(), tab, 2 * indiceCourant + 2);
 	}
 }

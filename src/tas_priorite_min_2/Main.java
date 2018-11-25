@@ -99,5 +99,21 @@ public class Main {
 		tArbre3.ajout(new CleInteger(4));
 		tArbre3.ajout(new CleInteger(0));
 		System.out.println("Troisième arbre : \n" + tArbre3.infixeToString());
+		
+		TasMinArbre tUnion1 = new TasMinArbre();
+		TasMinArbre tUnion2 = new TasMinArbre();
+		for (int i=10; i>0; i--)
+			tUnion1.ajout(new CleInteger(i));
+		
+		for (int i=0; i<10; i++)
+			tUnion2.ajout(new CleInteger(i));
+		
+		System.out.println("Union");
+		System.out.println("Union 1: \n" + tUnion1.infixeToString());
+		
+		System.out.println("Union 2: \n" + tUnion2.infixeToString());
+		
+		tUnion1.union(tUnion2);
+		System.out.println("Union : \n" + tUnion1.infixeToString());
 	}
 }
