@@ -133,7 +133,7 @@ public class testTasMinTab {
 		tas2.ajout(new CleInteger(0));
 		tas2.ajout(new CleInteger(90));
 		
-		assertTrue(tas1.union(tas2));
+		tas1.union(tas2);
 		assertEquals(tas1.toString(), "0 9 11 10 10 30 15 90");
 		
 	}

@@ -1,5 +1,6 @@
 package tas_priorite_min_2;
 
+import java.util.Arrays;
 import java.util.List;
 
 import interfaces.ICle;
@@ -131,15 +132,13 @@ public class TasMinTab implements ITasMin {
 	}
 	
 	@Override
-	public boolean ajout(ICle c) {
+	public void ajout(ICle c) {
 		
 		if(nbElements == 0) {
 			tas[0] = c;
 			nbElements++;
-			
-			return true;
-			
-		}else if (capacite() == nbElements) { // Si la capacite est atteinte, on agrandi le tableau du double de sa capacite actuelle.
+			return ;
+		}else if (capacite() == nbElements) { // Si la capacite est atteinte, on agrandie le tableau du double de sa capacite actuelle.
 			ICle [] tasTmp = new ICle[capacite() * 2]; 
 			
 			for(int i=0; i < nbElements; i++)
@@ -150,9 +149,9 @@ public class TasMinTab implements ITasMin {
 		
 		tas[nbElements] = c; // Cle ajoute en fin de tas (en feuille)
 		
-		nbElements++; // Augement le nombre d'element du tas
+		nbElements++; // Augmente le nombre d'element du tas
 		
-		// Reagencement des cles par rapport a la nouvelle cle inseree.
+		// Réagencement des cles par rapport a la nouvelle cle inseree.
 		
 		int lastId = nbElements - 1;
 		int pere = idPere(lastId); // indice du pere de la derniere cle ajoutee
@@ -162,8 +161,6 @@ public class TasMinTab implements ITasMin {
 			lastId = pere;
 			pere = idPere(lastId);
 		}
-		
-		return true;
 	}
 
 	
@@ -183,9 +180,9 @@ public class TasMinTab implements ITasMin {
 	@Override
 	public boolean consIter(List<ICle> elems) {
 		
-		if(elems.size() == 0) {
+		if(elems.size() == 0)
 			return false;
-		}else {
+		else {
 			for(ICle c : elems)
 				ajout(c);
 		}
@@ -193,21 +190,10 @@ public class TasMinTab implements ITasMin {
 	}
 
 	@Override
-	public boolean union(ITasMin t2) {
-		
-		if(t2 instanceof TasMinTab) {
-			TasMinTab tas2 = (TasMinTab) t2;
-			ICle [] tabTas2 = tas2.getTas();
-			for(int i =0; i < tas2.nbElements; i++)
-				ajout(tabTas2[i]);
-			
-			return true;
-		}
-		else {
-			System.out.println("Union impossible.");
-			return false;
-		}	
-		
+	public void union(ITasMin t2) {
+		ICle [] tabTas2 = t2.getRepresentationTableau();
+		for(int i =0; i < tabTas2.length; i++)
+			ajout(tabTas2[i]);
 	}
 	
 	/**
@@ -232,4 +218,8 @@ public class TasMinTab implements ITasMin {
 		return str.toString();
 	}
 
+	@Override
+	public ICle[] getRepresentationTableau() {
+		 return Arrays.copyOfRange(tas, 0, nbElements);		// On ne renvoie pas la totalité du tableau afin d'éviter d'avoir à gérer les valeurs null
+	}
 }

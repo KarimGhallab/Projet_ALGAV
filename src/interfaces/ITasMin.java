@@ -18,22 +18,26 @@ public interface ITasMin {
 	/**
 	 * Ajoute une cle au tas minimal 
 	 * @param c cle a ajouter
-	 * @return true si la cle a correctement ete ajoute, false sinon.
 	 */
-	public boolean ajout(ICle c);
+	public void ajout(ICle c);
 	
 	/**
 	 * Construit un tas minimal, a partir d'une liste de cles.
 	 * @param elems
-	 * @return le tas minimal cree
+	 * @return true si le tas à été construit, false sinon.
 	 */
 	public boolean consIter(List<ICle> elems);
 	
 	/**
 	 * Fusionne 2 tas minimaux, pour former un seul tas minimal. 
-	 * @param t2
-	 * @return Le tas minimal issu de la fusion des 2 tas minimaux.
+	 * @param t2 le second tas avec lequel faire la fusion.
 	 */
-	public boolean union(ITasMin t2);
+	public void union(ITasMin t2);
+	
+	/**
+	 * Renvoie la représentation du tas min sous la forme d'un tableau.
+	 * @return La représentation du tas min sous la forme d'un tableau.
+	 */
+	public ICle[] getRepresentationTableau();
 	
 }

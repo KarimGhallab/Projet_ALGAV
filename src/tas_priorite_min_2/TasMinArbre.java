@@ -3,6 +3,7 @@ package tas_priorite_min_2;
 import java.util.List;
 import java.util.Stack;
 
+import autres.CleInteger;
 import interfaces.ICle;
 import interfaces.ITasMin;
 
@@ -55,7 +56,7 @@ public class TasMinArbre implements ITasMin {
 	}
 
 	@Override
-	public boolean ajout(ICle c) {
+	public void ajout(ICle c) {
 		taille++;
 		// On insère à la position du dernier noeud supprimé de la pile
 		if (!pileNoeud.isEmpty()) {
@@ -94,8 +95,6 @@ public class TasMinArbre implements ITasMin {
 			racine = new Noeud(c, null, false, false);
 			prochaineInsertion = racine.getFilsGauche();
 		}
-		
-		return false;
 	}
 	
 	/**
@@ -330,12 +329,24 @@ public class TasMinArbre implements ITasMin {
 	}	// Fin class de trie
 	
 	@Override
-	public boolean union(ITasMin t2) {
+	public void union(ITasMin t2) {
 		// TODO Auto-generated method stub
-		return false;
 	}
 
 	public String infixeToString() {
 		return racine.infixeToString("\t");
+	}
+
+	@Override
+	public ICle[] getRepresentationTableau() {
+		ICle[] tab = new ICle[size()];
+		tab[0] = new CleInteger(12);
+		System.out.println(tab[0]);
+		getRepresentationTableau(tab, 0);
+		return tab;
+	}
+	
+	private void getRepresentationTableau(ICle[] tab, int indiceCourant) {
+		tab[0] = new CleInteger(24);
 	}
 }

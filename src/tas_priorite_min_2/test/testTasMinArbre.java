@@ -104,11 +104,8 @@ public class testTasMinArbre {
 		
 		testStructureTasMin(tArbreIter.getRacine(), tArbreIter.size());
 		
-		System.out.println("Taille : " + tArbreIter.size());
 		for (int i=0; i<1500000; i++)
 			tArbreIter.supprMin();
-		
-		System.out.println("Taille : " + tArbreIter.size());
 			
 		testStructureTasMin(tArbreIter.getRacine(), tArbreIter.size());
 	}
