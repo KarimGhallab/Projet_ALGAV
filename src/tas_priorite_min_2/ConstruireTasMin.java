@@ -7,18 +7,18 @@ import interfaces.ICle;
 /**
  * Classe s'occupant de la conversion d'un tableau d'éléments non triés en un tableau représentant un tas min. 
  */
-public abstract class TrierTasMin {
+public abstract class ConstruireTasMin {
 	
 	/** Les éléments du tas */
 	private static List<ICle> elems;
 	
 	/**
 	 * Point d'entrée pour la conversion d'une liste non triée en une liste représentant un tas min
-	 * @param elems2 La liste d'élément non triée.
+	 * @param listeElement La liste d'élément non triée.
 	 * @return La liste représentant le tas min.
 	 */
-	public static List<ICle> trierListe(List<ICle> elems2) {
-		elems = elems2;
+	public static List<ICle> convertirListe(List<ICle> listeElement) {
+		elems = listeElement;
 		// On appelle la fonction à partir des "feuilles" 
 		for (int i = elems.size() / 2; i >= 0; i--)
             trierTasLocal(i);

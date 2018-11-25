@@ -227,7 +227,7 @@ public class TasMinArbre implements ITasMin {
 	public boolean consIter(List<ICle> elems) {
 		
 		taille = elems.size();
-		List<ICle> listeTriee = TrierTasMin.trierListe(elems);
+		List<ICle> listeTriee = ConstruireTasMin.convertirListe(elems);
 		
 		racine = new Noeud(null, false, false);
 		consIter(racine, listeTriee, 0);
