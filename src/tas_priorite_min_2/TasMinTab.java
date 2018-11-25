@@ -27,21 +27,24 @@ public class TasMinTab implements ITasMin {
 	}
 	
 	@Override
-	public boolean supprMin() {
+	public ICle supprMin() {
 		
 		if(nbElements == 0) { // Cas ou le tas est vide.
 			System.out.println("Tas vide, suppression impossible.");
-			return false;
+			return null;
 
 		}else if(nbElements == 1) { // Cas ou le tas possede 1 element à supprimer.			
+			ICle min = tas[0];
 			tas[0] = null;
 			nbElements--;
 			
-			return true;
+			return min;
 			
 		}
 		// Cas ou le tas possede plus de 1 element.
-    	ICle c = tas[nbElements - 1];
+		ICle min = tas[0];
+		
+		ICle c = tas[nbElements - 1];
     	
     	tas[0] = c;
     	
@@ -52,7 +55,7 @@ public class TasMinTab implements ITasMin {
 		// on verifie que le tas est toujour minimal
 		verifMin(0);
 		
-		return true;
+		return min;
 	}
 	
 	
@@ -122,10 +125,7 @@ public class TasMinTab implements ITasMin {
 	}
 	
 
-	/**
-	 * Renvoie la taille du tas.
-	 * @return 
-	 */
+	@Override
 	public int size() {
 		return nbElements;
 	}

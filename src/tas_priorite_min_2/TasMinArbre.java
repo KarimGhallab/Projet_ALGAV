@@ -1,6 +1,7 @@
 package tas_priorite_min_2;
 
 import java.util.List;
+import java.util.Stack;
 
 import interfaces.ICle;
 import interfaces.ITasMin;
@@ -14,11 +15,22 @@ public class TasMinArbre implements ITasMin {
 	private Noeud prochaineInsertion;
 	
 	/**
+	 * La pile des noeuds retirés.
+	 * Utilisé afin de réinsérer les noeuds à la bonne place du tas.
+	 * */
+	private Stack<Noeud> pileNoeud;
+	
+	/** La taile du tas */
+	private int taille;
+	
+	/**
 	 * Constructeur d'un tas min vide.
 	 */
 	public TasMinArbre() {
 		racine = null;
 		prochaineInsertion = racine;
+		pileNoeud = new Stack<>();
+		taille = 0;
 	}
 	
 	/**
@@ -28,26 +40,40 @@ public class TasMinArbre implements ITasMin {
 	public TasMinArbre(ICle n) {
 		racine = new Noeud(n, null, false, false);		// La racine n'a pas de pêre est n'est ni un fils gauche, ni un fils droit
 		prochaineInsertion = racine.getFilsGauche();
+		pileNoeud = new Stack<>();
+		taille = 1;
 	}
 	
 	/** Retourne la racine de l'arbre sans la supprimer */
 	public Noeud getRacine() {
 		return racine;
 	}
-		
+	
 	@Override
-	public boolean supprMin() {
-		return false;
+	public int size() {
+		return taille;
 	}
 
 	@Override
 	public boolean ajout(ICle c) {
-		// Insertion à la racine
-		if (prochaineInsertion == null) {
-			racine = new Noeud(c, null, false, false);
-			prochaineInsertion = racine.getFilsGauche();
-		}
-		else {
+		taille++;
+		// On insère à la position du dernier noeud supprimé de la pile
+		if (!pileNoeud.isEmpty()) {
+			Noeud prochain = pileNoeud.pop();
+			// prochain.add(c);
+			prochain.setNoeud(c);
+			
+			if ((prochain.getPere() != null) && (prochain.getPere().estExtremiteDroite())) {
+				if (prochain.estFilsDroit()) {
+					prochain.setEstExtremiteDroite(true);
+					prochain.getPere().setEstExtremiteDroite(false);
+				}
+			}
+			
+			// Il faut remonter la clé
+			remonterCle(prochain);
+		}	
+		else if (prochaineInsertion != null){
 			// Ajout de la clé dans le noeud déstiné à la prochaine insertion
 			prochaineInsertion.add(c);
 			
@@ -63,6 +89,11 @@ public class TasMinArbre implements ITasMin {
 			
 			// Il faut remonter la clé
 			remonterCle(ancienneProchaineInsertion);
+		}
+		// Insertion à la racine
+		else {
+			racine = new Noeud(c, null, false, false);
+			prochaineInsertion = racine.getFilsGauche();
 		}
 		
 		return false;
@@ -139,13 +170,57 @@ public class TasMinArbre implements ITasMin {
 	 * @param courant Le noeud depuis lequel il faut faire la remontée.
 	 */
 	private void remonterCle(Noeud courant) {
-		if (courant.getPere() != null) {
+		if ((courant.getPere() != null) && (courant.getPere().getNoeud() != null)) {
 			if (courant.getNoeud().inf(courant.getPere().getNoeud())) {			// La valeur de la clé courante est inférieure à celle du père
 				ICle tmp = courant.getNoeud();
 				courant.setNoeud(courant.getPere().getNoeud());
 				courant.getPere().setNoeud(tmp);
 				remonterCle(courant.getPere());
 			}
+		}
+	}
+	
+	@Override
+	public ICle supprMin() {
+		if (racine != null) {
+			taille--;
+			ICle min = racine.getNoeud();
+			supprMin(racine);
+			return min;
+		}
+		return null;
+	}
+	
+	/**
+	 * Swap récursivement les clés de l'arbre pour conserver une structure de tas min
+	 * @param courant Le noeud courant
+	 */
+	private void supprMin(Noeud courant) {
+		if ((courant.getFilsGauche().getNoeud() != null) && (courant.getFilsDroit().getNoeud() != null)) {		// deux fils pleins
+			if (courant.getFilsGauche().getNoeud().inf(courant.getFilsDroit().getNoeud()))	{					// On va à gauche
+				courant.setNoeud(courant.getFilsGauche().getNoeud());
+				supprMin(courant.getFilsGauche());
+			}
+			else {																								// On va à droite
+				courant.setNoeud(courant.getFilsDroit().getNoeud());
+				supprMin(courant.getFilsDroit());
+			}
+		}
+		else if (courant.getFilsGauche().getNoeud() != null) {	// On va à gauche
+			courant.setNoeud(courant.getFilsGauche().getNoeud());
+			supprMin(courant.getFilsGauche());
+		}
+		else if (courant.getFilsGauche().getNoeud() != null) {	// On va à droite
+			courant.setNoeud(courant.getFilsDroit().getNoeud());
+			supprMin(courant.getFilsDroit());
+		}
+		else {	// deux noeuds fils à null
+			if (courant.estExtremiteDroite()) {
+				courant.setEstExtremiteDroite(false);
+				courant.getPere().setEstExtremiteDroite(true);
+			}
+			courant.setNoeud(null);
+			pileNoeud.push(courant);
 		}
 	}
 

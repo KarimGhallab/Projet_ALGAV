@@ -3,11 +3,18 @@ package interfaces;
 import java.util.List;
 
 public interface ITasMin {
+	
+	/**
+	 * Renvoie le nombre de clé dans le tas.
+	 * @return Le nombre de clé dans le tas au moment de l'appel.
+	 */
+	public int size();
+	
 	/**
 	 * Supprime la cle minimal 
-	 * @return true si la suppression a reussi, false sinon.
+	 * @return La clé de valeur minimal dans le tas.
 	 */
-	public boolean supprMin();
+	public ICle supprMin();
 	/**
 	 * Ajoute une cle au tas minimal 
 	 * @param c cle a ajouter

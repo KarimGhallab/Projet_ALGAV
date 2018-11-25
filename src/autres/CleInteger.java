@@ -19,7 +19,7 @@ public class CleInteger implements ICle{
 		if (cle1 instanceof CleInteger)
 			return valeur < ((CleInteger) cle1).getValeur();
 		else
-			throw new RuntimeException("Impossible de comparer une \"CleInteger\" avec une autre classe");
+			throw new RuntimeException("Impossible de comparer une \"CleInteger\" avec une instance de " + cle1.getClass());
 	}
 
 	@Override

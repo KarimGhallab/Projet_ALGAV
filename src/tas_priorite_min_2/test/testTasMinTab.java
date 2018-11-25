@@ -66,10 +66,10 @@ public class testTasMinTab {
 		tas1.ajout(new Cle128Bit("EF48CF8A954A5"));
 		
 		assertEquals(tas1.size(), 4);
-		assertTrue(tas1.supprMin());
+		assertTrue(tas1.supprMin() != null);
 		assertEquals(tas1.size(), 3);
-		assertTrue(tas1.supprMin());
-		assertTrue(tas1.supprMin());
+		assertTrue(tas1.supprMin() != null);
+		assertTrue(tas1.supprMin() != null);
 		assertEquals(tas1.size(), 1);
 		
 		//Pour des contrainte d'affichage, on utilise ICleInteger
@@ -85,7 +85,7 @@ public class testTasMinTab {
 		assertEquals(tas1.size(), 6);
 		assertEquals("9 10 15 10 11 30", tas1.toString());
 		
-		assertTrue(tas1.supprMin());
+		assertTrue(tas1.supprMin() != null);
 		
 		assertEquals(tas1.size(), 5);
 		assertEquals(tas1.toString(), "15 10 30 10 11");

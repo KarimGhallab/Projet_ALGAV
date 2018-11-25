@@ -62,14 +62,27 @@ public class Main {
 		
 		TasMinArbre tArbre1 = new TasMinArbre();
 		
-		int N = 1000;
+		int N = 30;
 		for (int i=N; i>=1; i--) {
+			tArbre1.ajout(new CleInteger(i+20));
 			tArbre1.ajout(new CleInteger(i));
-			tArbre1.ajout(new CleInteger(i));
+			tArbre1.supprMin();
 		}
 		
-		System.out.println(tArbre1.infixeToString());
+		System.out.println("premier arbre : \n" + tArbre1.infixeToString());
 		
+		TasMinArbre tArbre2 = new TasMinArbre();
+		
+		for (int i=N; i>=1; i--)
+			tArbre2.ajout(new CleInteger(i));
+		
+		for (int i=0; i<N/7; i++) {
+			tArbre2.supprMin();
+		}
+		
+		tArbre2.ajout(new CleInteger(0));
+		
+		System.out.println("Second arbre : \n" + tArbre2.infixeToString());
 	}
 
 }

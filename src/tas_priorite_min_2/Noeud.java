@@ -86,6 +86,14 @@ public class Noeud {
 	 * getteur sur l'attribut fils droit du noeud.
 	 * @return true si le noeud est un fils droit, false sinon.
 	 */
+	public boolean estFilsDroit() {
+		return estFilsGauche;
+	}
+	
+	/**
+	 * getteur sur l'attribut fils droit du noeud.
+	 * @return true si le noeud est un fils droit, false sinon.
+	 */
 	public boolean estExtremiteDroite() {
 		return estExtremiteDroite;
 	}
