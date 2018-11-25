@@ -1,11 +1,9 @@
 package tas_priorite_min_2;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
-import autres.CleInteger;
 import interfaces.ICle;
 import interfaces.ITasMin;
 
@@ -229,7 +227,7 @@ public class TasMinArbre implements ITasMin {
 	public boolean consIter(List<ICle> elems) {
 		
 		taille = elems.size();
-		List<ICle> listeTriee = TrieTasMin.trierListe(elems);
+		List<ICle> listeTriee = TrierTasMin.trierListe(elems);
 		
 		racine = new Noeud(null, false, false);
 		consIter(racine, listeTriee, 0);
@@ -254,81 +252,6 @@ public class TasMinArbre implements ITasMin {
 			consIter(courant.getFilsDroit(), elems, droit);
 		}
 	}
-	
-	/**
-	 * Classe interne s'occupant de la conversion d'un tableau d'éléments non triés en un tableau représentant la tas min 
-	 */
-	static class TrieTasMin {
-		
-		static List<ICle> elems;
-		
-		static List<ICle> trierListe(List<ICle> elems2) {
-			elems = elems2;
-			for (int i = elems.size() / 2; i >= 0; i--)
-	            minHeapify(i);
-			
-			return elems;
-		}
-		
-		private static void minHeapify(int i) {
-
-	        int gauche = gauche(i);
-	        int droit = droit(i);
-	        int petit;				// L'indice de la clé la plus petite entre l'actuelle et ses deux fils 
-
-	        // Calcule quelle est la clé la plus petite entre l'actuelle et ses fils
-	        // Le fils gauche existe et est plus petit que la clé actuelle
-	        if (gauche <= elems.size() - 1 && elems.get(gauche).inf(elems.get(i)))
-	            petit = gauche;
-	        
-	        // Condition non vérifié, la clé la plus petite est l'actuelle
-	        else
-	            petit = i;
-
-	        
-	        // Le fils droit existe, et est plus petit que la valeur trouvée au dessus
-	        if (droit <= elems.size() - 1 && elems.get(droit).inf(elems.get(petit)))
-	            petit = droit;
-
-	        // La clé la plus petite n'est pas la clé actuelle (le parent), il faut changer sa place dans le tableau
-	        // Il faut aussi appeler cette opération sur l'indice de la clé la plus petite
-	        if (petit != i) {
-	            swap(i, petit);
-	            minHeapify(petit);
-	        }
-	    }
-		
-		/**
-		 * Calcule le fils gauche du noeud.
-		 * @param i L'indice du noeud.
-		 * @return L'indice du fils gauche.
-		 */
-	    private static int gauche(int i) {
-	        return 2 * i + 1;
-	    }
-		
-		/**
-		 * Calcule le fils droit du noeud.
-		 * @param i L'indice du noeud.
-		 * @return L'indice du fils droit.
-		 */
-		private static int droit(int i) {
-
-	        return 2 * i + 2;
-	    }
-		
-	    /**
-	     * Échange deux élements dans le tableau.
-	     * @param i L'indice du premier élément.
-	     * @param j L'indice du second élément.
-	     */
-		private static void swap(int i, int j) {
-	        ICle temp = elems.get(j);
-	        elems.set(j, elems.get(i));
-	        elems.set(i, temp);
-	    }
-		
-	}	// Fin class de trie
 	
 	@Override
 	public void union(ITasMin t2) {
