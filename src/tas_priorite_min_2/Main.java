@@ -83,6 +83,21 @@ public class Main {
 		tArbre2.ajout(new CleInteger(0));
 		
 		System.out.println("Second arbre : \n" + tArbre2.infixeToString());
+		
+		List<ICle> liste = new ArrayList<ICle>();
+		for (int i=20; i>0; i--)
+			liste.add(new CleInteger(i));
+		
+		TasMinArbre tArbre3 = new TasMinArbre();
+		
+		System.out.println("ConsIter");
+		tArbre3.consIter(liste);
+		
+		tArbre3.ajout(new CleInteger(18));
+		tArbre3.ajout(new CleInteger(25));
+		
+		tArbre3.ajout(new CleInteger(4));
+		tArbre3.ajout(new CleInteger(0));
+		System.out.println("Troisième arbre : \n" + tArbre3.infixeToString());
 	}
-
 }

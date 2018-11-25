@@ -123,6 +123,22 @@ public class Noeud {
 	}
 	
 	/**
+	 * Setteur du fils gauche d'un noeud.
+	 * @param filsGauche Le nouveau fils gauche du noeud.
+	 */
+	public void setFilsGauche(Noeud filsGauche) {
+		this.filsGauche = filsGauche;
+	}
+	
+	/**
+	 * Setteur du fils droit d'un noeud.
+	 * @param filsGauche Le nouveau fils droit du noeud.
+	 */
+	public void setFilsDroit(Noeud filsDroit) {
+		this.filsDroit = filsDroit;
+	}
+	
+	/**
 	 * Ajoute une clé au noeud.
 	 * @param c La clé à ajouter.
 	 */

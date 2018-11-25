@@ -60,7 +60,6 @@ public class TasMinArbre implements ITasMin {
 		// On insère à la position du dernier noeud supprimé de la pile
 		if (!pileNoeud.isEmpty()) {
 			Noeud prochain = pileNoeud.pop();
-			// prochain.add(c);
 			prochain.setNoeud(c);
 			
 			if ((prochain.getPere() != null) && (prochain.getPere().estExtremiteDroite())) {
@@ -182,13 +181,14 @@ public class TasMinArbre implements ITasMin {
 	
 	@Override
 	public ICle supprMin() {
-		if (racine != null) {
+		if(taille == 0)
+			return null;
+		else {
 			taille--;
 			ICle min = racine.getNoeud();
 			supprMin(racine);
 			return min;
 		}
-		return null;
 	}
 	
 	/**
@@ -210,7 +210,7 @@ public class TasMinArbre implements ITasMin {
 			courant.setNoeud(courant.getFilsGauche().getNoeud());
 			supprMin(courant.getFilsGauche());
 		}
-		else if (courant.getFilsGauche().getNoeud() != null) {	// On va à droite
+		else if (courant.getFilsDroit().getNoeud() != null) {	// On va à droite
 			courant.setNoeud(courant.getFilsDroit().getNoeud());
 			supprMin(courant.getFilsDroit());
 		}
@@ -226,10 +226,109 @@ public class TasMinArbre implements ITasMin {
 
 	@Override
 	public boolean consIter(List<ICle> elems) {
-		// TODO Auto-generated method stub
+		
+		taille = elems.size();
+		List<ICle> listeTriee = TrieTasMin.trierListe(elems);
+		
+		racine = new Noeud(null, false, false);
+		consIter(racine, listeTriee, 0);
+		
 		return false;
 	}
+	
+	private void consIter(Noeud courant, List<ICle> elems, int indiceCourant) {
+		if (indiceCourant == elems.size()-1)
+			prochaineInsertion = prochaineInsertion(courant);
+		courant.setNoeud(elems.get(indiceCourant));
+		
+		int gauche = 2 * indiceCourant + 1;
+		int droit = 2 * indiceCourant + 2;
+		
+		courant.setFilsGauche(new Noeud(courant, true, false));
+		courant.setFilsDroit(new Noeud(courant, false, droit == elems.size() - 1));
+		if (gauche < elems.size()) {
+			consIter(courant.getFilsGauche(), elems, gauche);
+		}
+		if (droit < elems.size()) {
+			consIter(courant.getFilsDroit(), elems, droit);
+		}
+	}
+	
+	/**
+	 * Classe interne s'occupant de la conversion d'un tableau d'éléments non triés en un tableau représentant la tas min 
+	 */
+	static class TrieTasMin {
+		
+		static List<ICle> elems;
+		
+		static List<ICle> trierListe(List<ICle> elems2) {
+			elems = elems2;
+			for (int i = elems.size() / 2; i >= 0; i--)
+	            minHeapify(i);
+			
+			return elems;
+		}
+		
+		private static void minHeapify(int i) {
 
+	        int gauche = gauche(i);
+	        int droit = droit(i);
+	        int petit;				// L'indice de la clé la plus petite entre l'actuelle et ses deux fils 
+
+	        // Calcule quelle est la clé la plus petite entre l'actuelle et ses fils
+	        // Le fils gauche existe et est plus petit que la clé actuelle
+	        if (gauche <= elems.size() - 1 && elems.get(gauche).inf(elems.get(i)))
+	            petit = gauche;
+	        
+	        // Condition non vérifié, la clé la plus petite est l'actuelle
+	        else
+	            petit = i;
+
+	        
+	        // Le fils droit existe, et est plus petit que la valeur trouvée au dessus
+	        if (droit <= elems.size() - 1 && elems.get(droit).inf(elems.get(petit)))
+	            petit = droit;
+
+	        // La clé la plus petite n'est pas la clé actuelle (le parent), il faut changer sa place dans le tableau
+	        // Il faut aussi appeler cette opération sur l'indice de la clé la plus petite
+	        if (petit != i) {
+	            swap(i, petit);
+	            minHeapify(petit);
+	        }
+	    }
+		
+		/**
+		 * Calcule le fils gauche du noeud.
+		 * @param i L'indice du noeud.
+		 * @return L'indice du fils gauche.
+		 */
+	    private static int gauche(int i) {
+	        return 2 * i + 1;
+	    }
+		
+		/**
+		 * Calcule le fils droit du noeud.
+		 * @param i L'indice du noeud.
+		 * @return L'indice du fils droit.
+		 */
+		private static int droit(int i) {
+
+	        return 2 * i + 2;
+	    }
+		
+	    /**
+	     * Échange deux élements dans le tableau.
+	     * @param i L'indice du premier élément.
+	     * @param j L'indice du second élément.
+	     */
+		private static void swap(int i, int j) {
+	        ICle temp = elems.get(j);
+	        elems.set(j, elems.get(i));
+	        elems.set(i, temp);
+	    }
+		
+	}	// Fin class de trie
+	
 	@Override
 	public boolean union(ITasMin t2) {
 		// TODO Auto-generated method stub
