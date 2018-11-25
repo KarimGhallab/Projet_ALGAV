@@ -230,6 +230,8 @@ public class TasMinArbre implements ITasMin {
 		List<ICle> listeTriee = ConstruireTasMin.convertirListe(elems);
 		
 		racine = new Noeud(null, false, false);
+		
+		// Il faut construire l'arbre
 		consIter(racine, listeTriee, 0);
 		
 		return false;
@@ -261,12 +263,12 @@ public class TasMinArbre implements ITasMin {
 	
 	@Override
 	public void union(ITasMin t2) {
-		// L'objectif pour effectuer l'union ets d'utiliser la méthode constIter
+		// L'objectif pour effectuer l'union est d'utiliser la méthode constIter
 		// Pour cela il faut réaliser une liste contenant tous les élements des deux tas
 		ICle[] tabTas1 = this.getRepresentationTableau();
 		ICle[] tabTas2 = t2.getRepresentationTableau();
 		
-		List<ICle> union = new ArrayList<>(tabTas1.length + tabTas2.length);//new ICle[tabTas1.length + tabTas2.length];
+		List<ICle> union = new ArrayList<>(tabTas1.length + tabTas2.length);
 		
 		// On ajoute le premier tas à la liste
 		for(int i=0; i<tabTas1.length; i++)

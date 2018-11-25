@@ -32,8 +32,8 @@ public abstract class ConstruireTasMin {
 	 */
 	private static void trierTasLocal(int i) {
 
-        int gauche = gauche(i);
-        int droit = droit(i);
+        int gauche = filsGauche(i);
+        int droit = filsDroit(i);
         int petit;				// L'indice de la clé la plus petite entre l'actuelle et ses deux fils 
 
         // Calcule quelle est la clé la plus petite entre l'actuelle et ses fils
@@ -63,7 +63,7 @@ public abstract class ConstruireTasMin {
 	 * @param i L'indice du noeud.
 	 * @return L'indice du fils gauche.
 	 */
-    private static int gauche(int i) {
+    private static int filsGauche(int i) {
         return 2 * i + 1;
     }
 	
@@ -72,8 +72,7 @@ public abstract class ConstruireTasMin {
 	 * @param i L'indice du noeud.
 	 * @return L'indice du fils droit.
 	 */
-	private static int droit(int i) {
-
+	private static int filsDroit(int i) {
         return 2 * i + 2;
     }
 	
@@ -87,5 +86,4 @@ public abstract class ConstruireTasMin {
         elems.set(j, elems.get(i));
         elems.set(i, temp);
     }
-	
 }
