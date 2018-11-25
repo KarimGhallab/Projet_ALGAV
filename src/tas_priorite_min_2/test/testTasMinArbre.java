@@ -17,9 +17,11 @@ public class testTasMinArbre {
 	public void initialize() {
 		tArbre = new TasMinArbre();
 		
-		int N = 1000000;
-		for (int i=N; i>=1; i--)
+		int N = 1000000/2;
+		for (int i=N; i>=1; i--) {
 			tArbre.ajout(new CleInteger(i));
+			tArbre.ajout(new CleInteger(i));
+		}
 	}
 	
 	@Test
@@ -30,13 +32,17 @@ public class testTasMinArbre {
 	public void testAjoutCleRec(Noeud courant) {
 		if (courant.getFilsGauche() != null) {
 			if (courant.getFilsGauche().getNoeud() != null) {
-				assertTrue(courant.getNoeud().inf(courant.getFilsGauche().getNoeud()));
+				boolean assertion = (courant.getNoeud().inf(courant.getFilsGauche().getNoeud()) || courant.getNoeud().eg(courant.getFilsGauche().getNoeud())); 
+				System.out.println("(" + courant.getNoeud() + " <= " + courant.getFilsGauche().getNoeud() + ")   ==> " + assertion);
+				assertTrue(assertion);
 				testAjoutCleRec(courant.getFilsGauche());
 			}
 		}
 		if (courant.getFilsDroit() != null) {
 			if (courant.getFilsDroit().getNoeud() != null) {
-				assertTrue(courant.getNoeud().inf(courant.getFilsDroit().getNoeud()));
+				boolean assertion = (courant.getNoeud().inf(courant.getFilsDroit().getNoeud()) || courant.getNoeud().eg(courant.getFilsDroit().getNoeud())); 
+				System.out.println("(" + courant.getNoeud() + " <= " + courant.getFilsDroit().getNoeud() + ")   ==> " + assertion);
+				assertTrue(assertion);
 				testAjoutCleRec(courant.getFilsDroit());
 			}
 		}

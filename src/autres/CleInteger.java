@@ -25,7 +25,7 @@ public class CleInteger implements ICle{
 	@Override
 	public boolean eg(ICle cle1) {
 		if (cle1 instanceof CleInteger)
-			return valeur == ((CleInteger) cle1).getValeur();
+			return valeur.equals(((CleInteger) cle1).getValeur());
 		else
 			throw new RuntimeException("Impossible de comparer une \"CleInteger\" avec une autre classe");
 	}

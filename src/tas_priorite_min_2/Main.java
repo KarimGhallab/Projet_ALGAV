@@ -62,9 +62,11 @@ public class Main {
 		
 		TasMinArbre tArbre1 = new TasMinArbre();
 		
-		int N = 1023;
-		for (int i=N; i>=1; i--)
+		int N = 1000;
+		for (int i=N; i>=1; i--) {
 			tArbre1.ajout(new CleInteger(i));
+			tArbre1.ajout(new CleInteger(i));
+		}
 		
 		System.out.println(tArbre1.infixeToString());
 		
