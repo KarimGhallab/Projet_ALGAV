@@ -235,6 +235,12 @@ public class TasMinArbre implements ITasMin {
 		return false;
 	}
 	
+	/**
+	 * Méthode récursive pour construire l'arbre du tas min en parcourant le tableau.
+	 * @param courant Le noeud courant
+	 * @param elems La liste des éléments du tas.
+	 * @param indiceCourant L'indice courant dans la liste.
+	 */
 	private void consIter(Noeud courant, List<ICle> elems, int indiceCourant) {
 		if (indiceCourant == elems.size()-1)
 			prochaineInsertion = prochaineInsertion(courant);

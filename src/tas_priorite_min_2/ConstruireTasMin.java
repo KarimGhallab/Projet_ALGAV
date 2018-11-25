@@ -19,7 +19,7 @@ public abstract class ConstruireTasMin {
 	 */
 	public static List<ICle> convertirListe(List<ICle> listeElement) {
 		elems = listeElement;
-		// On appelle la fonction à partir des "feuilles" 
+		 
 		for (int i = elems.size() / 2; i >= 0; i--)
             trierTasLocal(i);
 		
