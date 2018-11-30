@@ -30,7 +30,7 @@ public class AVLTest {
 			}
 	}
 	/**
-	 * Teste la structure de l'arbre (si les clés sont bien dans les emlacement
+	 * Teste la structure de l'arbre (si les clés sont bien dans les emplacements
 	 * ou elle sont sensées être).
 	 */
 	@Test
@@ -89,7 +89,7 @@ public class AVLTest {
 	}
 	
 	/**
-	 * Teste si l'ordre prefixe retourne bien les clés dans l'ordre croissant.
+	 * Teste si l'ordre préfixe retourne bien les clés dans l'ordre croissant.
 	 */
 	@Test
 	public void testOrdre() {

@@ -29,7 +29,7 @@ public class AVL<C extends ICle> implements IAVL<C> {
 	/** La taille de l'arbre */
 	private int taille;
 	
-	/** Le nombre de comparaison pour la derniere opération de recherche. */
+	/** Le nombre de comparaison pour la dernière opération de recherche. */
 	private int nbComparaison;
 
 	@Override
@@ -71,7 +71,7 @@ public class AVL<C extends ICle> implements IAVL<C> {
 	/**
 	 * Affichage du parcours infixe depuis une racine.
 	 * @param racine La racine de l'arbre.
-	 * @return La chaine de caractère correpondant à la suite des clés depuis la racine
+	 * @return La chaîne de caractère correspondant à la suite des clés depuis la racine
 	 * selon un parcours infixe.
 	 */
 	private String infixeToString(Noeud<C> racine) { 
@@ -86,9 +86,9 @@ public class AVL<C extends ICle> implements IAVL<C> {
 	}
 		
 	/**
-	 * Affichage du parcours prefixe depuis une racine.
+	 * Affichage du parcours préfixe depuis une racine.
 	 * @param racine La racine de l'arbre.
-	 * @return La chaine de caractère correpondant à la suite des clés depuis la racine
+	 * @return La chaîne de caractère correspondant à la suite des clés depuis la racine
 	 * selon un parcours prefixe.
 	 */
 	private String prefixeToString(Noeud<C> racine) { 
@@ -98,7 +98,7 @@ public class AVL<C extends ICle> implements IAVL<C> {
 	}
 
 	/**
-	 * Calcule et renvoie le maximum parmis deux entiers. 
+	 * Calcule et renvoie le maximum parmi deux entiers. 
 	 * @param a Le premier entier à comparer.
 	 * @param b Le second entier à comparer.
 	 * @return Le maximum des deux entiers.
@@ -259,7 +259,7 @@ public class AVL<C extends ICle> implements IAVL<C> {
 	}
 	
 	/**
-	 * Génére un fichier CSV avec les résulats de la méthode de recherche dans un AVL.
+	 * Génère un fichier CSV avec les résultats de la méthode de recherche dans un AVL.
 	 */
 	public static void genererResultatRecherche() {
 		int tailles[] = {100, 200, 500, 1000, 5000, 10000, 20000, 50000};
@@ -274,7 +274,7 @@ public class AVL<C extends ICle> implements IAVL<C> {
 		
 		for(int i=1; i<=nb; i++) {
 			for(int j=0; j<tailles.length; j++) {
-				if (!nbComparaisonParTaille.containsKey(tailles[j]))		// Initialisation des arrayList des Hashmap
+				if (!nbComparaisonParTaille.containsKey(tailles[j]))		// Initialisation des ArrayList des Hashmap
 					nbComparaisonParTaille.put(tailles[j], new ArrayList<Integer>());
 				
 				cpt++;
@@ -358,7 +358,7 @@ public class AVL<C extends ICle> implements IAVL<C> {
 	}
 	
 	/**
-	 * Calcule la moyenne des élements d'une liste.
+	 * Calcule la moyenne des éléments d'une liste.
 	 * @param liste La liste pour laquelle on souhaite la moyenne des éléments.
 	 * @return La moyenne des éléments de la liste.
 	 */
@@ -372,7 +372,7 @@ public class AVL<C extends ICle> implements IAVL<C> {
 	
 	/**
 	 * Récupère la valeur maximale dans une liste.
-	 * @param liste La liste pour laquelle on souhaite récupèrer la valeur maximale.
+	 * @param liste La liste pour laquelle on souhaite récupérer la valeur maximale.
 	 * @return L'élément le plus grand de la liste.
 	 */
 	private static int getMax(ArrayList<Integer> liste) {

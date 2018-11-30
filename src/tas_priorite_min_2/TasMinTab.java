@@ -37,7 +37,7 @@ public class TasMinTab implements ITasMin {
 			System.out.println("Tas vide, suppression impossible.");
 			return null;
 
-		}else if(nbElements == 1) { // Cas ou le tas possede 1 element à supprimer.			
+		}else if(nbElements == 1) { // Cas où le tas possède 1 element à supprimer.			
 			ICle min = tas[0];
 			tas[0] = null;
 			nbElements--;
@@ -45,7 +45,7 @@ public class TasMinTab implements ITasMin {
 			return min;
 			
 		}
-		// Cas ou le tas possede plus de 1 element.
+		// Cas où le tas possède plus de 1 element.
 		ICle min = tas[0];
 		
 		ICle c = tas[nbElements - 1];
@@ -56,7 +56,7 @@ public class TasMinTab implements ITasMin {
     	
 		nbElements--; // nombre d'element diminue de 1
 
-		// on verifie que le tas est toujours minimal
+		// On vérifie que le tas est toujours minimal
 		verifMin(0);
 		
 		return min;
@@ -64,7 +64,7 @@ public class TasMinTab implements ITasMin {
 	
 	
 	/**
-	 * Verifie que le tas est toujours minimal, et le rend minimal si cela est neccessaire.
+	 * Vérifie que le tas est toujours minimal, et le rend minimal si cela est nécessaire.
 	 * @param noeud
 	 */
     public void verifMin(int noeud) {
@@ -75,9 +75,10 @@ public class TasMinTab implements ITasMin {
         int idMin = noeud;
         int nbElems = nbElements-1;
         
-        if (fDroit <= nbElems && fDroit > 0 && tas[fDroit].inf(tas[idMin])) { // Verifie si le fils droit n'est pas plus grand que le pere.
+        // Il faut prendre l'id du fils le plus petit si un des fils est plus petit que le père
+        if (fDroit <= nbElems && fDroit > 0 && tas[fDroit].inf(tas[idMin])) { // Vérifie si le fils droit n'est pas plus grand que le pere.
             idMin = fDroit;
-        } if (fGauche <= nbElems && fGauche > 0 && tas[fGauche].inf(tas[idMin])) { //Verifie si le fils gauche n'est pas plus grand que le pere.
+        } if (fGauche <= nbElems && fGauche > 0 && tas[fGauche].inf(tas[idMin])) { // Vérifie si le fils gauche n'est pas le noeud le plus petit.
             idMin = fGauche;
         }
 
@@ -118,7 +119,7 @@ public class TasMinTab implements ITasMin {
 	}
 
 	/**
-	 * Renvoie la capacite du tas.
+	 * Renvoie la capacité du tas.
 	 * @return 
 	 */
 	public int capacite() {
@@ -138,7 +139,7 @@ public class TasMinTab implements ITasMin {
 			tas[0] = c;
 			nbElements++;
 			return ;
-		}else if (capacite() == nbElements) { // Si la capacite est atteinte, on agrandie le tableau du double de sa capacite actuelle.
+		}else if (capacite() == nbElements) { // Si la capacité est atteinte, on agrandie le tableau du double de sa capacité actuelle.
 			ICle [] tasTmp = new ICle[capacite() * 2]; 
 			
 			for(int i=0; i < nbElements; i++)
@@ -147,14 +148,14 @@ public class TasMinTab implements ITasMin {
 			tas = tasTmp;	
 		}
 		
-		tas[nbElements] = c; // Cle ajoute en fin de tas (en feuille)
+		tas[nbElements] = c; // Clé ajoute en fin de tas (en feuille)
 		
 		nbElements++; // Augmente le nombre d'element du tas
 		
-		// Réagencement des cles par rapport a la nouvelle cle inseree.
+		// Réagencement des clés par rapport a la nouvelle clé insérée.
 		
 		int lastId = nbElements - 1;
-		int pere = idPere(lastId); // indice du pere de la derniere cle ajoutee
+		int pere = idPere(lastId); // indice du père de la dernière clé ajoutée
 		
 		while(pere != lastId && tas[lastId].inf(tas[pere])) {
 			swap(lastId, pere);
@@ -165,9 +166,9 @@ public class TasMinTab implements ITasMin {
 
 	
 	/**
-	 * Renvoie l'indice dans le tas du noeud pere, d'un noeud. 
-	 * @param noeud dont on cherche le pere.
-	 * @return id du noeud pere
+	 * Renvoie l'indice dans le tas du noeud père, d'un noeud. 
+	 * @param noeud dont on cherche le père.
+	 * @return id du noeud père.
 	 */
 	public int idPere(int noeud) {
         if (noeud % 2 == 1) {
@@ -193,8 +194,8 @@ public class TasMinTab implements ITasMin {
 	@Override
 	public void union(ITasMin t2) {
 		// L'objectif pour effectuer l'union est d'utiliser la méthode constIter
-		// Pour cela il faut réaliser une liste contenant tous les élements des deux tas
-		// Afin de ne pas avoir de donblon et de garder une complexité linéaire, nous allons utiliser un Set
+		// Pour cela il faut réaliser une liste contenant tous les éléments des deux tas
+		// Afin de ne pas avoir de doublon et de garder une complexité linéaire, nous allons utiliser un Set
 		ICle[] tabTas1 = this.getRepresentationTableau();
 		ICle[] tabTas2 = t2.getRepresentationTableau();
 		

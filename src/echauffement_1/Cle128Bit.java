@@ -44,8 +44,7 @@ public class Cle128Bit implements ICle{
 	    		sb.append('0');
 	    }
 		
-		// return sb.toString();
-		return cleString + " " + cleString.length();
+		return sb.toString();
 	}
 	
 	@Override

@@ -6,7 +6,6 @@ import java.nio.IntBuffer;
 
 /**
  * Classe de réalisation du MD5.
- *
  */
 public class MD5
 {
@@ -33,12 +32,12 @@ public class MD5
 	/** Paramètre k de l'algorithme du MD5. */
 	private static final int[] k = new int[64];
 	
-	/** flag indiquant si le tablau "k" est défini. */
+	/** flag indiquant si le tableau "k" est défini. */
 	private static boolean kEstDefini = false;
 	
 	/**
 	 * Définie les valeurs dans k.
-	 * Doit être exécutée la premier fois que l'on génére un MD5.
+	 * Doit être exécutée la premier fois que l'on génère un MD5.
 	 */
 	private static void definirK() {
 		for (int i = 0; i < 64; i++)
@@ -62,7 +61,7 @@ public class MD5
 		byte[] messageBytes = message.getBytes();
 
 		// Il faut réserver une taille multiple de 64 bytes permettant de stocker le message ainsi que son padding.
-		// Les 64 bytes résérvés ici représentent les 512 bits nécéssairent à l'algorithme du MD5.
+		// Les 64 bytes réservés ici représentent les 512 bits nécessaires à l'algorithme du MD5.
 		// L'utillisation du ByteBuffer nous permet d'ajouter facilement les informations de padding du MD5.
 		int taille = (((messageBytes.length) / 64) + 1) * 64;
 		ByteBuffer byteBufferMessage = ByteBuffer.allocate(taille).order(ByteOrder.LITTLE_ENDIAN);
@@ -77,7 +76,7 @@ public class MD5
 		// Les bits restants dans le ByteBuffer sont déjà tous des zéros, cela nous évite de boucler pour les ajouter.
 		byteBufferMessage.put((byte)0x80);
 
-		// Inutile, le ByteBuffer est initialement aloué avec des bytes de valeur 0x00.
+		// Inutile, le ByteBuffer est initialement alloué avec des bytes de valeur 0x00.
 		/*while(byteBufferMessage.position() < byteBufferMessage.capacity() - 8)
 			byteBufferMessage.put((byte) 0x00);*/
 		
@@ -99,7 +98,7 @@ public class MD5
 		int d = h3;
 		int temp;
 		while (byteBufferMessage.hasRemaining()) {
-			// On récupère le contenu de notre ByteBuffer en tant que IntBuffer (donc avec chaque valeur codées sur 32 bits).
+			// On récupère le contenu de nôtre ByteBuffer en tant que IntBuffer (donc avec chaque valeur codées sur 32 bits).
 			// Cette récupération se fait à partir de la position actuelle de ByteBuffer qui n'est pas modifiée par cette opération.
 			// Il faut donc modifier manuellement cette position pour la faire avancer de 512 bits.
 			IntBuffer w = byteBufferMessage.slice().order(ByteOrder.LITTLE_ENDIAN).asIntBuffer();
@@ -151,14 +150,14 @@ public class MD5
 		md5.putInt(c);
 		md5.putInt(d);
 		
-		// On retourne le résultat sous forme du String hecadécimale.
+		// On retourne le résultat sous forme du String hexadécimale.
 		return toHexadecimal(md5.array());
 	}
 	
 	/**
 	 * Convertie un tableau de byte en une string sous forme hexadécimal.
 	 * @param message Le message à convertir. 
-	 * @return La convertion hexadécimal du message.
+	 * @return La conversion hexadécimal du message.
 	 */
 	public static String toHexadecimal(byte[] message) {
 		StringBuilder sb = new StringBuilder(message.length * 2);

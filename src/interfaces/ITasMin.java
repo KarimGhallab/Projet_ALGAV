@@ -11,18 +11,18 @@ public interface ITasMin {
 	public int size();
 	
 	/**
-	 * Supprime la cle minimal 
+	 * Supprime la clé minimal 
 	 * @return La clé de valeur minimal dans le tas.
 	 */
 	public ICle supprMin();
 	/**
-	 * Ajoute une cle au tas minimal 
-	 * @param c cle a ajouter
+	 * Ajoute une clé au tas minimal 
+	 * @param c clé a ajouter
 	 */
 	public void ajout(ICle c);
 	
 	/**
-	 * Construit un tas minimal, a partir d'une liste de cles.
+	 * Construit un tas minimal, a partir d'une liste de clés.
 	 * @param elems
 	 * @return true si le tas à été construit, false sinon.
 	 */

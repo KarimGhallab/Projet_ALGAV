@@ -95,7 +95,7 @@ public class Noeud<C extends ICle> {
 	/**
 	 * Affichage du parcours infixe depuis un noeud.
 	 * @param racine La racine depuis laquelle il faut effectuer le parcours.
-	 * @return La chaine de caractère correpondant à la suite des clé depuis la racine
+	 * @return La chaîne de caractère correspondant à la suite des clé depuis la racine
 	 * selon un parcours infixe.
 	 */
 	public String infixeToString() { 

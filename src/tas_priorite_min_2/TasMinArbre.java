@@ -23,7 +23,7 @@ public class TasMinArbre implements ITasMin {
 	 * */
 	private Stack<Noeud> pileNoeud;
 	
-	/** La taile du tas */
+	/** La taille du tas */
 	private int taille;
 	
 	/**
@@ -41,7 +41,7 @@ public class TasMinArbre implements ITasMin {
 	 * @param n La clé à insérer.
 	 */
 	public TasMinArbre(ICle n) {
-		racine = new Noeud(n, null, false, false);		// La racine n'a pas de pêre est n'est ni un fils gauche, ni un fils droit
+		racine = new Noeud(n, null, false, false);		// La racine n'a pas de père est n'est ni un fils gauche, ni un fils droit
 		prochaineInsertion = racine.getFilsGauche();
 		pileNoeud = new Stack<>();
 		taille = 1;
@@ -76,7 +76,7 @@ public class TasMinArbre implements ITasMin {
 			remonterCle(prochain);
 		}	
 		else if (prochaineInsertion != null){
-			// Ajout de la clé dans le noeud déstiné à la prochaine insertion
+			// Ajout de la clé dans le noeud destiné à la prochaine insertion
 			prochaineInsertion.add(c);
 			
 			Noeud ancienneProchaineInsertion = prochaineInsertion;
@@ -84,7 +84,7 @@ public class TasMinArbre implements ITasMin {
 			// On calcule le noeud sur lequel devra se faire la prochaine insertion.
 			prochaineInsertion = prochaineInsertion(ancienneProchaineInsertion);
 			
-			// Si le noeud sur lequel on vient de faire l'insertion etait l'extrémité droite de l'arbre,
+			// Si le noeud sur lequel on vient de faire l'insertion était l'extrémité droite de l'arbre,
 			// alors ce n'est plus l'extrémité.
 			if (ancienneProchaineInsertion.estExtremiteDroite())
 				ancienneProchaineInsertion.setEstExtremiteDroite(false);
@@ -124,7 +124,7 @@ public class TasMinArbre implements ITasMin {
 	 */
 	private Noeud prochaineInsertionDepuisFilsDroit(Noeud courant) {
 		// On est sur un fils gauche.
-		// La prochaine insertion se fait sur le fils droit du pêre puis tout à gauche
+		// La prochaine insertion se fait sur le fils droit du père puis tout à gauche
 		if(courant.estFilsGauche())
 			return trouverExtremiteGauche(courant.getPere().getFilsDroit()); 
 
@@ -243,7 +243,7 @@ public class TasMinArbre implements ITasMin {
 	}
 	
 	/**
-	 * Méthode récursive pour construire l'arbre du tas min en parcourant le tableau.
+	 * Méthode recursive pour construire l'arbre du tas min en parcourant le tableau.
 	 * @param courant Le noeud courant
 	 * @param elems La liste des éléments du tas.
 	 * @param indiceCourant L'indice courant dans la liste.
@@ -269,8 +269,8 @@ public class TasMinArbre implements ITasMin {
 	@Override
 	public void union(ITasMin t2) {
 		// L'objectif pour effectuer l'union est d'utiliser la méthode constIter
-		// Pour cela il faut réaliser une liste contenant tous les élements des deux tas
-		// Afin de ne pas avoir de donblon et de garder une complexité linéaire, nous allons utiliser un Set
+		// Pour cela il faut réaliser une liste contenant tous les éléments des deux tas
+		// Afin de ne pas avoir de doublon et de garder une complexité linéaire, nous allons utiliser un Set
 		ICle[] tabTas1 = this.getRepresentationTableau();
 		ICle[] tabTas2 = t2.getRepresentationTableau();
 		

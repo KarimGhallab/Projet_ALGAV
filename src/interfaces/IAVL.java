@@ -32,22 +32,22 @@ public interface IAVL<C extends ICle> {
 	public int getHauteur();
 	
 	/**
-	 * Récupère la taille de notre arbre
+	 * Récupère la taille de nôtre arbre
 	 * @return La taille de l'arbre.
 	 */
 	public int size();
 	
 	/**
 	 * Affichage du parcours infixe de l'arbre.
-	 * @return La chaine de caractère correpondant à la suite des clés de l'arbre
+	 * @return La chaîne de caractère correspondant à la suite des clés de l'arbre
 	 * selon un parcours infixe.
 	 */
 	public String infixeToString();
 	
 	/**
-	 * Affichage du parcours prefixe de l'arbre.
-	 * @return La chaine de caractère correpondant à la suite des clés de l'arbre
-	 * selon un parcours prefixe.
+	 * Affichage du parcours préfixe de l'arbre.
+	 * @return La chaîne de caractère correspondant à la suite des clés de l'arbre
+	 * selon un parcours préfixe.
 	 */
 	public String prefixeToString();
 	
@@ -61,7 +61,7 @@ public interface IAVL<C extends ICle> {
 	/**
 	 * Recherche une clé dans l'arbre.
 	 * @param cle La clé à rechercher.
-	 * @return Une map associant au noeud que l'on a trouvé, le nombre de comparaison necessaire à cet recherche.
+	 * @return Une map associant au noeud que l'on a trouvé, le nombre de comparaison nécessaire à cet recherche.
 	 * @throws Exception La clé n'est pas présente dans l'arbre.
 	 */
 	public SimpleEntry<Noeud<C>, Integer> rechercher(C cle) throws Exception;

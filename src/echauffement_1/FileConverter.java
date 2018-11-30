@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.Vector;
 
 /**
- * Lit un fichier contenant les valeurs des clés en héxadécimal et renvoit un vecteur contenant les traductions
+ * Lit un fichier contenant les valeurs des clés en hexadécimal et renvoit un vecteur contenant les traductions
  * de ses clés en entiers de 128 bit.
  *
  */
@@ -24,8 +24,8 @@ public class FileConverter {
 	}
 	
 	/**
-	 * Lit dans le fichier pour recuperer les cles en les stocke dans un vector. 
-	 * @return le vector contenant les cles.
+	 * Lit dans le fichier pour récupérer les clés en les stocke dans un vector. 
+	 * @return le vector contenant les clés.
 	 */
 	public Vector<Cle128Bit> getCle(){
 		Vector<Cle128Bit> cles = new Vector<Cle128Bit>();

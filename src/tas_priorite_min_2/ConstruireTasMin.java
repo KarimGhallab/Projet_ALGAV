@@ -77,7 +77,7 @@ public abstract class ConstruireTasMin {
     }
 	
     /**
-     * Échange deux élements dans le tableau.
+     * Échange deux éléments dans le tableau.
      * @param i L'indice du premier élément.
      * @param j L'indice du second élément.
      */
