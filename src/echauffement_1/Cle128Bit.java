@@ -44,10 +44,9 @@ public class Cle128Bit implements ICle{
 	    		sb.append('0');
 	    }
 		
-		return sb.toString();
+		// return sb.toString();
+		return cleString + " " + cleString.length();
 	}
-	
-
 	
 	@Override
 	public boolean inf(ICle cle1) {
@@ -98,5 +97,21 @@ public class Cle128Bit implements ICle{
 		}
 		else
 			throw new RuntimeException("Impossible de comparer une \"Cle\" avec une autre classe");
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof Cle128Bit) {
+			Cle128Bit c = (Cle128Bit) o;
+			return this.eg(c);
+		}
+		else
+			return false;
+			
+	}
+	
+	@Override
+	public int hashCode() {
+		return cleString.hashCode();
 	}
 }

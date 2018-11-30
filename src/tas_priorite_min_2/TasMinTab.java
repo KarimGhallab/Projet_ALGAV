@@ -1,7 +1,10 @@
 package tas_priorite_min_2;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import interfaces.ICle;
 import interfaces.ITasMin;
@@ -53,7 +56,7 @@ public class TasMinTab implements ITasMin {
     	
 		nbElements--; // nombre d'element diminue de 1
 
-		// on verifie que le tas est toujour minimal
+		// on verifie que le tas est toujours minimal
 		verifMin(0);
 		
 		return min;
@@ -69,22 +72,19 @@ public class TasMinTab implements ITasMin {
         int fGauche = idFilsGauche(noeud);
         int fDroit = idFilsDroit(noeud);
         
-        int idMin = -1;
+        int idMin = noeud;
         int nbElems = nbElements-1;
         
-        if (fDroit <= nbElems && fDroit > 0 && tas[fDroit].inf(tas[noeud])) { // Verifie si le fils droit n'est pas plus grand que le pere.
+        if (fDroit <= nbElems && fDroit > 0 && tas[fDroit].inf(tas[idMin])) { // Verifie si le fils droit n'est pas plus grand que le pere.
             idMin = fDroit;
-        } else if (fGauche <= nbElems && fGauche > 0 && tas[fGauche].inf(tas[noeud])) { //Verifie si le fils gauche n'est pas plus grand que le pere.
+        } if (fGauche <= nbElems && fGauche > 0 && tas[fGauche].inf(tas[idMin])) { //Verifie si le fils gauche n'est pas plus grand que le pere.
             idMin = fGauche;
-        } else {
-            idMin = noeud;
         }
 
         if (idMin != noeud) {
             swap(noeud, idMin);
             verifMin(idMin); // On continue la descente
         }
-        
     }
 	
 	/**
@@ -94,7 +94,7 @@ public class TasMinTab implements ITasMin {
 	 */
 	public int idFilsGauche(int noeud) {
 		
-		if((2*noeud + 1) > nbElements)
+		if((2*noeud + 1) >= nbElements)
 			return -1;
 		else {
 			return (2*noeud + 1);
@@ -109,7 +109,7 @@ public class TasMinTab implements ITasMin {
 	 */
 	public int idFilsDroit(int noeud) {
 		
-		if((2*noeud + 2) > nbElements)
+		if((2*noeud + 2) >= nbElements)
 			return -1;
 		else {
 			return (2*noeud + 2);
@@ -179,21 +179,40 @@ public class TasMinTab implements ITasMin {
 	
 	@Override
 	public boolean consIter(List<ICle> elems) {
-		
-		if(elems.size() == 0)
+		if (elems.size() == 0)
 			return false;
 		else {
-			for(ICle c : elems)
-				ajout(c);
+			List<ICle> listeTriee = ConstruireTasMin.convertirListe(elems);
+			tas = (ICle[]) listeTriee.toArray(new ICle[0]);
+			
+			nbElements = listeTriee.size();
+			return true;
 		}
-		return true;
 	}
 
 	@Override
 	public void union(ITasMin t2) {
-		ICle [] tabTas2 = t2.getRepresentationTableau();
-		for(int i =0; i < tabTas2.length; i++)
-			ajout(tabTas2[i]);
+		// L'objectif pour effectuer l'union est d'utiliser la méthode constIter
+		// Pour cela il faut réaliser une liste contenant tous les élements des deux tas
+		// Afin de ne pas avoir de donblon et de garder une complexité linéaire, nous allons utiliser un Set
+		ICle[] tabTas1 = this.getRepresentationTableau();
+		ICle[] tabTas2 = t2.getRepresentationTableau();
+		
+		Set<ICle> unionSet = new HashSet<ICle>();
+		
+		// On ajoute le premier tas à au set
+		for(int i=0; i<tabTas1.length; i++)
+			unionSet.add(tabTas1[i]);
+		
+		// On ajoute le second tas à au set
+		for(int i=0; i<tabTas2.length; i++)
+			unionSet.add(tabTas2[i]);
+		
+		// On crée une liste contenant tous les élément du tas : complexité linéaire
+		List<ICle> unionSansDoublon = new ArrayList<ICle>(unionSet);
+		
+		// On appelle consIter pour construire le tas contenant l'union des deux tas
+		consIter(unionSansDoublon);
 	}
 	
 	/**

@@ -4,11 +4,14 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import autres.CleInteger;
+import echauffement_1.Cle128Bit;
+import echauffement_1.FileConverter;
 import interfaces.ICle;
 import tas_priorite_min_2.Noeud;
 import tas_priorite_min_2.TasMinArbre;
@@ -75,9 +78,6 @@ public class testTasMinArbre {
 			}
 			if (courant.getFilsDroit() != null) {
 				if (courant.getFilsDroit().getNoeud() != null) {
-					if (courant.getNoeud() == null) {
-						System.out.println("Noeud du courant est null");
-					}
 					boolean assertion = (courant.getNoeud().inf(courant.getFilsDroit().getNoeud()) || courant.getNoeud().eg(courant.getFilsDroit().getNoeud())); 
 					// System.out.println("(" + courant.getNoeud() + " <= " + courant.getFilsDroit().getNoeud() + ")   ==> " + assertion);
 					assertTrue(assertion);
@@ -122,5 +122,34 @@ public class testTasMinArbre {
 		
 		tUnion1.union(tUnion2);
 		testStructureTasMin(tUnion1.getRacine(), tUnion1.size());
+	}
+	
+	@Test
+	public void testAvecCle128Bit() {
+		TasMinArbre tArbre128 = new TasMinArbre();
+		FileConverter fc = new FileConverter("donnees/cles_alea/jeu_4_nb_cles_50000.txt");
+		Vector<Cle128Bit> v = fc.getCle();
+		
+		for(Cle128Bit c : v)
+			tArbre128.ajout(c);
+		
+		testStructureTasMin(tArbre128.getRacine(), tArbre128.size());
+		
+		tArbre128.supprMin();
+		tArbre128.supprMin();
+		tArbre128.supprMin();
+		
+		testStructureTasMin(tArbre128.getRacine(), tArbre128.size());
+		
+		fc = new FileConverter("donnees/cles_alea/jeu_2_nb_cles_20000.txt");
+		v = fc.getCle();
+		for(Cle128Bit c : v)
+			tArbre128.ajout(c);
+		
+		testStructureTasMin(tArbre128.getRacine(), tArbre128.size());
+		
+		tArbre128.supprMin();
+		
+		testStructureTasMin(tArbre128.getRacine(), tArbre128.size());
 	}
 }

@@ -5,11 +5,14 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
+
 import org.junit.Before;
 import org.junit.Test;
 
 import autres.CleInteger;
 import echauffement_1.Cle128Bit;
+import echauffement_1.FileConverter;
 import interfaces.ICle;
 import tas_priorite_min_2.TasMinTab;
 
@@ -42,6 +45,7 @@ public class testTasMinTab {
 		tas1.ajout(new Cle128Bit("AEF48CF5"));
 		
 		assertEquals(tas1.size(), 3);
+		testStructureTasMin(tas1, 0);
 		
 		//Pour des contrainte d'affichage, on utilise ICleInteger
 		tas1 = new TasMinTab(5);
@@ -55,6 +59,7 @@ public class testTasMinTab {
 		
 		assertEquals(tas1.size(), 6);
 		assertEquals(tas1.toString(), "1 9 3 10 11 5");
+		testStructureTasMin(tas1, 0);
 	}
 	
 	@Test
@@ -64,13 +69,21 @@ public class testTasMinTab {
 		tas1.ajout(new Cle128Bit("56CF48C5"));
 		tas1.ajout(new Cle128Bit("EF48CF5"));
 		tas1.ajout(new Cle128Bit("EF48CF8A954A5"));
-		
 		assertEquals(tas1.size(), 4);
+		testStructureTasMin(tas1, 0);
+		
+		
 		assertTrue(tas1.supprMin() != null);
 		assertEquals(tas1.size(), 3);
+		testStructureTasMin(tas1, 0);
+		
 		assertTrue(tas1.supprMin() != null);
+		assertEquals(tas1.size(), 2);
+		testStructureTasMin(tas1, 0);
+		
 		assertTrue(tas1.supprMin() != null);
 		assertEquals(tas1.size(), 1);
+		testStructureTasMin(tas1, 0);
 		
 		//Pour des contrainte d'affichage, on utilise ICleInteger
 		tas1 = new TasMinTab(5);
@@ -84,11 +97,13 @@ public class testTasMinTab {
 		
 		assertEquals(tas1.size(), 6);
 		assertEquals("9 10 15 10 11 30", tas1.toString());
+		testStructureTasMin(tas1, 0);
 		
 		assertTrue(tas1.supprMin() != null);
 		
 		assertEquals(tas1.size(), 5);
-		assertEquals(tas1.toString(), "15 10 30 10 11");
+		assertEquals(tas1.toString(), "10 10 15 30 11");
+		testStructureTasMin(tas1, 0);
 	}
 	
 	@Test
@@ -99,7 +114,8 @@ public class testTasMinTab {
 		tasConstLoop.consIter(list);
 		
 		assertEquals(tasConstLoop.size(), list.size());
-		assertEquals(tasConstLoop.toString(), "1 9 2 10 11 5 3");
+		assertEquals(tasConstLoop.toString(), "1 9 2 10 11 3 5");
+		testStructureTasMin(tasConstLoop, 0);
 		
 	}
 	
@@ -110,14 +126,19 @@ public class testTasMinTab {
 		tas1.ajout(new Cle128Bit("56CF48C5"));
 		tas1.ajout(new Cle128Bit("EF48CF5"));
 		tas1.ajout(new Cle128Bit("EF48CF8A954A5"));
+		assertEquals(tas1.size(), 4);
+		testStructureTasMin(tas1, 0);
 		
 		tas2.ajout(new Cle128Bit("11C9CF49CF7"));
 		tas2.ajout(new Cle128Bit("EA4CCC5"));
 		tas2.ajout(new Cle128Bit("AEF49C64A954A5"));
+		tas2.ajout(new Cle128Bit("AEF49C64A954A5"));
+		tas2.ajout(new Cle128Bit("EA4CCC5"));
+		testStructureTasMin(tas2, 0);
 		
-		assertEquals(tas1.size(), 4);
 		tas1.union(tas2);
 		assertEquals(tas1.size(), 7);
+		testStructureTasMin(tas1, 0);
 		
 		//Pour des contrainte d'affichage, on utilise ICleInteger
 		tas1 = new TasMinTab(5);
@@ -126,16 +147,69 @@ public class testTasMinTab {
 		tas1.ajout(new CleInteger(10));
 		tas1.ajout(new CleInteger(9));
 		tas1.ajout(new CleInteger(15));
+		tas1.ajout(new CleInteger(0));
+		testStructureTasMin(tas1, 0);
 		
 		tas2.ajout(new CleInteger(10));
 		tas2.ajout(new CleInteger(11));
 		tas2.ajout(new CleInteger(30));
 		tas2.ajout(new CleInteger(0));
 		tas2.ajout(new CleInteger(90));
+		testStructureTasMin(tas2, 0);
 		
 		tas1.union(tas2);
-		assertEquals(tas1.toString(), "0 9 11 10 10 30 15 90");
+		assertEquals(tas1.toString(), "0 9 10 90 11 30 15");
+		testStructureTasMin(tas1, 0);
 		
+	}
+	
+	@Test
+	public void testAvecCle128Bit() {
+		TasMinTab tArbre128 = new TasMinTab(50000);
+		FileConverter fc = new FileConverter("donnees/cles_alea/jeu_4_nb_cles_50000.txt");
+		Vector<Cle128Bit> v = fc.getCle();
+		
+		for(Cle128Bit c : v)
+			tArbre128.ajout(c);
+		
+		testStructureTasMin(tArbre128, 0);
+		
+		tArbre128.supprMin();
+		testStructureTasMin(tArbre128, 0);
+		tArbre128.supprMin();
+		testStructureTasMin(tArbre128, 0);
+		tArbre128.supprMin();
+		
+		testStructureTasMin(tArbre128, 0);
+		
+		fc = new FileConverter("donnees/cles_alea/jeu_2_nb_cles_20000.txt");
+		v = fc.getCle();
+		for(Cle128Bit c : v)
+			tArbre128.ajout(c);
+		
+		testStructureTasMin(tArbre128, 0);
+		
+		tArbre128.supprMin();
+		
+		testStructureTasMin(tArbre128, 0);
+	}
+	
+	public void testStructureTasMin(TasMinTab tas, int courant) {
+		int filsGauche = tas.idFilsGauche(courant);
+		int filsDroit = tas.idFilsDroit(courant);
+		ICle[] tab = tas.getRepresentationTableau();
+		if (filsGauche != -1) {
+			boolean assertion = (tab[courant].inf(tab[filsGauche]) || tab[courant].eg(tab[filsGauche])); 
+			// System.out.println("(" + tab[courant] + " <= " + tab[filsGauche] + ")   ==> " + assertion);
+			assertTrue(assertion);
+			testStructureTasMin(tas, filsGauche);
+		}
+		if (filsDroit != -1) {
+			boolean assertion = (tab[courant].inf(tab[filsDroit]) || tab[courant].eg(tab[filsDroit])); 
+			// System.out.println("(" + tab[courant] + " <= " + tab[filsDroit] + ")   ==> " + assertion);
+			assertTrue(assertion);
+			testStructureTasMin(tas, filsDroit);
+		}
 	}
 	
 }

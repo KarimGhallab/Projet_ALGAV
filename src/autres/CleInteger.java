@@ -34,4 +34,20 @@ public class CleInteger implements ICle{
 	public String toString() {
 		return ""+valeur;
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof CleInteger) {
+			CleInteger c = (CleInteger) o;
+			return this.eg(c);
+		}
+		else
+			return false;
+			
+	}
+	
+	@Override
+	public int hashCode() {
+		return valeur.hashCode();
+	}
 }

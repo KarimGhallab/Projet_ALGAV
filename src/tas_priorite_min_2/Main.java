@@ -54,9 +54,13 @@ public class Main {
 		t2.ajout(new CleInteger(5));
 		t2.ajout(new CleInteger(9));
 		
+		
+		System.out.println("\tunion");
+		System.out.println("\t\t" + t.toString());
+		System.out.println("\t\t" + t2.toString());
 		t.union(t2);
 		
-		System.out.println("\t" + t.toString());
+		System.out.println("\t\t" + t.toString());
 		
 		System.out.println("Tas min avec un arbre : ");
 		
@@ -115,5 +119,25 @@ public class Main {
 		
 		tUnion1.union(tUnion2);
 		System.out.println("Union : \n" + tUnion1.infixeToString());
+		
+		/*printTab(tUnion1.getRepresentationTableau());
+		printTab(tUnion2.getRepresentationTableau());
+		
+		tUnion1.union(tUnion2);
+		printTab(tUnion1.getRepresentationTableau());*/
+		
+	}
+	
+	@SuppressWarnings("unused")
+	private static void printTab(ICle[] tab) {
+		ICle c;
+		System.out.print("[");
+		for (int i=0; i<tab.length; i++) {
+			c = tab[i];
+			System.out.print(c);
+			if (i != tab.length-1)
+				System.out.print(", ");
+		}
+		System.out.println("]");
 	}
 }

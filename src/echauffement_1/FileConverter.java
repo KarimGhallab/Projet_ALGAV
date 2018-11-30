@@ -31,17 +31,17 @@ public class FileConverter {
 		Vector<Cle128Bit> cles = new Vector<Cle128Bit>();
 		BufferedReader br;
 		try {
-				br = new BufferedReader(new FileReader(file));
-				String ligne;
-				while ((ligne = br.readLine()) != null) {
-					
-					String cleS = ligne.substring(2);
-					
-					Cle128Bit cle = new Cle128Bit(cleS);
-					
-					cles.add(cle);
-				}
-				br.close();
+			br = new BufferedReader(new FileReader(file));
+			String ligne;
+			while ((ligne = br.readLine()) != null) {
+				
+				String cleS = ligne.substring(2);
+				
+				Cle128Bit cle = new Cle128Bit(cleS);
+				
+				cles.add(cle);
+			}
+			br.close();
 		}catch (IOException e) {
 			System.out.println("erreur");
 		}

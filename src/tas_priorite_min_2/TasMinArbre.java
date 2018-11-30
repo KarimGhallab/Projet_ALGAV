@@ -1,7 +1,9 @@
 package tas_priorite_min_2;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.Stack;
 
 import interfaces.ICle;
@@ -225,16 +227,19 @@ public class TasMinArbre implements ITasMin {
 
 	@Override
 	public boolean consIter(List<ICle> elems) {
-		
-		taille = elems.size();
-		List<ICle> listeTriee = ConstruireTasMin.convertirListe(elems);
-		
-		racine = new Noeud(null, false, false);
-		
-		// Il faut construire l'arbre
-		consIter(racine, listeTriee, 0);
-		
-		return false;
+		if (elems.size() == 0)
+			return false;
+		else {
+			taille = elems.size();
+			List<ICle> listeTriee = ConstruireTasMin.convertirListe(elems);
+			
+			racine = new Noeud(null, false, false);
+			
+			// Il faut construire l'arbre
+			consIter(racine, listeTriee, 0);
+			
+			return true;
+		}
 	}
 	
 	/**
@@ -265,21 +270,41 @@ public class TasMinArbre implements ITasMin {
 	public void union(ITasMin t2) {
 		// L'objectif pour effectuer l'union est d'utiliser la méthode constIter
 		// Pour cela il faut réaliser une liste contenant tous les élements des deux tas
+		// Afin de ne pas avoir de donblon et de garder une complexité linéaire, nous allons utiliser un Set
 		ICle[] tabTas1 = this.getRepresentationTableau();
 		ICle[] tabTas2 = t2.getRepresentationTableau();
 		
-		List<ICle> union = new ArrayList<>(tabTas1.length + tabTas2.length);
+		Set<ICle> unionSet = new HashSet<ICle>();
 		
-		// On ajoute le premier tas à la liste
+		// On ajoute le premier tas à au set
 		for(int i=0; i<tabTas1.length; i++)
-			union.add(i, tabTas1[i]);
+			unionSet.add(tabTas1[i]);
 		
-		// On ajoute le second tas à la liste
+		// On ajoute le second tas à au set
 		for(int i=0; i<tabTas2.length; i++)
-			union.add(tabTas1.length + i, tabTas2[i]);
+			unionSet.add(tabTas2[i]);
 		
-		// On appelle consIter pour construire le tas contenant tous les élements
-		consIter(union);
+		// On crée une liste contenant tous les élément du tas : complexité linéaire
+		List<ICle> unionSansDoublon = new ArrayList<ICle>(unionSet);
+		
+		// On appelle consIter pour construire le tas contenant l'union des deux tas
+		consIter(unionSansDoublon);
+	}
+	
+	@SuppressWarnings("unused")
+	private List<ICle> enleverDoublon(List<ICle> listeAvecDoublon) {
+		Set<ICle> set = new HashSet<ICle>();
+		
+		List<ICle> listeSansDoublon = new ArrayList<ICle>();
+		for(ICle cle : listeAvecDoublon) {
+			set.add(cle);
+		}
+		
+		for (ICle cle : set) {
+			listeSansDoublon.add(cle);
+		}
+		
+		return listeSansDoublon;
 	}
 
 	/**
