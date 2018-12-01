@@ -7,7 +7,7 @@ set title "Temps d'exécution lors de la construction d'un tas min géré avec u
 set ylabel "Temps de construction du tas en milliseconde"
 set xlabel "Taille du tas min en nombre de clé" offset 0,-1
 set style fill solid						# Les barres sont pleines
-set yrange [0 to 15]						# Commence la graduation à 0
+set yrange [0 to 26]						# Commence la graduation à 0
 set key spacing 1.5							# Ajuste l'espace des éléments de la légende
 set key left top							# Position de la légende
 set xrange [0.5 to *]						# Ajuste le placement des barres

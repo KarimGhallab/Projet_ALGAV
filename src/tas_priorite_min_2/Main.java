@@ -1,31 +1,23 @@
 package tas_priorite_min_2;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.AbstractMap.SimpleEntry;
 
-import arbre_de_recherche_5.AVL;
-import arbre_de_recherche_5.Noeud;
 import autres.CleInteger;
-import echauffement_1.Cle128Bit;
 import echauffement_1.FileConverter;
 import interfaces.ICle;
-import interfaces.ITasMin;
 
 public class Main {
 
 	public static void main(String[] args) {
 		
-		System.out.println("Tas min avec un tableau : ");
+		/*System.out.println("Tas min avec un tableau : ");
 		TasMinTab t = new TasMinTab(5);
 		
 		t.ajout(new CleInteger(1));
@@ -134,14 +126,12 @@ public class Main {
 		
 		tUnion1.union(tUnion2);
 		System.out.println("Union : \n" + tUnion1.infixeToString());
+		*/
+		//calculerTempsConsIterTab();
+		// calculerTempsConsIterArbre();
 		
-		/*printTab(tUnion1.getRepresentationTableau());
-		printTab(tUnion2.getRepresentationTableau());
-		
-		tUnion1.union(tUnion2);
-		printTab(tUnion1.getRepresentationTableau());*/
-		
-		calculerTempsCalculConsIter();
+		//calculerTempsUnionTab();
+		calculerTempsUnionArbre();
 		
 	}
 	
@@ -158,7 +148,8 @@ public class Main {
 		System.out.println("]");
 	}
 	
-	private static void calculerTempsCalculConsIter() {
+	@SuppressWarnings("unused")
+	private static void calculerTempsConsIterArbre() {
 		TasMinArbre tas;
 		ArrayList<ICle> liste;
 		HashMap<Integer, ArrayList<Float>> tempsParTaille = new HashMap<>();
@@ -197,6 +188,169 @@ public class Main {
 				System.out.println("\tTemps d'exécution : " + ecoule + "ms");
 				tempsParTaille.get(tailles[j]).add(ecoule);
 				
+			}
+		}// Toutes les constructions ont été effectuées
+		
+		System.out.println("Sauvegarde des resultats dans le fichier \"" + nomFichierCSV + "\"...");
+		if (sauvegarderResultat(nomFichierCSV, tempsParTaille))
+			System.out.println("Les résultats ont été sauvegardés !");
+		else
+			System.err.println("Erreur lors de la sauvagardes des résultats");
+	}
+	
+	private static void calculerTempsUnionArbre() {
+		TasMinArbre tas1, tas2;
+		ArrayList<ICle> liste1, liste2;
+		HashMap<Integer, ArrayList<Float>> tempsParTaille = new HashMap<>();
+		
+		int tailles[] = {100, 200, 500, 1000, 5000, 10000, 20000, 50000};
+		int nb = 5;
+		
+		String nomFichier1, nomFichier2;
+		FileConverter fc1, fc2;
+		
+		long debut, fin;
+		float ecoule;
+		float f = 1000000;				// Division pour obtenir le temps en milliseconde
+		
+		String nomFichierCSV = "union_arbre.csv";
+		for(int i=1; i<nb; i++) {
+			for(int j=0; j<tailles.length; j++) {
+				if (!tempsParTaille.containsKey(tailles[j]))		// Initialisation des ArrayList des Hashmap
+					tempsParTaille.put(tailles[j], new ArrayList<Float>());
+				
+				nomFichier1 = "jeu_"+i+"_nb_cles_"+tailles[j]+".txt";
+				fc1 = new FileConverter("donnees/cles_alea/"+nomFichier1);
+				liste1 = new ArrayList<ICle>(fc1.getCle());
+				tas1 = new TasMinArbre();
+				tas1.consIter(liste1);
+				
+				System.out.println("Union de " + nomFichier1 + " avec : ");
+				for (int k=i+1; k<=nb; k++) {
+					nomFichier2 = "jeu_"+k+"_nb_cles_"+tailles[j]+".txt";
+					System.out.println("\t- " + nomFichier2);
+					fc2 = new FileConverter("donnees/cles_alea/"+nomFichier2);
+					liste2 = new ArrayList<ICle>(fc2.getCle());
+					tas2 = new TasMinArbre();
+					tas2.consIter(liste2);
+					
+					debut = System.nanoTime();
+					tas2.union(tas1);
+					fin = System.nanoTime();
+					
+					ecoule = ((fin - debut)/f);
+					
+					System.out.println("\tTemps d'exécution : " + ecoule + "ms");
+					tempsParTaille.get(tailles[j]).add(ecoule);
+				}
+				System.out.println();
+			}
+		}// Toutes les constructions ont été effectuées
+		
+		System.out.println("Sauvegarde des resultats dans le fichier \"" + nomFichierCSV + "\"...");
+		if (sauvegarderResultat(nomFichierCSV, tempsParTaille))
+			System.out.println("Les résultats ont été sauvegardés !");
+		else
+			System.err.println("Erreur lors de la sauvagardes des résultats");
+	}
+	
+	@SuppressWarnings("unused")
+	private static void calculerTempsConsIterTab() {
+		TasMinTab tas;
+		ArrayList<ICle> liste;
+		HashMap<Integer, ArrayList<Float>> tempsParTaille = new HashMap<>();
+		
+		int tailles[] = {100, 200, 500, 1000, 5000, 10000, 20000, 50000};
+		int nb = 5; int cpt = 0;
+		
+		String nomFichier;
+		FileConverter fc;
+		
+		long debut, fin;
+		float ecoule;
+		float f = 1000000;				// Division pour obtenir le temps en milliseconde
+		
+		String nomFichierCSV = "consIter_tab.csv";
+		for(int i=1; i<=nb; i++) {
+			for(int j=0; j<tailles.length; j++) {
+				if (!tempsParTaille.containsKey(tailles[j]))		// Initialisation des ArrayList des Hashmap
+					tempsParTaille.put(tailles[j], new ArrayList<Float>());
+				
+				tas = new TasMinTab(10000);
+				cpt++;
+				nomFichier = "jeu_"+i+"_nb_cles_"+tailles[j]+".txt";
+				System.out.println("Fichier : " + nomFichier + "Progression : " + cpt + "/" + nb*tailles.length);
+				
+				fc = new FileConverter("donnees/cles_alea/"+nomFichier);
+				liste = new ArrayList<ICle>(fc.getCle());					// La liste des clé à insérer
+				
+				debut = System.nanoTime();
+				
+				tas.consIter(liste);
+				
+				fin = System.nanoTime();
+				ecoule = ((fin - debut)/f);
+				
+				System.out.println("\tTemps d'exécution : " + ecoule + "ms");
+				tempsParTaille.get(tailles[j]).add(ecoule);
+				
+			}
+		}// Toutes les constructions ont été effectuées
+		
+		System.out.println("Sauvegarde des resultats dans le fichier \"" + nomFichierCSV + "\"...");
+		if (sauvegarderResultat(nomFichierCSV, tempsParTaille))
+			System.out.println("Les résultats ont été sauvegardés !");
+		else
+			System.err.println("Erreur lors de la sauvagardes des résultats");
+	}
+	
+	@SuppressWarnings("unused")
+	private static void calculerTempsUnionTab() {
+		TasMinTab tas1, tas2;
+		ArrayList<ICle> liste1, liste2;
+		HashMap<Integer, ArrayList<Float>> tempsParTaille = new HashMap<>();
+		
+		int tailles[] = {100, 200, 500, 1000, 5000, 10000, 20000, 50000};
+		int nb = 5;
+		
+		String nomFichier1, nomFichier2;
+		FileConverter fc1, fc2;
+		
+		long debut, fin;
+		float ecoule;
+		float f = 1000000;				// Division pour obtenir le temps en milliseconde
+		
+		String nomFichierCSV = "union_tab.csv";
+		for(int i=1; i<nb; i++) {
+			for(int j=0; j<tailles.length; j++) {
+				if (!tempsParTaille.containsKey(tailles[j]))		// Initialisation des ArrayList des Hashmap
+					tempsParTaille.put(tailles[j], new ArrayList<Float>());
+				
+				nomFichier1 = "jeu_"+i+"_nb_cles_"+tailles[j]+".txt";
+				fc1 = new FileConverter("donnees/cles_alea/"+nomFichier1);
+				liste1 = new ArrayList<ICle>(fc1.getCle());
+				tas1 = new TasMinTab(10000);
+				tas1.consIter(liste1);
+				
+				System.out.println("Union de " + nomFichier1 + " avec : ");
+				for (int k=i+1; k<=nb; k++) {
+					nomFichier2 = "jeu_"+k+"_nb_cles_"+tailles[j]+".txt";
+					System.out.println("\t- " + nomFichier2);
+					fc2 = new FileConverter("donnees/cles_alea/"+nomFichier2);
+					liste2 = new ArrayList<ICle>(fc2.getCle());
+					tas2 = new TasMinTab(10000);
+					tas2.consIter(liste2);
+					
+					debut = System.nanoTime();
+					tas2.union(tas1);
+					fin = System.nanoTime();
+					
+					ecoule = ((fin - debut)/f);
+					
+					System.out.println("\tTemps d'exécution : " + ecoule + "ms");
+					tempsParTaille.get(tailles[j]).add(ecoule);
+				}
+				System.out.println();
 			}
 		}// Toutes les constructions ont été effectuées
 		
