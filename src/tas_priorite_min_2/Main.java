@@ -159,7 +159,7 @@ public class Main {
 	}
 	
 	private static void calculerTempsCalculConsIter() {
-		TasMinTab tas;
+		TasMinArbre tas;
 		ArrayList<ICle> liste;
 		HashMap<Integer, ArrayList<Float>> tempsParTaille = new HashMap<>();
 		
@@ -173,13 +173,13 @@ public class Main {
 		float ecoule;
 		float f = 1000000;				// Division pour obtenir le temps en milliseconde
 		
-		String nomFichierCSV = "consIter_tab.csv";
+		String nomFichierCSV = "consIter_arbre.csv";
 		for(int i=1; i<=nb; i++) {
 			for(int j=0; j<tailles.length; j++) {
 				if (!tempsParTaille.containsKey(tailles[j]))		// Initialisation des ArrayList des Hashmap
 					tempsParTaille.put(tailles[j], new ArrayList<Float>());
 				
-				tas = new TasMinTab(10000);
+				tas = new TasMinArbre();
 				cpt++;
 				nomFichier = "jeu_"+i+"_nb_cles_"+tailles[j]+".txt";
 				System.out.println("Fichier : " + nomFichier + "Progression : " + cpt + "/" + nb*tailles.length);
@@ -198,7 +198,7 @@ public class Main {
 				tempsParTaille.get(tailles[j]).add(ecoule);
 				
 			}
-		}// Toutes les recherches ont été effectués
+		}// Toutes les constructions ont été effectuées
 		
 		System.out.println("Sauvegarde des resultats dans le fichier \"" + nomFichierCSV + "\"...");
 		if (sauvegarderResultat(nomFichierCSV, tempsParTaille))
@@ -223,7 +223,7 @@ public class Main {
 				liste = new ArrayList<>(tempsParTaille.get(taille));
 				moyenne = getMoyenne(liste);
 				max = getMax(liste);
-				aEcrire += taille + " " + df.format(moyenne )+ " " + max + "\n";
+				aEcrire += taille + " " + df.format(moyenne )+ " " + df.format(max) + "\n";
 			}
 	        FileWriter writer = new FileWriter(fichierCSV);
 	        writer.write(aEcrire);

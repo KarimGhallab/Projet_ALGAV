@@ -310,7 +310,7 @@ public class AVL<C extends ICle> implements IAVL<C> {
 					e.printStackTrace();
 				}
 			}
-		}// Toutes les recherches ont été effectués
+		}// Toutes les recherches ont été effectuées
 		String nomFichierCSV = "recherche_AVL.csv";
 		
 		System.out.println("Sauvegarde des resultats dans le fichier \"" + nomFichierCSV + "\"...");
