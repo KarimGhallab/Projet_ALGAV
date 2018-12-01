@@ -169,7 +169,7 @@ public class Noeud {
 			else
 				tmp += tabLvl+"FD : ";
 			tmp += " Clé : " + noeud.toString() + " \n";
-			
+				
 			if (filsDroit.getNoeud() != null)
 				tmp += filsDroit.infixeToString(tabLvl+"\t");
 		}

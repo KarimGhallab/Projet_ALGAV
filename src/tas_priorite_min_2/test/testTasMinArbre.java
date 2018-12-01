@@ -3,6 +3,7 @@ package tas_priorite_min_2.test;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
 
@@ -151,5 +152,31 @@ public class testTasMinArbre {
 		tArbre128.supprMin();
 		
 		testStructureTasMin(tArbre128.getRacine(), tArbre128.size());
+	}
+	
+	@Test
+	public void testClesAlea() {
+		TasMinArbre tas;
+		ArrayList<ICle> liste;
+		
+		int tailles[] = {100, 200, 500, 1000, 5000, 10000, 20000, 50000};
+		int nb = 5; int cpt = 0;
+		
+		String nomFichier;
+		FileConverter fc;
+		
+		for(int i=1; i<=nb; i++) {
+			for(int j=0; j<tailles.length; j++) {
+				tas = new TasMinArbre();
+				cpt++;
+				nomFichier = "jeu_"+i+"_nb_cles_"+tailles[j]+".txt";
+				System.out.println("Fichier : " + nomFichier + "Progression : " + cpt + "/" + nb*tailles.length);
+				
+				fc = new FileConverter("donnees/cles_alea/"+nomFichier);
+				liste = new ArrayList<ICle>(fc.getCle());					// La liste des clé à insérer
+				tas.consIter(liste);
+				testStructureTasMin(tas.getRacine(), tas.size());
+			}
+		}
 	}
 }

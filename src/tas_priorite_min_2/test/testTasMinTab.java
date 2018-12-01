@@ -14,6 +14,7 @@ import autres.CleInteger;
 import echauffement_1.Cle128Bit;
 import echauffement_1.FileConverter;
 import interfaces.ICle;
+import tas_priorite_min_2.TasMinArbre;
 import tas_priorite_min_2.TasMinTab;
 
 public class testTasMinTab {
@@ -209,6 +210,32 @@ public class testTasMinTab {
 			// System.out.println("(" + tab[courant] + " <= " + tab[filsDroit] + ")   ==> " + assertion);
 			assertTrue(assertion);
 			testStructureTasMin(tas, filsDroit);
+		}
+	}
+	
+	@Test
+	public void testClesAlea() {
+		TasMinTab tas;
+		ArrayList<ICle> liste;
+		
+		int tailles[] = {100, 200, 500, 1000, 5000, 10000, 20000, 50000};
+		int nb = 5; int cpt = 0;
+		
+		String nomFichier;
+		FileConverter fc;
+		
+		for(int i=1; i<=nb; i++) {
+			for(int j=0; j<tailles.length; j++) {
+				tas = new TasMinTab(10000);
+				cpt++;
+				nomFichier = "jeu_"+i+"_nb_cles_"+tailles[j]+".txt";
+				System.out.println("Test sur : " + nomFichier + "Progression : " + cpt + "/" + nb*tailles.length);
+				
+				fc = new FileConverter("donnees/cles_alea/"+nomFichier);
+				liste = new ArrayList<ICle>(fc.getCle());					// La liste des clé à insérer
+				tas.consIter(liste);
+				testStructureTasMin(tas, 0);
+			}
 		}
 	}
 	

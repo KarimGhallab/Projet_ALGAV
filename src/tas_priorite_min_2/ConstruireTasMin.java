@@ -20,6 +20,8 @@ public abstract class ConstruireTasMin {
 	public static List<ICle> convertirListe(List<ICle> listeElement) {
 		elems = listeElement;
 		 
+		// On part des parents les plus profonds jusqu'à la racine
+		// Pour chaque appel sur un noeud à une profondeur i, on aura au pire cas n/(2**(i+1)) appel récursif
 		for (int i = elems.size() / 2; i >= 0; i--)
             trierTasLocal(i);
 		
@@ -31,10 +33,10 @@ public abstract class ConstruireTasMin {
 	 * @param i L'indice du noeud.
 	 */
 	private static void trierTasLocal(int i) {
-
+		
         int gauche = filsGauche(i);
         int droit = filsDroit(i);
-        int petit;				// L'indice de la clé la plus petite entre l'actuelle et ses deux fils 
+        int petit;				// L'indice de la clé la plus petite entre l'actuelle et ses deux fils
 
         // Calcule quelle est la clé la plus petite entre l'actuelle et ses fils
         // Le fils gauche existe et est plus petit que la clé actuelle

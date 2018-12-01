@@ -1,10 +1,25 @@
 package tas_priorite_min_2;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.AbstractMap.SimpleEntry;
 
+import arbre_de_recherche_5.AVL;
+import arbre_de_recherche_5.Noeud;
 import autres.CleInteger;
+import echauffement_1.Cle128Bit;
+import echauffement_1.FileConverter;
 import interfaces.ICle;
+import interfaces.ITasMin;
 
 public class Main {
 
@@ -126,6 +141,8 @@ public class Main {
 		tUnion1.union(tUnion2);
 		printTab(tUnion1.getRepresentationTableau());*/
 		
+		calculerTempsCalculConsIter();
+		
 	}
 	
 	@SuppressWarnings("unused")
@@ -139,5 +156,112 @@ public class Main {
 				System.out.print(", ");
 		}
 		System.out.println("]");
+	}
+	
+	private static void calculerTempsCalculConsIter() {
+		TasMinTab tas;
+		ArrayList<ICle> liste;
+		HashMap<Integer, ArrayList<Float>> tempsParTaille = new HashMap<>();
+		
+		int tailles[] = {100, 200, 500, 1000, 5000, 10000, 20000, 50000};
+		int nb = 5; int cpt = 0;
+		
+		String nomFichier;
+		FileConverter fc;
+		
+		long debut, fin;
+		float ecoule;
+		float f = 1000000;				// Division pour obtenir le temps en milliseconde
+		
+		String nomFichierCSV = "consIter_tab.csv";
+		for(int i=1; i<=nb; i++) {
+			for(int j=0; j<tailles.length; j++) {
+				if (!tempsParTaille.containsKey(tailles[j]))		// Initialisation des ArrayList des Hashmap
+					tempsParTaille.put(tailles[j], new ArrayList<Float>());
+				
+				tas = new TasMinTab(10000);
+				cpt++;
+				nomFichier = "jeu_"+i+"_nb_cles_"+tailles[j]+".txt";
+				System.out.println("Fichier : " + nomFichier + "Progression : " + cpt + "/" + nb*tailles.length);
+				
+				fc = new FileConverter("donnees/cles_alea/"+nomFichier);
+				liste = new ArrayList<ICle>(fc.getCle());					// La liste des clé à insérer
+				
+				debut = System.nanoTime();
+				
+				tas.consIter(liste);
+				
+				fin = System.nanoTime();
+				ecoule = ((fin - debut)/f);
+				
+				System.out.println("\tTemps d'exécution : " + ecoule + "ms");
+				tempsParTaille.get(tailles[j]).add(ecoule);
+				
+			}
+		}// Toutes les recherches ont été effectués
+		
+		System.out.println("Sauvegarde des resultats dans le fichier \"" + nomFichierCSV + "\"...");
+		if (sauvegarderResultat(nomFichierCSV, tempsParTaille))
+			System.out.println("Les résultats ont été sauvegardés !");
+		else
+			System.err.println("Erreur lors de la sauvagardes des résultats");
+	}
+	
+	private static boolean sauvegarderResultat(String nomFichierCSV, HashMap<Integer, ArrayList<Float>> tempsParTaille) {
+		ArrayList<Float> liste;
+		float moyenne;
+		float max;
+		ArrayList<Integer> listeTriee = new ArrayList<>(tempsParTaille.keySet());
+		Collections.sort(listeTriee);
+
+		// Écriture des résultats
+		try {
+			File fichierCSV = new File("resultats/" + nomFichierCSV);
+	        String aEcrire = "Taille moyenne maximum\n";
+	        DecimalFormat df = new DecimalFormat("#.###");
+	        for (Integer taille : listeTriee) {
+				liste = new ArrayList<>(tempsParTaille.get(taille));
+				moyenne = getMoyenne(liste);
+				max = getMax(liste);
+				aEcrire += taille + " " + df.format(moyenne )+ " " + max + "\n";
+			}
+	        FileWriter writer = new FileWriter(fichierCSV);
+	        writer.write(aEcrire);
+	        writer.close();
+	        
+	        return true;
+	        
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	/**
+	 * Calcule la moyenne des éléments d'une liste.
+	 * @param liste La liste pour laquelle on souhaite la moyenne des éléments.
+	 * @return La moyenne des éléments de la liste.
+	 */
+	private static float getMoyenne(ArrayList<Float> liste) {
+		float somme = 0;
+		for(Float x : liste)
+			somme += x;
+			
+		return somme/liste.size();
+	}
+	
+	/**
+	 * Récupère la valeur maximale dans une liste.
+	 * @param liste La liste pour laquelle on souhaite récupérer la valeur maximale.
+	 * @return L'élément le plus grand de la liste.
+	 */
+	private static float getMax(ArrayList<Float> liste) {
+		float max = -1;
+		for(Float x : liste) {
+			if (x > max)
+				max = x;
+		}
+		
+		return max;
 	}
 }

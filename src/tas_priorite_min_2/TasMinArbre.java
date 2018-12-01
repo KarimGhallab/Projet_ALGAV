@@ -290,22 +290,6 @@ public class TasMinArbre implements ITasMin {
 		// On appelle consIter pour construire le tas contenant l'union des deux tas
 		consIter(unionSansDoublon);
 	}
-	
-	@SuppressWarnings("unused")
-	private List<ICle> enleverDoublon(List<ICle> listeAvecDoublon) {
-		Set<ICle> set = new HashSet<ICle>();
-		
-		List<ICle> listeSansDoublon = new ArrayList<ICle>();
-		for(ICle cle : listeAvecDoublon) {
-			set.add(cle);
-		}
-		
-		for (ICle cle : set) {
-			listeSansDoublon.add(cle);
-		}
-		
-		return listeSansDoublon;
-	}
 
 	/**
 	 * Renvoie la string représentant le parcours infixe du tas
