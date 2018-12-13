@@ -2,6 +2,8 @@ package Ex3_files_binomiales;
 
 import java.util.LinkedList;
 import java.util.Vector;
+
+import Ex1_echauffement.Cle128Bit;
 import interfaces.ICle;
 import interfaces.IFileBinomiale;
 import interfaces.ITournoiBinomial;
@@ -170,7 +172,7 @@ public class FileBinomiale implements IFileBinomiale{
 	 * @param l liste de clé pour la contruction de la file.
 	 * @f la file qui va être construite avec les clés.
 	 */
-	public static void constItr(Vector<ICle> elems, FileBinomiale f) {
+	public static void constItr(Vector<Cle128Bit> elems, FileBinomiale f) {
 		itrAvecCles(elems, f); // Appel de la fonction qui crée les tas constituant la file binomiale.
 	}
 	
@@ -179,7 +181,7 @@ public class FileBinomiale implements IFileBinomiale{
 	 * @param elems les clés permettant de construire les tournois à ajouter à la file binomiale.
 	 * @param f la file binomiale qui va être construite.
 	 */
-	public static void itrAvecCles(Vector<ICle> elems, FileBinomiale f) {
+	public static void itrAvecCles(Vector<Cle128Bit> elems, FileBinomiale f) {
 		if(elems.size() == 0) { // S'il n'y a pas de clés dans la liste, on s'arrête.
 			return; 
 		}else { // Sinon, créer autant de tournois binomiaux de degrés 1, que possible, pour les fusionner après.
