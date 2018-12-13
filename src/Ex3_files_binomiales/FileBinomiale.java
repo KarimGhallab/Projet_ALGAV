@@ -1,6 +1,7 @@
 package Ex3_files_binomiales;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Vector;
 
 import Ex1_echauffement.Cle128Bit;
@@ -172,7 +173,7 @@ public class FileBinomiale implements IFileBinomiale{
 	 * @param l liste de clé pour la contruction de la file.
 	 * @f la file qui va être construite avec les clés.
 	 */
-	public static void constItr(Vector<Cle128Bit> elems, FileBinomiale f) {
+	public static void constItr(List<ICle> elems, FileBinomiale f) {
 		itrAvecCles(elems, f); // Appel de la fonction qui crée les tas constituant la file binomiale.
 	}
 	
@@ -181,7 +182,7 @@ public class FileBinomiale implements IFileBinomiale{
 	 * @param elems les clés permettant de construire les tournois à ajouter à la file binomiale.
 	 * @param f la file binomiale qui va être construite.
 	 */
-	public static void itrAvecCles(Vector<Cle128Bit> elems, FileBinomiale f) {
+	public static void itrAvecCles(List<ICle> elems, FileBinomiale f) {
 		if(elems.size() == 0) { // S'il n'y a pas de clés dans la liste, on s'arrête.
 			return; 
 		}else { // Sinon, créer autant de tournois binomiaux de degrés 1, que possible, pour les fusionner après.
@@ -244,10 +245,7 @@ public class FileBinomiale implements IFileBinomiale{
 		return unionFile(this, tournoiMin.decapite()); // Faire l'union entre la file, et la file résultant de la suppression du noeud racine du tournoi (tournoiMin).
 	}
 	
-	/**
-	 * Renvoie la taille de la file binomiale.
-	 * @return la taille de la file binomiale.
-	 */
+	@Override
 	public int getTaille() {
 		return taille;
 	}
@@ -279,5 +277,15 @@ public class FileBinomiale implements IFileBinomiale{
 			((TournoiBinomial) b).print();
 			System.out.println();
 		}
+	}
+
+	@Override
+	public int getNbTas() {
+		return tas.size();
+	}
+
+	@Override
+	public ITournoiBinomial getTas(int index) {
+		return tas.get(index);
 	}
 }

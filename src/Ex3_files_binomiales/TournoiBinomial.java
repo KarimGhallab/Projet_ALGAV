@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import interfaces.ICle;
 import interfaces.IFileBinomiale;
 import interfaces.ITournoiBinomial;
+import java.util.List;
 
 public class TournoiBinomial implements ITournoiBinomial{
 	/** Ensemble des tournois binomiaux fils, du tournoi binomial */
@@ -13,7 +14,7 @@ public class TournoiBinomial implements ITournoiBinomial{
 	private ICle cle;
 	/** Degre a la racine (TBk) */
 	private int degre;  
-	/** Nombre de cle inserrer dans le tournoi */
+	/** Nombre de cle insérée dans le tournoi */
 	private int taille;
 	
 	/**
@@ -23,7 +24,7 @@ public class TournoiBinomial implements ITournoiBinomial{
 	public TournoiBinomial(ICle c) {
 		fils = new LinkedList<>();
 		cle = c;
-		degre = 0; // Initialement on a un TB0, ne possèdant pas de fils, donc de degré 0.
+		degre = 0; // Initialement on a un TB0, ne possédant pas de fils, donc de degré 0.
 		taille = 1;
 	}
 	
@@ -120,5 +121,15 @@ public class TournoiBinomial implements ITournoiBinomial{
 	@Override
 	public ICle getCle() {
 		return cle;
+	}
+
+	@Override
+	public int getNbFils() {
+		return fils.size();
+	}
+
+	@Override
+	public ITournoiBinomial getFils(int index) {
+		return fils.get(index);
 	}
 }

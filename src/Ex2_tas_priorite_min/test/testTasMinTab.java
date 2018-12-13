@@ -167,9 +167,9 @@ public class testTasMinTab {
 	public void testAvecCle128Bit() {
 		TasMinTab tArbre128 = new TasMinTab(50000);
 		FileConverter fc = new FileConverter("donnees/cles_alea/jeu_4_nb_cles_50000.txt");
-		Vector<Cle128Bit> v = fc.getCle();
+		Vector<ICle> v = fc.getCle();
 		
-		for(Cle128Bit c : v)
+		for(ICle c : v)
 			tArbre128.ajout(c);
 		
 		testStructureTasMin(tArbre128, 0);
@@ -184,7 +184,7 @@ public class testTasMinTab {
 		
 		fc = new FileConverter("donnees/cles_alea/jeu_2_nb_cles_20000.txt");
 		v = fc.getCle();
-		for(Cle128Bit c : v)
+		for(ICle c : v)
 			tArbre128.ajout(c);
 		
 		testStructureTasMin(tArbre128, 0);
@@ -192,6 +192,32 @@ public class testTasMinTab {
 		tArbre128.supprMin();
 		
 		testStructureTasMin(tArbre128, 0);
+	}
+	
+	@Test
+	public void testClesAlea() {
+		TasMinTab tas;
+		ArrayList<ICle> liste;
+		
+		int tailles[] = {100, 200, 500, 1000, 5000, 10000, 20000, 50000};
+		int nb = 5; int cpt = 0;
+		
+		String nomFichier;
+		FileConverter fc;
+		
+		for(int i=1; i<=nb; i++) {
+			for(int j=0; j<tailles.length; j++) {
+				tas = new TasMinTab(10000);
+				cpt++;
+				nomFichier = "jeu_"+i+"_nb_cles_"+tailles[j]+".txt";
+				System.out.println("Test sur : " + nomFichier + " Progression : " + cpt + "/" + nb*tailles.length);
+				
+				fc = new FileConverter("donnees/cles_alea/"+nomFichier);
+				liste = new ArrayList<ICle>(fc.getCle());					// La liste des clé à insérer
+				tas.consIter(liste);
+				testStructureTasMin(tas, 0);
+			}
+		}
 	}
 	
 	public void testStructureTasMin(TasMinTab tas, int courant) {
@@ -211,31 +237,4 @@ public class testTasMinTab {
 			testStructureTasMin(tas, filsDroit);
 		}
 	}
-	
-	@Test
-	public void testClesAlea() {
-		TasMinTab tas;
-		ArrayList<ICle> liste;
-		
-		int tailles[] = {100, 200, 500, 1000, 5000, 10000, 20000, 50000};
-		int nb = 5; int cpt = 0;
-		
-		String nomFichier;
-		FileConverter fc;
-		
-		for(int i=1; i<=nb; i++) {
-			for(int j=0; j<tailles.length; j++) {
-				tas = new TasMinTab(10000);
-				cpt++;
-				nomFichier = "jeu_"+i+"_nb_cles_"+tailles[j]+".txt";
-				System.out.println("Test sur : " + nomFichier + "Progression : " + cpt + "/" + nb*tailles.length);
-				
-				fc = new FileConverter("donnees/cles_alea/"+nomFichier);
-				liste = new ArrayList<ICle>(fc.getCle());					// La liste des clé à insérer
-				tas.consIter(liste);
-				testStructureTasMin(tas, 0);
-			}
-		}
-	}
-	
 }

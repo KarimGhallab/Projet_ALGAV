@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import Ex1_echauffement.Cle128Bit;
 import Ex1_echauffement.FileConverter;
+import interfaces.ICle;
 
 public class testValiditeCle{
 
@@ -17,7 +18,7 @@ public class testValiditeCle{
 	Cle128Bit cle32;
 	Cle128Bit cle64;
 	Cle128Bit cle96;
-	Vector <Cle128Bit> cles;
+	Vector <ICle> cles;
 	
 	@Before
 	public void initialize() {

@@ -1,7 +1,5 @@
 package interfaces;
 
-import java.util.Vector;
-
 public interface IFileBinomiale {
 	
 	public IFileBinomiale add(ITournoiBinomial tb);
@@ -57,4 +55,23 @@ public interface IFileBinomiale {
 	 * @return une file privée de sa clé minimale.
 	 */
 	public IFileBinomiale supprCleMin();
+
+	/**
+	 * Renvoie la taille de la file binomiale.
+	 * @return la taille de la file binomiale.
+	 */
+	public int getTaille();
+	
+	/**
+	 * Renvoie le nombre de tas présent dans la file.
+	 * @return Le nombre de tas présent dans la file.
+	 */
+	public int getNbTas();
+	
+	/**
+	 * Renvoie le tournoi binomial présent à l'indice donnée en paramètre.
+	 * @param index L'indice du tas dans la file.
+	 * @return Le tournoi binomial présent à l'indice donnée en paramètre.
+	 */
+	public ITournoiBinomial getTas(int index);
 }

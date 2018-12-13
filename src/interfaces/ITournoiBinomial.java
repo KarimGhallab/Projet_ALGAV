@@ -1,5 +1,7 @@
 package interfaces;
 
+import java.util.LinkedList;
+import java.util.List;
 
 public interface ITournoiBinomial {
 
@@ -39,4 +41,17 @@ public interface ITournoiBinomial {
 	 * @return la clé du tournoi
 	 */
 	public ICle getCle();
+	
+	/**
+	 * Renvoie le nombre de fils du tournoi.
+	 * @return Le nombre de fils du tournoi.
+	 */
+	public int getNbFils();
+	
+	/**
+	 * Renvoie le fils présent à l'indice donnée en paramètre.
+	 * @param index L'indice du fils dans le tournoi.
+	 * @return Le fils présent à l'indice donné en paramètre.
+	 */
+	public ITournoiBinomial getFils(int index);
 }

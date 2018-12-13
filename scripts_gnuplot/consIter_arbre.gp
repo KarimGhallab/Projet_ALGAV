@@ -3,8 +3,8 @@ set output '../graphiques/consIter_arbre.pdf'
 
 set style data histograms
 set boxwidth 0.8
-set title "Temps d'exécution lors de la construction d'un tas min géré avec un arbre"
-set ylabel "Temps de construction du tas en milliseconde"
+set title "Temps d'exécution de la construction d'un tas min géré avec un arbre"
+set ylabel "Temps d'exécution en milliseconde"
 set xlabel "Taille du tas min en nombre de clé" offset 0,-1
 set style fill solid						# Les barres sont pleines
 set yrange [0 to 26]						# Commence la graduation à 0

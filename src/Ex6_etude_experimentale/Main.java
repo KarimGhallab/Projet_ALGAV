@@ -9,6 +9,7 @@ import java.util.HashSet;
 
 import Ex5_arbre_de_recherche.AVL;
 import Ex5_arbre_de_recherche.InsertionException;
+import autres.Outils;
 import Ex1_echauffement.Cle128Bit;
 import Ex4_hachage.MD5;
 
@@ -19,7 +20,9 @@ import Ex4_hachage.MD5;
 public class Main {
 
 	public static void main(String[] args) {
-		stockerMD5DansArbre();
+		// stockerMD5DansArbre();
+		// Outils.calculerTempsConsIterFileBinomiale();
+		Outils.calculerTempsUnionFileBinomiale();
 	}
 	
 	/**

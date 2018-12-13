@@ -7,6 +7,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 import Ex1_echauffement.FileConverter;
 import Ex2_tas_priorite_min.TasMinArbre;
@@ -332,7 +333,8 @@ public class Outils {
 				
 				debut = System.nanoTime();
 				
-				FileBinomiale.constItr(fc.getCle(), fileBinomiale);
+				List<ICle> cles = fc.getCle();
+				FileBinomiale.constItr(cles, fileBinomiale);
 				
 				fin = System.nanoTime();
 				ecoule = ((fin - debut)/f);
@@ -366,7 +368,7 @@ public class Outils {
 		float ecoule;
 		float f = 1000000;				// Division pour obtenir le temps en milliseconde
 		
-		String nomFichierCSV = "union_file_binomiale.csv";
+		String nomFichierCSV = "union_fileBinomiale.csv";
 		for(int i=1; i<nb; i++) {
 			for(int j=0; j<tailles.length; j++) {
 				if (!tempsParTaille.containsKey(tailles[j]))		// Initialisation des ArrayList des Hashmap
@@ -425,7 +427,7 @@ public class Outils {
 				liste = new ArrayList<>(tempsParTaille.get(taille));
 				moyenne = getMoyenne(liste);
 				max = getMax(liste);
-				aEcrire += taille + " " + df.format(moyenne )+ " " + df.format(max) + "\n";
+				aEcrire += taille + " " + df.format(moyenne)+ " " + df.format(max) + "\n";
 			}
 	        FileWriter writer = new FileWriter(fichierCSV);
 	        writer.write(aEcrire);

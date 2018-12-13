@@ -66,27 +66,6 @@ public class testTasMinArbre {
 		testStructureTasMin(tArbre.getRacine(), tArbre.size());
 	}
 	
-	public void testStructureTasMin(Noeud courant, int taille) {
-		if (taille > 0) {
-			if (courant.getFilsGauche() != null) {
-				if (courant.getFilsGauche().getNoeud() != null) {
-					boolean assertion = (courant.getNoeud().inf(courant.getFilsGauche().getNoeud()) || courant.getNoeud().eg(courant.getFilsGauche().getNoeud())); 
-					// System.out.println("(" + courant.getNoeud() + " <= " + courant.getFilsGauche().getNoeud() + ")   ==> " + assertion);
-					assertTrue(assertion);
-					testStructureTasMin(courant.getFilsGauche(), taille);
-				}
-			}
-			if (courant.getFilsDroit() != null) {
-				if (courant.getFilsDroit().getNoeud() != null) {
-					boolean assertion = (courant.getNoeud().inf(courant.getFilsDroit().getNoeud()) || courant.getNoeud().eg(courant.getFilsDroit().getNoeud())); 
-					// System.out.println("(" + courant.getNoeud() + " <= " + courant.getFilsDroit().getNoeud() + ")   ==> " + assertion);
-					assertTrue(assertion);
-					testStructureTasMin(courant.getFilsDroit(), taille);
-				}
-			}
-		}
-	}
-	
 	@Test
 	public void consIter() {
 		List<ICle> liste = new ArrayList<ICle>();
@@ -128,9 +107,9 @@ public class testTasMinArbre {
 	public void testAvecCle128Bit() {
 		TasMinArbre tArbre128 = new TasMinArbre();
 		FileConverter fc = new FileConverter("donnees/cles_alea/jeu_4_nb_cles_50000.txt");
-		Vector<Cle128Bit> v = fc.getCle();
+		Vector<ICle> v = fc.getCle();
 		
-		for(Cle128Bit c : v)
+		for(ICle c : v)
 			tArbre128.ajout(c);
 		
 		testStructureTasMin(tArbre128.getRacine(), tArbre128.size());
@@ -143,7 +122,7 @@ public class testTasMinArbre {
 		
 		fc = new FileConverter("donnees/cles_alea/jeu_2_nb_cles_20000.txt");
 		v = fc.getCle();
-		for(Cle128Bit c : v)
+		for(ICle c : v)
 			tArbre128.ajout(c);
 		
 		testStructureTasMin(tArbre128.getRacine(), tArbre128.size());
@@ -169,12 +148,33 @@ public class testTasMinArbre {
 				tas = new TasMinArbre();
 				cpt++;
 				nomFichier = "jeu_"+i+"_nb_cles_"+tailles[j]+".txt";
-				System.out.println("Fichier : " + nomFichier + "Progression : " + cpt + "/" + nb*tailles.length);
+				System.out.println("Fichier : " + nomFichier + " Progression : " + cpt + "/" + nb*tailles.length);
 				
 				fc = new FileConverter("donnees/cles_alea/"+nomFichier);
 				liste = new ArrayList<ICle>(fc.getCle());					// La liste des clé à insérer
 				tas.consIter(liste);
 				testStructureTasMin(tas.getRacine(), tas.size());
+			}
+		}
+	}
+	
+	public void testStructureTasMin(Noeud courant, int taille) {
+		if (taille > 0) {
+			if (courant.getFilsGauche() != null) {
+				if (courant.getFilsGauche().getNoeud() != null) {
+					boolean assertion = (courant.getNoeud().inf(courant.getFilsGauche().getNoeud()) || courant.getNoeud().eg(courant.getFilsGauche().getNoeud())); 
+					// System.out.println("(" + courant.getNoeud() + " <= " + courant.getFilsGauche().getNoeud() + ")   ==> " + assertion);
+					assertTrue(assertion);
+					testStructureTasMin(courant.getFilsGauche(), taille);
+				}
+			}
+			if (courant.getFilsDroit() != null) {
+				if (courant.getFilsDroit().getNoeud() != null) {
+					boolean assertion = (courant.getNoeud().inf(courant.getFilsDroit().getNoeud()) || courant.getNoeud().eg(courant.getFilsDroit().getNoeud())); 
+					// System.out.println("(" + courant.getNoeud() + " <= " + courant.getFilsDroit().getNoeud() + ")   ==> " + assertion);
+					assertTrue(assertion);
+					testStructureTasMin(courant.getFilsDroit(), taille);
+				}
 			}
 		}
 	}
