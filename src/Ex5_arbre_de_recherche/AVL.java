@@ -1,4 +1,4 @@
-package V_arbre_de_recherche;
+package Ex5_arbre_de_recherche;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 
 
-import I_echauffement.Cle128Bit;
+import Ex1_echauffement.Cle128Bit;
 import interfaces.IAVL;
 import interfaces.ICle;
 

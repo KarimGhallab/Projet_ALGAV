@@ -1,4 +1,4 @@
-package II_tas_priorite_min.test;
+package Ex2_tas_priorite_min.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -11,10 +11,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import autres.CleInteger;
-import I_echauffement.Cle128Bit;
-import I_echauffement.FileConverter;
+import Ex1_echauffement.Cle128Bit;
+import Ex1_echauffement.FileConverter;
 import interfaces.ICle;
-import II_tas_priorite_min.TasMinTab;
+import Ex2_tas_priorite_min.TasMinTab;
 
 public class testTasMinTab {
 	TasMinTab tas1;

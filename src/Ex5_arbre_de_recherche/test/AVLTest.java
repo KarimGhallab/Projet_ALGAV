@@ -1,4 +1,4 @@
-package V_arbre_de_recherche.test;
+package Ex5_arbre_de_recherche.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -9,9 +9,9 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import V_arbre_de_recherche.AVL;
-import V_arbre_de_recherche.InsertionException;
-import V_arbre_de_recherche.Noeud;
+import Ex5_arbre_de_recherche.AVL;
+import Ex5_arbre_de_recherche.InsertionException;
+import Ex5_arbre_de_recherche.Noeud;
 import autres.CleInteger;
 
 public class AVLTest {

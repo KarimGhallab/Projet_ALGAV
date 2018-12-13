@@ -1,4 +1,4 @@
-package IV_hachage;
+package Ex4_hachage;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;

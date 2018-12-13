@@ -1,4 +1,4 @@
-package I_echauffement;
+package Ex1_echauffement;
 
 import java.io.BufferedReader;
 import java.io.File;

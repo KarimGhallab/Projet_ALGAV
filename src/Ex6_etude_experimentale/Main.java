@@ -1,4 +1,4 @@
-package VI_etude_experimentale;
+package Ex6_etude_experimentale;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -7,10 +7,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import V_arbre_de_recherche.AVL;
-import V_arbre_de_recherche.InsertionException;
-import I_echauffement.Cle128Bit;
-import IV_hachage.MD5;
+import Ex5_arbre_de_recherche.AVL;
+import Ex5_arbre_de_recherche.InsertionException;
+import Ex1_echauffement.Cle128Bit;
+import Ex4_hachage.MD5;
 
 /**
  * Classe Main de l'étude expérimentale

@@ -1,4 +1,4 @@
-package II_tas_priorite_min;
+package Ex2_tas_priorite_min;
 
 import java.util.ArrayList;
 import java.util.HashSet;

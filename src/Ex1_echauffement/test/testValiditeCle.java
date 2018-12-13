@@ -1,4 +1,4 @@
-package I_echauffement.test;
+package Ex1_echauffement.test;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -8,8 +8,8 @@ import java.util.Vector;
 import org.junit.Before;
 import org.junit.Test;
 
-import I_echauffement.Cle128Bit;
-import I_echauffement.FileConverter;
+import Ex1_echauffement.Cle128Bit;
+import Ex1_echauffement.FileConverter;
 
 public class testValiditeCle{
 

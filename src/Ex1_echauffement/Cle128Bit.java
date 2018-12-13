@@ -1,4 +1,4 @@
-package I_echauffement;
+package Ex1_echauffement;
 
 import java.math.BigInteger;
 import java.util.BitSet;

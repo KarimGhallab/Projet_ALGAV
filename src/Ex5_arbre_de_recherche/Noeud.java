@@ -1,4 +1,4 @@
-package V_arbre_de_recherche;
+package Ex5_arbre_de_recherche;
 
 import interfaces.ICle;
 
