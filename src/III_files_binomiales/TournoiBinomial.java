@@ -1,4 +1,4 @@
-package files_binomiales_3;
+package III_files_binomiales;
 
 import java.util.LinkedList;
 

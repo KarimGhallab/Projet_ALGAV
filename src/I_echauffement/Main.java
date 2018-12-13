@@ -1,4 +1,4 @@
-package echauffement_1;
+package I_echauffement;
 
 import java.util.Vector;
 

@@ -1,4 +1,4 @@
-package tas_priorite_min_2;
+package II_tas_priorite_min;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -7,10 +7,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
-
-import autres.CleInteger;
-import echauffement_1.FileConverter;
+import I_echauffement.FileConverter;
 import interfaces.ICle;
 
 public class Main {

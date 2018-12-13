@@ -1,10 +1,10 @@
-package hachage_4.test;
+package IV_hachage.test;
 
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import hachage_4.MD5;
+import IV_hachage.MD5;
 
 /**
  * Classe de test du calcule du MD5.

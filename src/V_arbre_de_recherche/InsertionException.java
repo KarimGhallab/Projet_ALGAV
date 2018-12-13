@@ -1,4 +1,4 @@
-package arbre_de_recherche_5;
+package V_arbre_de_recherche;
 
 public class InsertionException extends Exception{
 	private static final long serialVersionUID = -3745107194548896174L;

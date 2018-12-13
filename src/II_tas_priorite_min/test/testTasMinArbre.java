@@ -1,9 +1,8 @@
-package tas_priorite_min_2.test;
+package II_tas_priorite_min.test;
 
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
 
@@ -11,11 +10,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import autres.CleInteger;
-import echauffement_1.Cle128Bit;
-import echauffement_1.FileConverter;
+import I_echauffement.Cle128Bit;
+import I_echauffement.FileConverter;
 import interfaces.ICle;
-import tas_priorite_min_2.Noeud;
-import tas_priorite_min_2.TasMinArbre;
+import II_tas_priorite_min.Noeud;
+import II_tas_priorite_min.TasMinArbre;
 
 public class testTasMinArbre {
 	

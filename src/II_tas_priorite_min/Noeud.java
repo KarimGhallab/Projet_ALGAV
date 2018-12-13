@@ -1,4 +1,4 @@
-package tas_priorite_min_2;
+package II_tas_priorite_min;
 
 import interfaces.ICle;
 
