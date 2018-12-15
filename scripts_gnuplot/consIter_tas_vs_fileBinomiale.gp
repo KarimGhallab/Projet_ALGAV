@@ -3,15 +3,15 @@ set output '../graphiques/consIter_tas_vs_fileBinomiale.pdf'
 
 set style data histograms
 set boxwidth 0.8
-set title "Temps d'exécution de la construction d'un tas : tableau vs file binomiale"
+set title "Temps d'exécution de la construction de la structure : tableau vs file binomiale"
 set ylabel "Temps d'exécution en milliseconde"
-set xlabel "Taille du tas min en nombre de clé" offset 0,-1
+set xlabel "Taille de la structre en nombre de clé" offset 0,-1
 set style fill solid						# Les barres sont pleines
 set yrange [0 to *]							# Commence la graduation à 0
 set key spacing 1.5							# Ajuste l'espace des éléments de la légende
 set key left top							# Position de la légende
 set xrange [0.5 to *]						# Ajuste le placement des barres
-
+		
 plot "../resultats/consIter_tas_vs_fileBinomiale.csv"\
 	    using 2:xtic(1) title "Temps d'exécution moyen avec tableau" lt rgb "#33cc33",\
      "" using 3 title "Temps d'exécution maximum avec un tableau" lt rgb "#1f7a1f",\

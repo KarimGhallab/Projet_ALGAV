@@ -3,9 +3,9 @@ set output '../graphiques/union_tas_vs_fileBinomiale.pdf'
 
 set style data histograms
 set boxwidth 0.8
-set title "Temps d'exécution de l'union de deux tas : tableau vs file binomiale"
+set title "Temps d'exécution de l'union de deux structures : tableau vs file binomiale"
 set ylabel "Temps d'exécution en milliseconde"
-set xlabel "Taille du tas min en nombre de clé" offset 0,-1
+set xlabel "Taille de la structure en nombre de clé" offset 0,-1
 set style fill solid						# Les barres sont pleines
 set yrange [0 to *]							# Commence la graduation à 0
 set key spacing 1.5							# Ajuste l'espace des éléments de la légende
