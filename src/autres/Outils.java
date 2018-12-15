@@ -303,9 +303,7 @@ public class Outils {
 	}
 
 	public static void calculerTempsConsIterFileBinomiale() {
-		
 		FileBinomiale fileBinomiale;
-		ArrayList<ICle> liste;
 		HashMap<Integer, ArrayList<Float>> tempsParTaille = new HashMap<>();
 		
 		int tailles[] = {100, 200, 500, 1000, 5000, 10000, 20000, 50000};
@@ -331,12 +329,12 @@ public class Outils {
 				
 				fc = new FileConverter("donnees/cles_alea/"+nomFichier);
 				
-				debut = System.nanoTime();
-				
 				List<ICle> cles = fc.getCle();
-				FileBinomiale.constItr(cles, fileBinomiale);
 				
+				debut = System.nanoTime();
+				FileBinomiale.constItr(cles, fileBinomiale);
 				fin = System.nanoTime();
+				
 				ecoule = ((fin - debut)/f);
 				
 				System.out.println("\tTemps d'exécution : " + ecoule + "ms");

@@ -19,10 +19,10 @@ import Ex4_hachage.MD5;
  */
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		// stockerMD5DansArbre();
-		// Outils.calculerTempsConsIterFileBinomiale();
-		Outils.calculerTempsUnionFileBinomiale();
+		Outils.calculerTempsConsIterFileBinomiale();
+		// Outils.calculerTempsUnionFileBinomiale();
 	}
 	
 	/**
