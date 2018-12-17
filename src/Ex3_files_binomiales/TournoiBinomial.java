@@ -5,7 +5,6 @@ import java.util.LinkedList;
 import interfaces.ICle;
 import interfaces.IFileBinomiale;
 import interfaces.ITournoiBinomial;
-import java.util.List;
 
 public class TournoiBinomial implements ITournoiBinomial{
 	/** Ensemble des tournois binomiaux fils, du tournoi binomial */

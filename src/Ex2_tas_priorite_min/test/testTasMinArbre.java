@@ -10,7 +10,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import autres.CleInteger;
-import Ex1_echauffement.Cle128Bit;
 import Ex1_echauffement.FileConverter;
 import interfaces.ICle;
 import Ex2_tas_priorite_min.Noeud;

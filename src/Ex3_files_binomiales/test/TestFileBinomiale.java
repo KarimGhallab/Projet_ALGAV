@@ -9,10 +9,7 @@ import java.util.Vector;
 import org.junit.Before;
 import org.junit.Test;
 
-import Ex1_echauffement.Cle128Bit;
 import Ex1_echauffement.FileConverter;
-import Ex2_tas_priorite_min.Noeud;
-import Ex2_tas_priorite_min.TasMinArbre;
 import Ex3_files_binomiales.FileBinomiale;
 import Ex3_files_binomiales.TournoiBinomial;
 import autres.CleInteger;
