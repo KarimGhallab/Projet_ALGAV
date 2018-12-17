@@ -8,13 +8,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Vector;
 
 import Ex1_echauffement.FileConverter;
 import Ex2_tas_priorite_min.TasMinArbre;
 import Ex2_tas_priorite_min.TasMinTab;
 import Ex3_files_binomiales.FileBinomiale;
+import Ex3_files_binomiales.TournoiBinomial;
 import interfaces.ICle;
-import interfaces.ITasMin;
 
 public class Outils {
 
@@ -187,6 +188,113 @@ public class Outils {
 			System.err.println("Erreur lors de la sauvagardes des résultats");
 	}
 	
+	public static void calculerTempsAjoutTab() {
+		TasMinTab tas;
+		HashMap<Integer, ArrayList<Float>> tempsParTaille = new HashMap<>();
+		
+		int tailles[] = {100, 200, 500, 1000, 5000, 10000, 20000, 50000};
+		int nb = 5; int cpt = 0;
+		
+		String nomFichier;
+		FileConverter fc;
+		
+		long debut, fin;
+		float ecoule;
+		float f = 1000000;				// Division pour obtenir le temps en milliseconde
+		
+		String nomFichierCSV = "ajout_tab.csv";
+		for(int i=1; i<=nb; i++) {
+			for(int j=0; j<tailles.length; j++) {
+				if (!tempsParTaille.containsKey(tailles[j]))		// Initialisation des ArrayList des Hashmap
+					tempsParTaille.put(tailles[j], new ArrayList<Float>());
+				
+				tas = new TasMinTab(10000);
+				cpt++;
+				nomFichier = "jeu_"+i+"_nb_cles_"+tailles[j]+".txt";
+				System.out.println("Fichier : " + nomFichier + "Progression : " + cpt + "/" + nb*tailles.length);
+				
+				fc = new FileConverter("donnees/cles_alea/"+nomFichier);
+				Vector<ICle> cles = fc.getCle();
+				// Ajout de toutes les cles
+				for (int k = 0; k<cles.size(); k++) {
+					ICle c = cles.get(k);
+					if (k < cles.size() - (cles.size()/10))
+						tas.ajout(c);
+
+					// Les 10% des ajouts restant
+					// Il faut calculer le temps de l'ajout
+					else {
+						debut = System.nanoTime();
+						
+						tas.ajout(c);
+						
+						fin = System.nanoTime();
+						ecoule = ((fin - debut)/f);
+						
+						System.out.println("\tTemps d'exécution : " + ecoule + "ms");
+						tempsParTaille.get(tailles[j]).add(ecoule);
+					}
+				}
+			}
+		}// Toutes les constructions ont été effectuées
+		
+		System.out.println("Sauvegarde des resultats dans le fichier \"" + nomFichierCSV + "\"...");
+		if (sauvegarderResultatTasMin(nomFichierCSV, tempsParTaille))
+			System.out.println("Les résultats ont été sauvegardés !");
+		else
+			System.err.println("Erreur lors de la sauvagardes des résultats");
+	}
+	
+	public static void calculerTempsSupprMinTab() {
+		TasMinTab tas;
+		HashMap<Integer, ArrayList<Float>> tempsParTaille = new HashMap<>();
+		
+		int tailles[] = {100, 200, 500, 1000, 5000, 10000, 20000, 50000};
+		int nb = 5; int cpt = 0;
+		
+		String nomFichier;
+		FileConverter fc;
+		
+		long debut, fin;
+		float ecoule;
+		float f = 1000000;				// Division pour obtenir le temps en milliseconde
+		
+		String nomFichierCSV = "supprMin_tab.csv";
+		for(int i=1; i<=nb; i++) {
+			for(int j=0; j<tailles.length; j++) {
+				if (!tempsParTaille.containsKey(tailles[j]))		// Initialisation des ArrayList des Hashmap
+					tempsParTaille.put(tailles[j], new ArrayList<Float>());
+				
+				tas = new TasMinTab(10000);
+				cpt++;
+				nomFichier = "jeu_"+i+"_nb_cles_"+tailles[j]+".txt";
+				System.out.println("Fichier : " + nomFichier + "Progression : " + cpt + "/" + nb*tailles.length);
+				
+				fc = new FileConverter("donnees/cles_alea/"+nomFichier);
+				
+				tas.consIter(new ArrayList<>(fc.getCle()));
+				int tmpTaille = tas.size();
+				for (int k=0; k<tmpTaille/10; k++ ) {
+					debut = System.nanoTime();
+					
+					tas.supprMin();
+					
+					fin = System.nanoTime();
+					ecoule = ((fin - debut)/f);
+					
+					System.out.println("\tTemps d'exécution : " + ecoule + "ms");
+					tempsParTaille.get(tailles[j]).add(ecoule);
+				}
+			}
+		}// Toutes les constructions ont été effectuées
+		
+		System.out.println("Sauvegarde des resultats dans le fichier \"" + nomFichierCSV + "\"...");
+		if (sauvegarderResultatTasMin(nomFichierCSV, tempsParTaille))
+			System.out.println("Les résultats ont été sauvegardés !");
+		else
+			System.err.println("Erreur lors de la sauvagardes des résultats");
+	}
+	
 	@SuppressWarnings("unused")
 	public static void calculerTempsUnionTab() {
 		TasMinTab tas1, tas2;
@@ -255,12 +363,13 @@ public class Outils {
 		try {
 			File fichierCSV = new File("resultats/" + nomFichierCSV);
 	        String aEcrire = "Taille moyenne maximum\n";
-	        DecimalFormat df = new DecimalFormat("#.###");
+	        DecimalFormat df = new DecimalFormat("#.#####");			// Version valeurs normales
+	        // DecimalFormat df = new DecimalFormat("#.###");			// Version valeurs normales
 	        for (Integer taille : listeTriee) {
 				liste = new ArrayList<>(tempsParTaille.get(taille));
 				moyenne = getMoyenne(liste);
 				max = getMax(liste);
-				aEcrire += taille + " " + df.format(moyenne )+ " " + df.format(max) + "\n";
+				aEcrire += taille + " " + df.format(moyenne)+ " " + df.format(max) + "\n";
 			}
 	        FileWriter writer = new FileWriter(fichierCSV);
 	        writer.write(aEcrire);
@@ -409,6 +518,112 @@ public class Outils {
 			System.err.println("Erreur lors de la sauvagardes des résultats");
 	}
 
+	public static void calculerTempsAjoutFileBinomiale() {
+		FileBinomiale file;
+		HashMap<Integer, ArrayList<Float>> tempsParTaille = new HashMap<>();
+		
+		int tailles[] = {100, 200, 500, 1000, 5000, 10000, 20000, 50000};
+		int nb = 5; int cpt = 0;
+		
+		String nomFichier;
+		FileConverter fc;
+		
+		long debut, fin;
+		float ecoule;
+		float f = 1000000;				// Division pour obtenir le temps en milliseconde
+		
+		String nomFichierCSV = "ajout_fileBinomiale.csv";
+		for(int i=1; i<=nb; i++) {
+			for(int j=0; j<tailles.length; j++) {
+				if (!tempsParTaille.containsKey(tailles[j]))		// Initialisation des ArrayList des Hashmap
+					tempsParTaille.put(tailles[j], new ArrayList<Float>());
+				
+				file = new FileBinomiale(10000);
+				cpt++;
+				nomFichier = "jeu_"+i+"_nb_cles_"+tailles[j]+".txt";
+				System.out.println("Fichier : " + nomFichier + "Progression : " + cpt + "/" + nb*tailles.length);
+				
+				fc = new FileConverter("donnees/cles_alea/"+nomFichier);
+				Vector<ICle> cles = fc.getCle();
+				// Ajout de toutes les cles
+				for (int k = 0; k<cles.size(); k++) {
+					ICle c = cles.get(k);
+					if (k < cles.size() - (cles.size()/10))
+						file = (FileBinomiale) file.add(new TournoiBinomial(c));
+
+					// Les 10% des ajouts restant
+					// Il faut calculer le temps de l'ajout
+					else {
+						debut = System.nanoTime();
+						
+						file = (FileBinomiale) file.add(new TournoiBinomial(c));
+						
+						fin = System.nanoTime();
+						ecoule = ((fin - debut)/f);
+						
+						System.out.println("\tTemps d'exécution : " + ecoule + "ms");
+						tempsParTaille.get(tailles[j]).add(ecoule);
+					}
+				}
+			}
+		}// Toutes les constructions ont été effectuées
+		
+		System.out.println("Sauvegarde des resultats dans le fichier \"" + nomFichierCSV + "\"...");
+		if (sauvegarderResultatTasMin(nomFichierCSV, tempsParTaille))
+			System.out.println("Les résultats ont été sauvegardés !");
+		else
+			System.err.println("Erreur lors de la sauvagardes des résultats");
+	}
+	
+	public static void calculerTempsSupprMinFileBinomiale() {
+		FileBinomiale file;
+		HashMap<Integer, ArrayList<Float>> tempsParTaille = new HashMap<>();
+		
+		int tailles[] = {100, 200, 500, 1000, 5000, 10000, 20000, 50000};
+		int nb = 5; int cpt = 0;
+		
+		String nomFichier;
+		FileConverter fc;
+		
+		long debut, fin;
+		float ecoule;
+		float f = 1000000;				// Division pour obtenir le temps en milliseconde
+		
+		String nomFichierCSV = "supprMin_fileBinomiale.csv";
+		for(int i=1; i<=nb; i++) {
+			for(int j=0; j<tailles.length; j++) {
+				if (!tempsParTaille.containsKey(tailles[j]))		// Initialisation des ArrayList des Hashmap
+					tempsParTaille.put(tailles[j], new ArrayList<Float>());
+				
+				file = new FileBinomiale(0);
+				cpt++;
+				nomFichier = "jeu_"+i+"_nb_cles_"+tailles[j]+".txt";
+				System.out.println("Fichier : " + nomFichier + "Progression : " + cpt + "/" + nb*tailles.length);
+				
+				fc = new FileConverter("donnees/cles_alea/"+nomFichier);
+				
+				FileBinomiale.constItr(fc.getCle(), (FileBinomiale) file);
+				for (int k=0; k<tailles[j]/10; k++ ) {
+					debut = System.nanoTime();
+					
+					file = (FileBinomiale) file.supprCleMin();
+					
+					fin = System.nanoTime();
+					ecoule = ((fin - debut)/f);
+					
+					System.out.println("\tTemps d'exécution : " + ecoule + "ms");
+					tempsParTaille.get(tailles[j]).add(ecoule);
+				}
+			}
+		}// Toutes les constructions ont été effectuées
+		
+		System.out.println("Sauvegarde des resultats dans le fichier \"" + nomFichierCSV + "\"...");
+		if (sauvegarderResultatTasMin(nomFichierCSV, tempsParTaille))
+			System.out.println("Les résultats ont été sauvegardés !");
+		else
+			System.err.println("Erreur lors de la sauvagardes des résultats");
+	}
+	
 	public static boolean sauvegarderResultatFileBinomiale(String nomFichierCSV, HashMap<Integer, ArrayList<Float>> tempsParTaille) {
 		ArrayList<Float> liste;
 		float moyenne;

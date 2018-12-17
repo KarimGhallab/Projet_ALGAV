@@ -175,6 +175,12 @@ public class FileBinomiale implements IFileBinomiale{
 	 */
 	public static void constItr(List<ICle> elems, FileBinomiale f) {
 		itrAvecCles(elems, f); // Appel de la fonction qui crée les tas constituant la file binomiale.
+		
+		/* J'ai rajouté ca pour ne pas que le consItr */
+		for (ITournoiBinomial tb : f.tas) {
+			if ( f.tournoiMin == null || tb.getCle().inf(f.tournoiMin.getCle()) )
+				f.tournoiMin = tb;
+		}
 	}
 	
 	/**
@@ -241,7 +247,7 @@ public class FileBinomiale implements IFileBinomiale{
 
 	@Override
 	public IFileBinomiale supprCleMin() {
-		tas.remove(tournoiMin);// On enlève le tournoi stockant la clé minimal de la file.
+		tas.remove(tournoiMin);// On enlève le tournoi stockant la clé minimale de la file.
 		return unionFile(this, tournoiMin.decapite()); // Faire l'union entre la file, et la file résultant de la suppression du noeud racine du tournoi (tournoiMin).
 	}
 	

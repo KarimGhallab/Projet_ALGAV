@@ -21,8 +21,12 @@ public class Main {
 
 	public static void main(String[] args) throws InterruptedException {
 		// stockerMD5DansArbre();
-		Outils.calculerTempsConsIterFileBinomiale();
+		// Outils.calculerTempsConsIterFileBinomiale();
 		// Outils.calculerTempsUnionFileBinomiale();
+		Outils.calculerTempsAjoutTab();
+		// Outils.calculerTempsSupprMinTab();
+		// Outils.calculerTempsAjoutFileBinomiale();
+		// Outils.calculerTempsSupprMinFileBinomiale();
 	}
 	
 	/**
