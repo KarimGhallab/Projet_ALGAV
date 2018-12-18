@@ -58,7 +58,7 @@ public class testTasMinTab {
 		tas1.ajout(new CleInteger(3));
 		
 		assertEquals(tas1.size(), 6);
-		assertEquals(tas1.toString(), "1 9 3 10 11 5");
+		assertEquals(tas1.toString(), "[1, 9, 3, 10, 11, 5]");
 		testStructureTasMin(tas1, 0);
 	}
 	
@@ -96,13 +96,13 @@ public class testTasMinTab {
 		tas1.ajout(new CleInteger(30));
 		
 		assertEquals(tas1.size(), 6);
-		assertEquals("9 10 15 10 11 30", tas1.toString());
+		assertEquals("[9, 10, 15, 10, 11, 30]", tas1.toString());
 		testStructureTasMin(tas1, 0);
 		
 		assertTrue(tas1.supprMin() != null);
 		
 		assertEquals(tas1.size(), 5);
-		assertEquals(tas1.toString(), "10 10 15 30 11");
+		assertEquals(tas1.toString(), "[10, 10, 15, 30, 11]");
 		testStructureTasMin(tas1, 0);
 	}
 	
@@ -114,7 +114,7 @@ public class testTasMinTab {
 		tasConstLoop.consIter(list);
 		
 		assertEquals(tasConstLoop.size(), list.size());
-		assertEquals(tasConstLoop.toString(), "1 9 2 10 11 3 5");
+		assertEquals(tasConstLoop.toString(), "[1, 9, 2, 10, 11, 3, 5]");
 		testStructureTasMin(tasConstLoop, 0);
 		
 	}
@@ -158,7 +158,7 @@ public class testTasMinTab {
 		testStructureTasMin(tas2, 0);
 		
 		tas1.union(tas2);
-		assertEquals(tas1.toString(), "0 9 10 90 11 30 15");
+		assertEquals(tas1.toString(), "[0, 9, 10, 90, 11, 30, 15]");
 		testStructureTasMin(tas1, 0);
 		
 	}

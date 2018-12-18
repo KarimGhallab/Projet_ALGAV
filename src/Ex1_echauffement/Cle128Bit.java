@@ -35,16 +35,16 @@ public class Cle128Bit implements ICle{
 	
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
+		/*StringBuilder sb = new StringBuilder();
 		
 		for(int i = 0; i < cle.size(); i++) {	
 	    	if(cle.get(i))
 	    		sb.append('1');
 	    	else
 	    		sb.append('0');
-	    }
+	    }*/
 		
-		return sb.toString();
+		return cleString + " Taille : " + cleString.length();
 	}
 	
 	@Override

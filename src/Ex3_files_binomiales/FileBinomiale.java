@@ -293,4 +293,13 @@ public class FileBinomiale implements IFileBinomiale{
 	public ITournoiBinomial getTas(int index) {
 		return tas.get(index);
 	}
+	
+	@Override
+	public String toString() {
+		String res = "FB" + this.getTaille() + "\n\n";
+		for (int i=0; i<tas.size(); i++)
+			res += "TB" + tas.get(i).degre() + "\n" + tas.get(i).toString() + "\n";
+		
+		return res;
+	}
 }
