@@ -9,6 +9,9 @@ import java.util.Set;
 import interfaces.ICle;
 import interfaces.ITasMin;
 
+/**
+ * Tas min utilisant un tableau.
+ */
 public class TasMinTab implements ITasMin {
 
 	/** Le tas. */

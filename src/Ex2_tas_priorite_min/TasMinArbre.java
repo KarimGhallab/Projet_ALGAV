@@ -9,6 +9,9 @@ import java.util.Stack;
 import interfaces.ICle;
 import interfaces.ITasMin;
 
+/**
+ * Tas min utilisant un arbre.
+ */
 public class TasMinArbre implements ITasMin {
 
 	/** La racine de l'arbre. */

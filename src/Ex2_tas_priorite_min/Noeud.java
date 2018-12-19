@@ -2,6 +2,9 @@ package Ex2_tas_priorite_min;
 
 import interfaces.ICle;
 
+/**
+ * Classe d'un noeud pour le tas min utilisant un arbre.
+ */
 public class Noeud {
 
 	/** La clé du noeud. */
