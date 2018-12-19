@@ -165,7 +165,7 @@ public class AVL<C extends ICle> implements IAVL<C> {
             
             racine = rotationGauche(racine);
         }
-        else if (getEquilibrage(racine) > 1) {
+        else if (getEquilibrage(racine) > 1) {			// Voir cours 2 : slide 16/48
         	// Rotation gauche droite
             if (getEquilibrage(racine.getFilsGauche()) < 0)
                 racine.setFilsGauche(rotationGauche(racine.getFilsGauche()));
