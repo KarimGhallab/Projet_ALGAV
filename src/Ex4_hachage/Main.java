@@ -1,6 +1,8 @@
 package Ex4_hachage;
 
-
+/**
+ * Main graphique pour le MD5.
+ */
 public class Main {
 
 	public static void main(String[] args) {

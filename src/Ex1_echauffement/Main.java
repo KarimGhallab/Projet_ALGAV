@@ -4,6 +4,9 @@ import java.util.Vector;
 
 import interfaces.ICle;
 
+/**
+ * Main graphique pour les clés de 128 bits.
+ */
 public class Main {	
 	
 	public static void main(String[] args) {

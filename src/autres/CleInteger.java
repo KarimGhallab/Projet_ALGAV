@@ -2,14 +2,24 @@ package autres;
 
 import interfaces.ICle;
 
+/**
+ * Clé contenant un entier.
+ * Classe utilisé pour avoir un meilleur visuel sur nos structures.
+ */
 public class CleInteger implements ICle{
 
+	/** La valeur de la clé. */
 	private Integer valeur;
 	
+	/** Construit une clé avec un entier. */
 	public CleInteger(Integer valeur) {
 		this.valeur = valeur;
 	}
 	
+	/**
+	 * Getteur de la valeur de la clé.
+	 * @return La valeur de la clé.
+	 */
 	public Integer getValeur() {
 		return valeur;
 	}

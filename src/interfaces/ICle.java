@@ -2,7 +2,6 @@ package interfaces;
 
 /**
  * Interface d'une clé pour nos structures.
- *
  */
 public interface ICle {
 	
@@ -22,6 +21,5 @@ public interface ICle {
 	public int hashCode();
 	
 	@Override
-	public boolean equals(Object o);
-	
+	public boolean equals(Object o);	
 }

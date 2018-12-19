@@ -8,15 +8,18 @@ import interfaces.ICle;
 import interfaces.IFileBinomiale;
 import interfaces.ITournoiBinomial;
 
+/**
+ * Classe de la file binomiale.
+ */
 public class FileBinomiale implements IFileBinomiale{
 	
-	/** Degre de la file binomiale */
+	/** Degre de la file binomiale. */
 	private int taille;
-	/** Nombre de tournois binomiaux actuellement dans la file binomiale */
+	/** Nombre de tournois binomiaux actuellement dans la file binomiale. */
 	private int nbElmt; 
-	/** Ensemble des tournois binomiaux composant la file binomiale */
+	/** Ensemble des tournois binomiaux composant la file binomiale. */
 	private LinkedList<ITournoiBinomial> tas;
-	/** On stockera à chaque ajout, l'éventuel nouveau tournoi binomiale de plus petite clé, de la file binomiale */
+	/** On stockera à chaque ajout, l'éventuel nouveau tournoi binomiale de plus petite clé, de la file binomiale. */
 	private ITournoiBinomial tournoiMin;
 	
 	/**

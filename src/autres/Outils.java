@@ -17,8 +17,15 @@ import Ex3_files_binomiales.FileBinomiale;
 import Ex3_files_binomiales.TournoiBinomial;
 import interfaces.ICle;
 
+/**
+ * Classe permettant la génération de nos résulats.
+ */
 public class Outils {
 
+	/**
+	 * Affiche un tableau.
+	 * @param tab Le tableau à afficher.
+	 */
 	@SuppressWarnings("unused")
 	private static void printTab(ICle[] tab) {
 		ICle c;
@@ -32,6 +39,9 @@ public class Outils {
 		System.out.println("]");
 	}
 	
+	/**
+	 * Calcule et sauvegarde les temps d'exécution de consIter sur un tas min utilisant un arbre.
+	 */
 	@SuppressWarnings("unused")
 	public static void calculerTempsConsIterArbre() {
 		TasMinArbre tas;
@@ -82,6 +92,9 @@ public class Outils {
 			System.err.println("Erreur lors de la sauvagardes des résultats");
 	}
 	
+	/**
+	 * Calcule et sauvegarde les temps d'exécution de l'union de deux tas min utilisant des arbres.
+	 */
 	public static void calculerTempsUnionArbre() {
 		TasMinArbre tas1, tas2;
 		ArrayList<ICle> liste1, liste2;
@@ -138,6 +151,9 @@ public class Outils {
 			System.err.println("Erreur lors de la sauvagardes des résultats");
 	}
 	
+	/**
+	 * Calcule et sauvegarde les temps d'exécution de consIter sur un tas min utilisant un tableau.
+	 */
 	@SuppressWarnings("unused")
 	public static void calculerTempsConsIterTab() {
 		TasMinTab tas;
@@ -188,6 +204,9 @@ public class Outils {
 			System.err.println("Erreur lors de la sauvagardes des résultats");
 	}
 	
+	/**
+	 * Calcule et sauvegarde les temps d'exécution de l'ajout d'une clé à un tas min utilisant un tableau.
+	 */
 	public static void calculerTempsAjoutTab() {
 		TasMinTab tas;
 		HashMap<Integer, ArrayList<Float>> tempsParTaille = new HashMap<>();
@@ -245,6 +264,9 @@ public class Outils {
 			System.err.println("Erreur lors de la sauvagardes des résultats");
 	}
 	
+	/**
+	 * Calcule et sauvegarde les temps d'exécution de la suppression de la clé minimum dans un tas min utilisant un tableau.
+	 */
 	public static void calculerTempsSupprMinTab() {
 		TasMinTab tas;
 		HashMap<Integer, ArrayList<Float>> tempsParTaille = new HashMap<>();
@@ -295,6 +317,9 @@ public class Outils {
 			System.err.println("Erreur lors de la sauvagardes des résultats");
 	}
 	
+	/**
+	 * Calcule et sauvegarde les temps d'exécution de l'union de deux tas min utilisant des tableaux.
+	 */
 	@SuppressWarnings("unused")
 	public static void calculerTempsUnionTab() {
 		TasMinTab tas1, tas2;
@@ -352,6 +377,12 @@ public class Outils {
 			System.err.println("Erreur lors de la sauvagardes des résultats");
 	}
 	
+	/**
+	 * Sauvegarde les résultats dans un fichier CSV.
+	 * @param nomFichierCSV Le nom du fichier CSV.
+	 * @param tempsParTaille Les résultats à sauvegarder
+	 * @return True si la sauvegarder est un succès, false sinon.
+	 */
 	public static boolean sauvegarderResultatTasMin(String nomFichierCSV, HashMap<Integer, ArrayList<Float>> tempsParTaille) {
 		ArrayList<Float> liste;
 		float moyenne;
@@ -411,6 +442,9 @@ public class Outils {
 		return max;
 	}
 
+	/**
+	 * Calcule et sauvegarde les temps d'exécution de la construction d'une file binomiale.
+	 */
 	public static void calculerTempsConsIterFileBinomiale() {
 		FileBinomiale fileBinomiale;
 		HashMap<Integer, ArrayList<Float>> tempsParTaille = new HashMap<>();
@@ -460,6 +494,9 @@ public class Outils {
 		
 	}
 	
+	/**
+	 * Calcule et sauvegarde les temps d'exécution de l'union de deux files binomiales.
+	 */
 	public static void calculerTempsUnionFileBinomiale(){
 		
 		FileBinomiale fileBinomiale1, fileBinomiale2;
@@ -518,6 +555,9 @@ public class Outils {
 			System.err.println("Erreur lors de la sauvagardes des résultats");
 	}
 
+	/**
+	 * Calcule et sauvegarde les temps d'exécution de l'ajout d'une clé à une file binomiale.
+	 */
 	public static void calculerTempsAjoutFileBinomiale() {
 		FileBinomiale file;
 		HashMap<Integer, ArrayList<Float>> tempsParTaille = new HashMap<>();
@@ -575,6 +615,9 @@ public class Outils {
 			System.err.println("Erreur lors de la sauvagardes des résultats");
 	}
 	
+	/**
+	 * Calcule et sauvegarde les temps d'exécution de la suppression de la clé minimum dans une file binomiale.
+	 */
 	public static void calculerTempsSupprMinFileBinomiale() {
 		FileBinomiale file;
 		HashMap<Integer, ArrayList<Float>> tempsParTaille = new HashMap<>();
@@ -624,6 +667,12 @@ public class Outils {
 			System.err.println("Erreur lors de la sauvagardes des résultats");
 	}
 	
+	/**
+	 * Sauvegarde les résultats dans un fichier CSV.
+	 * @param nomFichierCSV Le nom du fichier CSV.
+	 * @param tempsParTaille Les résultats à sauvegarder
+	 * @return True si la sauvegarder est un succès, false sinon.
+	 */
 	public static boolean sauvegarderResultatFileBinomiale(String nomFichierCSV, HashMap<Integer, ArrayList<Float>> tempsParTaille) {
 		ArrayList<Float> liste;
 		float moyenne;

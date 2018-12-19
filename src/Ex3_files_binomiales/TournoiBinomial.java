@@ -6,14 +6,17 @@ import interfaces.ICle;
 import interfaces.IFileBinomiale;
 import interfaces.ITournoiBinomial;
 
+/**
+ * Classe d'un tournoi binomial.
+ */
 public class TournoiBinomial implements ITournoiBinomial{
-	/** Ensemble des tournois binomiaux fils, du tournoi binomial */
+	/** Ensemble des tournois binomiaux fils, du tournoi binomial. */
 	private LinkedList<ITournoiBinomial> fils;
-	/** Clé stockée dans le noeud */
+	/** Clé stockée dans le noeud. */
 	private ICle cle;
-	/** Degre a la racine (TBk) */
+	/** Degre a la racine (TBk). */
 	private int degre;  
-	/** Nombre de cle insérée dans le tournoi */
+	/** Nombre de cle insérée dans le tournoi. */
 	private int taille;
 	
 	/**
@@ -72,10 +75,17 @@ public class TournoiBinomial implements ITournoiBinomial{
 	}
 	
 
+	@Override
 	public String toString() {
 		return toString("", "R");
 	}
 	
+	/**
+	 * Retourne la chaîne de caractère représentant le tournoi actuel ainsi que ses fils.
+	 * @param tabLvl Le niveau de tabulation.
+	 * @param role Le role du tas.
+	 * @return La chaîne de caractère représentant le tournoi actuel ainsi que ses fils.
+	 */
 	public String toString(String tabLvl, String role) {
 		String tmp = "";
 		int nbNoeud = fils.size();

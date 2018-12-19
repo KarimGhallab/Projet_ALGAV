@@ -1,7 +1,15 @@
 package interfaces;
 
+/**
+ * Interface d'une file binomiale.
+ */
 public interface IFileBinomiale {
 	
+	/**
+	 * Ajoute un tournoi à une file binomiale.
+	 * @param tb Le tournoi binomial à ajouter.
+	 * @return La nouvelle file contenant le tournoi.
+	 */
 	public IFileBinomiale add(ITournoiBinomial tb);
 	
 	/**

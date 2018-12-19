@@ -13,7 +13,7 @@ public abstract class ConstruireTasMin {
 	private static List<ICle> elems;
 	
 	/**
-	 * Point d'entrée pour la conversion d'une liste non triée en une liste représentant un tas min
+	 * Point d'entrée pour la conversion d'une liste non triée en une liste représentant un tas min.
 	 * @param listeElement La liste d'élément non triée.
 	 * @return La liste représentant le tas min.
 	 */

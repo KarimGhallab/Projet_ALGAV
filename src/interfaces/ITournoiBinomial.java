@@ -1,5 +1,8 @@
 package interfaces;
 
+/**
+ * Interface d'un tournoi binomial.
+ */
 public interface ITournoiBinomial {
 
 	/**

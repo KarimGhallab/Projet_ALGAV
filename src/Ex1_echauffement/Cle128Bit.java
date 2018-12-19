@@ -5,8 +5,7 @@ import java.util.BitSet;
 
 import interfaces.ICle;
 /**
- * Clé codé sur 128 bits.
- *
+ * Clé codée sur 128 bits.
  */
 public class Cle128Bit implements ICle{
 
@@ -18,7 +17,7 @@ public class Cle128Bit implements ICle{
 	
 	/**
 	 * Constructeur
-	 * @param cleS : hexadecimal à transformer en cle de 128 bits
+	 * @param cleS : hexadecimal à transformer en clé de 128 bits
 	 */
 	public Cle128Bit(String cleS) {
 		cleString = cleS;
@@ -47,6 +46,10 @@ public class Cle128Bit implements ICle{
 		return cleString + " Taille : " + cleString.length();
 	}
 	
+	/**
+	 * Renvoie la valeur binaire de la clé.
+	 * @return La valeur binaire de la clé.
+	 */
 	public String valeurBinaire() {
 		StringBuilder sb = new StringBuilder();
 		

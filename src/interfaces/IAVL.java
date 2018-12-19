@@ -8,7 +8,6 @@ import Ex5_arbre_de_recherche.Noeud;
 
 /**
  * Interface d'un arbre AVL
- * @author 3772468
  *
  * @param <C> @param <C> Le type des clés contenues dans l'arbre
  */

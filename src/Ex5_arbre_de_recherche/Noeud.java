@@ -4,21 +4,21 @@ import interfaces.ICle;
 
 /**
  * Classe représentant un noeud pour nos arbres.
- * @param <C> Le type de la clé contenue dans le noeud
+ * @param <C> Le type de la clé contenue dans le noeud.
  */
 public class Noeud<C extends ICle> {
-	/** La clé présente dans le noeud */
+	/** La clé présente dans le noeud. */
     private C cle;
-    /** La hauteur du noeud */
+    /** La hauteur du noeud. */
     private int hauteur;
     
-    /** Le fils gauche du noeud */
+    /** Le fils gauche du noeud. */
     private Noeud<C> filsGauche;
-    /** Le fils droit du noeud */
+    /** Le fils droit du noeud. */
     private Noeud<C> filsDroit; 
   
     /**
-     * Constructeur d'un noeud à partir d'une clé
+     * Constructeur d'un noeud à partir d'une clé.
      * @param cle La clé du noeud.
      */
     Noeud(C cle) { 
@@ -111,10 +111,19 @@ public class Noeud<C extends ICle> {
 		return tmp;
 	}
 	
+	/**
+	 * Calcule la chaîne de caractère représentant le parcours infixe depuis le noeud courant.
+	 * @return La chaîne de caractère représentant le parcours infixe depuis le noeud courant.
+	 */
 	public String prefixeToString() {
 		return prefixeToString("");
 	}
 	
+	/**
+	 * Calcule la chaîne de caractère représentant le parcours infixe depuis le noeud courant.
+	 * @param niveauTabulation Le niveau de tabulation actuel.
+	 * @return La chaîne de caractère représentant le parcours infixe depuis le noeud courant.
+	 */
 	private String prefixeToString(String niveauTabulation) { 
 		String tmp = niveauTabulation;
 		

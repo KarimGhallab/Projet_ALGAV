@@ -10,7 +10,7 @@ public class Noeud {
 	private Noeud pere;
 	/** Le fils gauche du noeud. */
 	private Noeud filsGauche;
-	/** Le fils droit du noeud */
+	/** Le fils droit du noeud. */
 	private Noeud filsDroit;
 	/** Un booléen indiquant si le noeud est un fils gauche. */
 	private boolean estFilsGauche;

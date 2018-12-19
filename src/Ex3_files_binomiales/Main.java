@@ -6,6 +6,9 @@ import Ex1_echauffement.FileConverter;
 import autres.CleInteger;
 import interfaces.ICle;
 
+/**
+ * Main graphique pour la file binomiale.
+ */
 public class Main {
 
 	public static void main(String[] args) {
@@ -13,6 +16,9 @@ public class Main {
 		mainCle128();
 	}
 	
+	/**
+	 * Affiche une file binomiale utilisant des CleInteger.
+	 */
 	public static void mainCleInteger() {
 		System.out.println("#################");
 		System.out.println("File Binomiale - CleInteger");
@@ -26,6 +32,9 @@ public class Main {
 		System.out.println(fileBinomiale.toString() + "\n");
 	}
 	
+	/**
+	 * Affiche une file binomiale utilisant des Cle128Bit.
+	 */
 	public static void mainCle128() {
 		System.out.println("#################");
 		System.out.println("File Binomiale - Cle128Bit");

@@ -113,7 +113,6 @@ public class TasMinArbre implements ITasMin {
 			return prochaineInsertionDepuisFilsDroit(courant);
 	}
 	
-	
 	/**
 	 * Calcule le prochain noeud sur lequel doit se faire la prochaine insertion en cas d'insertion dans un fils droit.
 	 * Le fils droit ne doit pas être l'extrémité de l'arbre.

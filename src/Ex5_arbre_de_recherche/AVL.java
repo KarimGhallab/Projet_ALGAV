@@ -59,6 +59,7 @@ public class AVL<C extends ICle> implements IAVL<C> {
 			return -1;
 	}
 	
+	@Override
 	public int size() {
 		return taille;
 	}
@@ -109,8 +110,8 @@ public class AVL<C extends ICle> implements IAVL<C> {
 		
 	/**
 	 * Calcule le niveau d'equilibrage d'un noeud. 
-	 * @param racine La racine pour laquelle on souhaite calculer son niveau d'equilibrage
-	 * @return Le niveau d'equilibrage d'un noeud
+	 * @param racine La racine pour laquelle on souhaite calculer son niveau d'equilibrage.
+	 * @return Le niveau d'equilibrage d'un noeud.
 	 */
 	private int getEquilibrage(Noeud<C> racine) { 
 		if (racine == null) 
@@ -153,20 +154,22 @@ public class AVL<C extends ICle> implements IAVL<C> {
 		
 	/**
 	 * Effectue un réequilibrage depuis un noeud racine.
-	 * @param racine Le noeud depuis lequelon souhaite rééquilibrer.
+	 * @param racine Le noeud depuis lequel on souhaite rééquilibrer.
 	 * @return La nouvelle racine après rééquilibrage.
 	 */
 	private Noeud<C> equilibrage(Noeud<C> racine) {
 		if (getEquilibrage(racine) < -1) {
-            if (getEquilibrage(racine.getFilsDroit()) > 0) {
+			// Rotation droite gauche
+            if (getEquilibrage(racine.getFilsDroit()) > 0)
                 racine.setFilsDroit(rotationDroite(racine.getFilsDroit()));
-            }
+            
             racine = rotationGauche(racine);
         }
         else if (getEquilibrage(racine) > 1) {
-            if (getEquilibrage(racine.getFilsGauche()) < 0) {
+        	// Rotation gauche droite
+            if (getEquilibrage(racine.getFilsGauche()) < 0)
                 racine.setFilsGauche(rotationGauche(racine.getFilsGauche()));
-            }
+            
             racine = rotationDroite(racine);
         }
         return racine;
@@ -247,6 +250,12 @@ public class AVL<C extends ICle> implements IAVL<C> {
 		return l;
 	}
 	
+	/**
+	 * Retourne les clés sous la forme d'une liste triée.
+	 * @param racine La racine à laquelle ou se situe.
+	 * @param l La liste actuelle.
+	 * @return Une liste triée des clés de l'AVL.
+	 */
 	private List<C> getCleTriee(Noeud<C> racine, List<C> l) {
 		if (racine != null) {
 			getCleTriee(racine.getFilsGauche(), l);

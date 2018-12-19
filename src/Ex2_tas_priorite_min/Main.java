@@ -7,6 +7,9 @@ import Ex1_echauffement.FileConverter;
 import autres.CleInteger;
 import interfaces.ICle;
 
+/**
+ * Main graphique pour les tas min.
+ */
 public class Main {
 
 	public static void main(String[] args) {
@@ -17,6 +20,9 @@ public class Main {
 		mainArbreCle128();
 	}
 	
+	/**
+	 * Affiche un tas min utilisant un tableau de CleInteger.
+	 */
 	public static void mainTabCleInteger() {
 		System.out.println("#################");
 		System.out.println("Tas Min Tableau - CleInteger");
@@ -32,6 +38,9 @@ public class Main {
 		System.out.println("\t" + tasConst + "\n");
 	}
 	
+	/**
+	 * Affiche un tas min utilisant un tableau de Cle128Bit.
+	 */
 	public static void mainTabCle128() {
 		System.out.println("#################");
 		System.out.println("Tas Min Tableau - Cle128Bit");
@@ -47,6 +56,9 @@ public class Main {
 		System.out.println("\t" + tTab128.toString() + "\n");
 	}
 	
+	/**
+	 * Affiche un tas min utilisant un arbre de CleInteger.
+	 */
 	public static void mainArbreCleInteger() {
 		System.out.println("#################");
 		System.out.println("Tas Min Arbre - CleInteger");
@@ -62,6 +74,9 @@ public class Main {
 		System.out.println(tasConst.infixeToString() + "\n");
 	}
 	
+	/**
+	 * Affiche un tas min utilisant un arbre de Cle128Bit.
+	 */
 	public static void mainArbreCle128() {
 		System.out.println("#################");
 		System.out.println("Tas Min Arbre - Cle128Bit");

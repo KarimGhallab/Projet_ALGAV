@@ -2,6 +2,9 @@ package interfaces;
 
 import java.util.List;
 
+/**
+ * Interface d'un tas min.
+ */
 public interface ITasMin {
 	
 	/**

@@ -10,10 +10,10 @@ import interfaces.ICle;
 
 /**
  * Lit un fichier contenant les valeurs des clés en hexadécimal et renvoit un vecteur contenant les traductions
- * de ses clés en entiers de 128 bit.
- *
+ * de ces clés sur 128 bits.
  */
 public class FileConverter {
+	
 	/** Le fichier à lire. */
 	private File file;
 	
@@ -26,8 +26,8 @@ public class FileConverter {
 	}
 	
 	/**
-	 * Lit dans le fichier pour récupérer les clés en les stocke dans un vector. 
-	 * @return le vector contenant les clés.
+	 * Lit dans le fichier pour récupérer les clés en les stocke dans un vecteur. 
+	 * @return le vecteur contenant les clés.
 	 */
 	public Vector<ICle> getCle(){
 		Vector<ICle> cles = new Vector<ICle>();
@@ -52,7 +52,7 @@ public class FileConverter {
 	}
 	
 	/**
-	 * Lit dans le fichier et renvoie l'ensemble des valeurs hexadécimales. 
+	 * Lit dans le fichier et renvoie l'ensemble des valeurs hexadécimales.
 	 * @return le vector contenant les clés.
 	 */
 	public Vector<String> getCleHexa(){

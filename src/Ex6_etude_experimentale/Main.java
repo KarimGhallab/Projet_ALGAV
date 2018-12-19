@@ -15,7 +15,6 @@ import Ex4_hachage.MD5;
 
 /**
  * Classe Main de l'étude expérimentale
- *
  */
 public class Main {
 

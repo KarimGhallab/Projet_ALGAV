@@ -11,9 +11,16 @@ import interfaces.ITasMin;
 
 public class TasMinTab implements ITasMin {
 
+	/** Le tas. */
 	private ICle [] tas;
+	
+	/** Le nombre de clé dans le tas. */
 	private int nbElements;
 	
+	/**
+	 * Constructeur d'un tas min.
+	 * @param capacite La capacité initiale du tas.
+	 */
 	public TasMinTab(int capacite) {
 		tas = new ICle[capacite];
 		nbElements=0;	
@@ -120,7 +127,7 @@ public class TasMinTab implements ITasMin {
 
 	/**
 	 * Renvoie la capacité du tas.
-	 * @return 
+	 * @return La capacité du tas.
 	 */
 	public int capacite() {
 		return tas.length;
