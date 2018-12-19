@@ -96,7 +96,6 @@ public class FileBinomiale implements IFileBinomiale{
 	public void ajoutMax(ITournoiBinomial t) {
 		tas.addLast(t);
 		taille += Math.pow(2,t.degre()); // On ajoute un tournoi à la file, donc on augmente le nombre de nœuds total que contient la file..
-		
 	}
 	
 	@Override
@@ -175,7 +174,7 @@ public class FileBinomiale implements IFileBinomiale{
 	public static void constItr(List<ICle> elems, FileBinomiale f) {
 		itrAvecCles(elems, f); // Appel de la fonction qui crée les tas constituant la file binomiale.
 		
-		/* J'ai rajouté ca pour ne pas que le consItr */
+		// Défnition du nouveau tournoi min
 		for (ITournoiBinomial tb : f.tas) {
 			if ( f.tournoiMin == null || tb.getCle().inf(f.tournoiMin.getCle()) )
 				f.tournoiMin = tb;
