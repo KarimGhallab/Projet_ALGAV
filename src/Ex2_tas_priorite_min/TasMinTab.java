@@ -226,15 +226,15 @@ public class TasMinTab implements ITasMin {
 	
 	@Override
 	public String toString() {
-		StringBuilder str = new StringBuilder();
+		StringBuilder str = new StringBuilder("[");
 		
 		for(int i = 0; i<nbElements; i++) {
 			str.append(tas[i]);
 			
 			if(i!=nbElements-1)
-				str.append(" ");
+				str.append(", ");
 		}
-		
+		str.append("]");
 		return str.toString();
 	}
 

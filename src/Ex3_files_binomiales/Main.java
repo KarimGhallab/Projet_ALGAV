@@ -1,11 +1,42 @@
 package Ex3_files_binomiales;
 
-import autres.Outils;
+import java.util.Vector;
+
+import Ex1_echauffement.FileConverter;
+import autres.CleInteger;
+import interfaces.ICle;
 
 public class Main {
 
 	public static void main(String[] args) {
-		Outils.calculerTempsConsIterFileBinomiale();
-		//Outils.calculerTempsUnionFileBinomiale();	
+		mainCleInteger();
+		mainCle128();
+	}
+	
+	public static void mainCleInteger() {
+		System.out.println("#################");
+		System.out.println("File Binomiale - CleInteger");
+		FileBinomiale fileBinomiale = new FileBinomiale(1000);
+		
+		int N = 10;
+		for (int i=N; i>=1; i--) {
+			fileBinomiale = (FileBinomiale) fileBinomiale.add(new TournoiBinomial(new CleInteger(i)));
+			fileBinomiale = (FileBinomiale) fileBinomiale.add(new TournoiBinomial(new CleInteger(i)));
+		}
+		System.out.println(fileBinomiale.toString() + "\n");
+	}
+	
+	public static void mainCle128() {
+		System.out.println("#################");
+		System.out.println("File Binomiale - Cle128Bit");
+		
+		FileBinomiale fileBinomiale = new FileBinomiale(10);
+		FileConverter fc = new FileConverter("donnees/cles_alea/jeu_4_nb_cles_100.txt");
+		Vector<ICle> v = fc.getCle();
+		
+		for(int i=0; i<19; i++)
+			fileBinomiale = (FileBinomiale) fileBinomiale.add(new TournoiBinomial(v.get(i)));
+		
+		System.out.println(fileBinomiale.toString() + "\n");
 	}
 }

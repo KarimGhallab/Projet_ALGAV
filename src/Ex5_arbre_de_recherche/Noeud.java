@@ -98,15 +98,15 @@ public class Noeud<C extends ICle> {
 	 * @return La chaîne de caractère correspondant à la suite des clé depuis la racine
 	 * selon un parcours infixe.
 	 */
-	public String infixeToString() { 
+	public String infixeToString(String tabLvl) { 
 		String tmp = "";
 		if (getFilsGauche() != null)
-			tmp += getFilsGauche().infixeToString();
+			tmp += getFilsGauche().infixeToString(tabLvl + "\t");
 		
-		tmp += "\t Clé : " + getCle().toString() + " - Hauteur : " + getHauteur() + ",\n";
+		tmp += tabLvl + "Clé : " + getCle().toString() + "\n";
 		
 		if (getFilsDroit() != null)
-			tmp += getFilsDroit().infixeToString();
+			tmp += getFilsDroit().infixeToString(tabLvl + "\t");
 		
 		return tmp;
 	}

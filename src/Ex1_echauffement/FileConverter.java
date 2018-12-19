@@ -50,4 +50,28 @@ public class FileConverter {
 		
 		return cles;
 	}
+	
+	/**
+	 * Lit dans le fichier et renvoie l'ensemble des valeurs hexadécimales. 
+	 * @return le vector contenant les clés.
+	 */
+	public Vector<String> getCleHexa(){
+		Vector<String> cles = new Vector<String>();
+		BufferedReader br;
+		try {
+			br = new BufferedReader(new FileReader(file));
+			String ligne;
+			while ((ligne = br.readLine()) != null) {
+				
+				String cleS = ligne.substring(2);
+				
+				cles.add(cleS);
+			}
+			br.close();
+		}catch (IOException e) {
+			System.out.println("erreur");
+		}
+		
+		return cles;
+	}
 }

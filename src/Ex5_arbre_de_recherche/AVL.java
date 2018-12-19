@@ -76,7 +76,7 @@ public class AVL<C extends ICle> implements IAVL<C> {
 	 */
 	private String infixeToString(Noeud<C> racine) { 
 		if (racine != null)
-			return racine.infixeToString();
+			return racine.infixeToString("");
 		return "";
 	}
 	
