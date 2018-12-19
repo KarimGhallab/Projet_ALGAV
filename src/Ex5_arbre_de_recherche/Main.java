@@ -12,7 +12,6 @@ public class Main {
 	public static void main(String[] args) throws InsertionException {
 		mainCleInteger();
 		mainCle128();
-
 	}
 	
 	public static void mainCleInteger() throws InsertionException {
