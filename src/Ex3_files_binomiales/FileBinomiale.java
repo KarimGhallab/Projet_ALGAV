@@ -298,7 +298,7 @@ public class FileBinomiale implements IFileBinomiale{
 	
 	@Override
 	public String toString() {
-		String res = "FB" + this.getTaille() + "\n\n";
+		String res = "FB" + this.getTaille() + " : " + Integer.toBinaryString(this.getTaille()) + "\n\n";
 		for (int i=0; i<tas.size(); i++)
 			res += "TB" + tas.get(i).degre() + "\n" + tas.get(i).toString() + "\n";
 		

@@ -35,7 +35,7 @@ public class Main {
 		// Outils.calculerTempsConsIterFileBinomiale();
 		// Outils.calculerTempsUnionFileBinomiale();
 		// Outils.calculerTempsAjoutFileBinomiale();
-		Outils.calculerTempsSupprMinFileBinomiale();
+		// Outils.calculerTempsSupprMinFileBinomiale();
 	}
 	
 	/**
