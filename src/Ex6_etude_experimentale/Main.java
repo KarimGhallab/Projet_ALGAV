@@ -20,12 +20,22 @@ public class Main {
 
 	public static void main(String[] args) throws InterruptedException {
 		// stockerMD5DansArbre();
+		
+		/* Tas min tableau */
+		// Outils.calculerTempsAjoutTab();
+		// Outils.calculerTempsSupprMinTab();
+		// Outils.calculerTempsConsIterTab();
+		// Outils.calculerTempsUnionTab();
+		
+		/* Tas min arbre */
+		// Outils.calculerTempsConsIterArbre();
+		// Outils.calculerTempsUnionArbre();
+		
+		/* File Binomiale */ 
 		// Outils.calculerTempsConsIterFileBinomiale();
 		// Outils.calculerTempsUnionFileBinomiale();
-		Outils.calculerTempsAjoutTab();
-		// Outils.calculerTempsSupprMinTab();
 		// Outils.calculerTempsAjoutFileBinomiale();
-		// Outils.calculerTempsSupprMinFileBinomiale();
+		Outils.calculerTempsSupprMinFileBinomiale();
 	}
 	
 	/**
